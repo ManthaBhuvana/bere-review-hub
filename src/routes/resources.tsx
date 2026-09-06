@@ -7,22 +7,39 @@ import {
 } from "@/components/ui/carousel";
 import { useState } from "react";
 import { Play } from "lucide-react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "../components/site/PageHeader";
-import { BookOpen, Compass, Download, FileText, ShieldCheck, Target, Users } from "lucide-react";
+import {
+  BookOpen,
+  ClipboardCheck,
+  Compass,
+  Download,
+  FileSearch,
+  FileText,
+  Heart,
+  Landmark,
+  Lightbulb,
+  ShieldCheck,
+  Users,
+} from "lucide-react";
 
 export const Route = createFileRoute("/resources")({
   component: Resources,
   head: () => ({
     meta: [
-      { title: "Resources for School Leaders — The Educational Review" },
+      { title: "School Leadership Resource Centre — The Educational Review" },
       {
         name: "description",
         content:
-          "Guides, toolkits, and workshop videos for instructional leadership, assessment reform, digital citizenship, and teacher development.",
+          "A growing library of guides, toolkits, rubrics, and videos for school leaders — organised by School Leadership, Teacher Development, Classroom Observation, Assessment & Rubrics, NEP/NCF, Competency-Based Education, Parent Engagement, School Audit, and Professional Learning.",
       },
-      { property: "og:title", content: "Resources for School Leaders" },
-      { property: "og:description", content: "Downloadable guides, toolkits, and workshop videos." },
+      {
+        name: "keywords",
+        content:
+          "school leadership resources, teacher development, classroom observation tools, assessment rubrics, NEP 2020, NCF, competency based education, parent engagement, school audit",
+      },
+      { property: "og:title", content: "School Leadership Resource Centre" },
+      { property: "og:description", content: "Downloadable guides, toolkits, rubrics, and workshop videos." },
       { property: "og:url", content: "/resources" },
     ],
     links: [{ rel: "canonical", href: "/resources" }],
@@ -30,21 +47,73 @@ export const Route = createFileRoute("/resources")({
 });
 
 // Each item's href points to a real file where one exists; items still on "#"
-// don't have a matching PDF yet — swap in a real link whenever you have one.
+// don't have a matching file yet — swap in a real link (e.g. a Supabase
+// Storage URL, same pattern as the ones already below) whenever you have one.
 const CATEGORIES = [
   {
     icon: Compass,
-    name: "Instructional Leadership",
+    name: "School Leadership",
+    desc: "Frameworks and tools for principals and academic leaders steering school-wide improvement.",
     items: [
-      { label: "The Leader's Toolkit", href: "https://zcgjgcncubxujgwtbkqo.supabase.co/storage/v1/object/public/publications/leaders-toolkit.pdf" },
+      { label: "The Leader's Toolkit", href: "/articles/leaders-toolkit", internal: true },
+      { label: "Volume 1 — Full Issue", href: "/articles/volume-1", internal: true },
     ],
   },
   {
     icon: Users,
-    name: "Teacher Professional Development",
+    name: "Teacher Development",
+    desc: "Materials to design and run high-impact professional learning for teachers.",
     items: [
-      { label: "Editorial — Volume 1", href: "https://zcgjgcncubxujgwtbkqo.supabase.co/storage/v1/object/public/publications/editorial.pdf" },
-      { label: "Foreword — Volume 1", href: "https://zcgjgcncubxujgwtbkqo.supabase.co/storage/v1/object/public/publications/foreword.pdf" },
+      { label: "Editorial — Volume 1", href: "/articles/editorial", internal: true },
+      { label: "Professional Learning Communities Guide", href: "#" },
+    ],
+  },
+  {
+    icon: FileSearch,
+    name: "Classroom Observation",
+    desc: "Protocols and look-fors for developmental, non-evaluative classroom visits.",
+    items: [
+      { label: "The Leader's Toolkit — Coaching Questions", href: "/articles/leaders-toolkit", internal: true },
+      { label: "Classroom Observation Protocol (guide)", href: "#" },
+    ],
+  },
+  {
+    icon: ClipboardCheck,
+    name: "Assessment & Rubrics",
+    desc: "Rubrics and formative-assessment tools aligned to competency-based education.",
+    items: [{ label: "Competency-Based Rubric Template", href: "#" }],
+  },
+  {
+    icon: Landmark,
+    name: "NEP / NCF",
+    desc: "Practical translations of NEP 2020 and NCF-SE 2023 into classroom decisions.",
+    items: [{ label: "Foreword — Volume 1", href: "/articles/foreword", internal: true }],
+  },
+  {
+    icon: Lightbulb,
+    name: "Competency-Based Education",
+    desc: "Lesson-design and planning resources for shifting from content coverage to competencies.",
+    items: [{ label: "Competency-Based Lesson Planner", href: "#" }],
+  },
+  {
+    icon: Heart,
+    name: "Parent Engagement",
+    desc: "Tools and talking points for building genuine partnership with families.",
+    items: [{ label: "Parent Engagement Starter Guide", href: "#" }],
+  },
+  {
+    icon: ShieldCheck,
+    name: "School Audit",
+    desc: "Self-assessment instruments for school readiness and improvement planning.",
+    items: [{ label: "School Readiness Self-Assessment", href: "/images/framework/school-readiness-self-assessment.png" }],
+  },
+  {
+    icon: BookOpen,
+    name: "Professional Learning",
+    desc: "Planning calendars and dashboards to run a year-long professional learning cycle.",
+    items: [
+      { label: "Annual PL Calendar", href: "/images/framework/annual-pl-calendar.png" },
+      { label: "Professional Learning Dashboard", href: "/images/framework/professional-learning-dashboard.png" },
     ],
   },
 ];
@@ -131,13 +200,28 @@ function Resources() {
   return (
     <>
       <PageHeader
-        eyebrow="Resource Library"
+        eyebrow="School Leadership Resource Centre"
         title="Resources for School Leaders"
-        lead="Practical guides, toolkits, and workshop videos to support instructional leadership, assessment reform, digital citizenship, and teacher development."
-      />
+        lead="A growing library of guides, toolkits, rubrics, dashboards, and workshop videos — organised for principals, coordinators, teachers, and teacher educators."
+      >
+        <div className="flex flex-wrap gap-3">
+          <Link
+            to="/speaking"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90"
+          >
+            Invite for a Workshop
+          </Link>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+          >
+            Collaborate
+          </Link>
+        </div>
+      </PageHeader>
 
-      <section className="container-editorial mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {CATEGORIES.map(({ icon: I, name, items }) => (
+      <section className="container-editorial mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {CATEGORIES.map(({ icon: I, name, desc, items }) => (
           <div key={name} className="flex flex-col rounded-2xl border border-border bg-card p-6 red-glow">
             <div className="flex items-center gap-3">
               <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary">
@@ -145,24 +229,48 @@ function Resources() {
               </div>
               <h3 className="font-serif text-lg leading-tight">{name}</h3>
             </div>
-            <ul className="mt-5 space-y-3 text-sm">
-              {items.map((it) => (
-                <li key={it.label}>
-                  <a
-                    href={it.href}
-                    target={it.href !== "#" ? "_blank" : undefined}
-                    rel={it.href !== "#" ? "noreferrer" : undefined}
-                    className="flex items-center justify-between rounded-md border border-transparent px-3 py-2 text-foreground/85 hover:border-primary/40 hover:bg-ink hover:text-primary"
-                  >
-                    <span className="flex items-center gap-2">
-                      <FileText className="h-4 w-4 text-primary" /> {it.label}
+            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{desc}</p>
+            <ul className="mt-4 space-y-2 text-sm">
+              {items.map((it) => {
+                const isComingSoon = it.href === "#";
+                const content = (
+                  <>
+                    <span className="flex items-center gap-2 text-left">
+                      <FileText className="h-4 w-4 shrink-0 text-primary" /> {it.label}
                     </span>
-                    <span className="text-xs text-muted-foreground">
-                      {it.href === "#" ? "Coming soon" : "PDF"}
+                    <span className="shrink-0 text-xs text-muted-foreground">
+                      {isComingSoon ? "Coming soon" : "Open"}
                     </span>
-                  </a>
-                </li>
-              ))}
+                  </>
+                );
+                const className =
+                  "flex items-center justify-between gap-2 rounded-md border border-transparent px-3 py-2 text-foreground/85 hover:border-primary/40 hover:bg-ink hover:text-primary";
+                if (isComingSoon) {
+                  return (
+                    <li key={it.label}>
+                      <span aria-disabled="true" className={`${className} cursor-not-allowed opacity-60`}>
+                        {content}
+                      </span>
+                    </li>
+                  );
+                }
+                if (it.internal) {
+                  return (
+                    <li key={it.label}>
+                      <Link to={it.href} className={className}>
+                        {content}
+                      </Link>
+                    </li>
+                  );
+                }
+                return (
+                  <li key={it.label}>
+                    <a href={it.href} target="_blank" rel="noreferrer" className={className}>
+                      {content}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}
@@ -198,7 +306,7 @@ function Resources() {
                 className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
               >
                 <Download className="h-3.5 w-3.5" />
-                Download
+                Download Toolkit
               </a>
             </div>
           ))}
@@ -242,6 +350,34 @@ function Resources() {
           <CarouselPrevious className="hidden sm:flex" />
           <CarouselNext className="hidden sm:flex" />
         </Carousel>
+      </section>
+
+      {/* CTA banner */}
+      <section className="container-editorial mb-20">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-primary/30 bg-ink p-8 sm:flex-row sm:items-center md:p-10">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+              Need something built for your school?
+            </div>
+            <h3 className="mt-2 font-serif text-2xl md:text-3xl">
+              Bring these tools into your staff room.
+            </h3>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-3">
+            <Link
+              to="/speaking"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90"
+            >
+              Invite for a Workshop
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              Contact
+            </Link>
+          </div>
+        </div>
       </section>
     </>
   );

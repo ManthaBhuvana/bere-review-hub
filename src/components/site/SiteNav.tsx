@@ -10,6 +10,7 @@ const NAV = [
   { to: "/publications", label: "Publications" },
   { to: "/frameworks", label: "Frameworks" },
   { to: "/resources", label: "Resources" },
+  { to: "/speaking", label: "Speaking & Training" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -32,11 +33,7 @@ export function SiteNav() {
       }`}
     >
       <div className="container-editorial flex h-16 items-center gap-4 lg:h-20">
-        <Link
-          to="/"
-          className="flex min-w-0 items-center gap-3"
-          onClick={() => setOpen(false)}
-        >
+        <Link to="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
           <Crest className="h-9 w-9 shrink-0 lg:h-11 lg:w-11" />
           <div className="min-w-0 leading-tight">
             <div className="truncate font-serif text-sm font-bold tracking-tight text-foreground sm:text-base lg:text-lg">
@@ -48,7 +45,7 @@ export function SiteNav() {
           </div>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-7 lg:flex">
+        <nav className="ml-auto hidden items-center gap-4 xl:gap-6 lg:flex">
           {NAV.map((n) => (
             <Link
               key={n.to}

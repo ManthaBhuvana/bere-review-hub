@@ -12,6 +12,10 @@ export const Route = createFileRoute("/contact")({
         content:
           "Contact the editorial team of The Venugopal Bere Educational Review for inquiries, submissions, and collaborations.",
       },
+      {
+        name: "keywords",
+        content: "contact, invite for a programme, workshop request, collaboration, Venugopal Bere",
+      },
       { property: "og:title", content: "Contact the Review" },
       {
         property: "og:description",
@@ -43,7 +47,7 @@ function Contact() {
               id="jotform-contact"
               title="Contact the Review"
               src="https://form.jotform.com/262355375920056"
-              className="min-h-130 w-full border-0"
+              className="h-[70vh] min-h-100 w-full border-0 md:min-h-130"
               allow="geolocation; microphone; camera"
             />
           </div>
@@ -55,8 +59,11 @@ function Contact() {
             <ul className="mt-4 space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <a href="mailto:contact@example.com" className="text-foreground/85 hover:text-primary">
-                  venugopalbere@gmail.com 
+                <a
+                  href="mailto:venugopalbere@gmail.com"
+                  className="text-foreground/85 hover:text-primary"
+                >
+                  venugopalbere@gmail.com
                 </a>
               </li>
             </ul>
@@ -70,14 +77,15 @@ function Contact() {
               >
                 <Linkedin className="h-4 w-4" />
               </a>
-                <a href="https://www.youtube.com/@EdWise.Politent"
-  target="_blank"
-  rel="noreferrer"
-  aria-label="YouTube"
-  className="grid h-10 w-10 place-items-center rounded-full border border-border text-foreground/80 red-glow hover:text-primary"
->
-  <Youtube className="h-4 w-4" />
-</a>
+              <a
+                href="https://www.youtube.com/@EdWise.Politent"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="YouTube"
+                className="grid h-10 w-10 place-items-center rounded-full border border-border text-foreground/80 red-glow hover:text-primary"
+              >
+                <Youtube className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </aside>

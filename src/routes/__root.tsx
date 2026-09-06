@@ -85,18 +85,45 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "An editorial review bridging educational research, policy, leadership, and classroom practice.",
+          "An educational leadership, research, professional learning, and school improvement platform bridging policy, leadership, and classroom practice.",
+      },
+      {
+        name: "keywords",
+        content:
+          "educational leadership, school improvement, teacher professional development, NEP 2020, NCF, CBSE resource person, Venugopal Bere",
       },
       { name: "author", content: "Venugopal Bere" },
       { property: "og:site_name", content: "The Venugopal Bere Educational Review" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "The Venugopal Bere Educational Review — Research. Policy. Leadership. Practice." },
-      { name: "twitter:title", content: "The Venugopal Bere Educational Review — Research. Policy. Leadership. Practice." },
-      { property: "og:description", content: "An editorial review bridging educational research, policy, leadership, and classroom practice." },
-      { name: "twitter:description", content: "An editorial review bridging educational research, policy, leadership, and classroom practice." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0e94efe-8059-4b2a-82cf-eab803749c02/id-preview-bb5377b8--7e916aaf-1cb1-4206-9a5c-d93bb56d9a22.lovable.app-1785087459544.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0e94efe-8059-4b2a-82cf-eab803749c02/id-preview-bb5377b8--7e916aaf-1cb1-4206-9a5c-d93bb56d9a22.lovable.app-1785087459544.png" },
+      {
+        property: "og:title",
+        content: "The Venugopal Bere Educational Review — Research. Policy. Leadership. Practice.",
+      },
+      {
+        name: "twitter:title",
+        content: "The Venugopal Bere Educational Review — Research. Policy. Leadership. Practice.",
+      },
+      {
+        property: "og:description",
+        content:
+          "An editorial review bridging educational research, policy, leadership, and classroom practice.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "An editorial review bridging educational research, policy, leadership, and classroom practice.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0e94efe-8059-4b2a-82cf-eab803749c02/id-preview-bb5377b8--7e916aaf-1cb1-4206-9a5c-d93bb56d9a22.lovable.app-1785087459544.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0e94efe-8059-4b2a-82cf-eab803749c02/id-preview-bb5377b8--7e916aaf-1cb1-4206-9a5c-d93bb56d9a22.lovable.app-1785087459544.png",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

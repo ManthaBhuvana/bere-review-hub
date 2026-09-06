@@ -1,16 +1,37 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, Compass, GraduationCap, Play } from "lucide-react";
+import {
+  Award,
+  ArrowRight,
+  BookOpen,
+  Building2,
+  Compass,
+  Download,
+  GraduationCap,
+  Handshake,
+  Mail,
+  Mic,
+  Users,
+} from "lucide-react";
 import { SubscribeForm } from "../components/site/SubscribeForm";
+import { ARTICLES } from "../data/articles";
 
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "The Venugopal Bere Educational Review — Research. Policy. Leadership. Practice." },
+      {
+        title:
+          "The Venugopal Bere Educational Review — Educational Leadership, Research & School Improvement",
+      },
       {
         name: "description",
         content:
-          "An editorial review bridging educational research, policy, leadership, and classroom practice.",
+          "An educational leadership, research, professional learning, and school improvement platform bridging policy, leadership, and classroom practice — by Venugopal Bere.",
+      },
+      {
+        name: "keywords",
+        content:
+          "educational leadership, school improvement, teacher development, NEP 2020, CBSE resource person, professional learning, Venugopal Bere",
       },
       {
         property: "og:title",
@@ -19,7 +40,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "An editorial review bridging educational research, policy, leadership, and classroom practice.",
+          "An educational leadership, research, professional learning, and school improvement platform.",
       },
       { property: "og:url", content: "/" },
     ],
@@ -27,34 +48,28 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const FEATURED = [
-  {
-    tag: "Framework",
-    title: "Introducing the Bere Professional Learning Framework",
-    excerpt:
-      "A practice-informed conceptual model integrating research, policy, leadership, and classroom practice into a coherent path for school improvement.",
-    author: "Venugopal Bere",
-    read: "12 min read",
-  },
-  {
-    tag: "Instructional Leadership",
-    title: "From Programmes to People: Rethinking School Improvement",
-    excerpt:
-      "Why sustainable change begins with the professional growth of educators — and how leaders can build the conditions for it.",
-    author: "Editorial",
-    read: "8 min read",
-  },
-  {
-    tag: "Policy",
-    title: "NEP 2020 and NCF-SE 2023 in Practice",
-    excerpt:
-      "Translating national policy vision into competency-based classrooms, coherent assessment, and cultures of continuous learning.",
-    author: "Editorial",
-    read: "10 min read",
-  },
+const CREDIBILITY = [
+  { icon: Award, label: "30+ Years", sub: "in Education" },
+  { icon: Building2, label: "Academic Leadership", sub: "School Improvement" },
+  { icon: Users, label: "CBSE Resource Person", sub: "Capacity Building" },
+  { icon: BookOpen, label: "Teacher Educator", sub: "Professional Learning" },
+  { icon: GraduationCap, label: "School Improvement", sub: "Practitioner" },
+];
+
+const FEATURED_SLUGS = ["volume-1", "editorial", "foreword", "leaders-toolkit"];
+
+const QUICK_ACTIONS = [
+  { to: "/current-issue", label: "Read Article", icon: BookOpen },
+  { to: "/resources", label: "Download Toolkit", icon: Download },
+  { to: "/resources", label: "Explore Resources", icon: Compass },
+  { to: "/speaking", label: "Invite for a Workshop", icon: Mic },
+  { to: "/contact", label: "Collaborate", icon: Handshake },
+  { to: "/contact", label: "Contact", icon: Mail },
 ];
 
 function Home() {
+  const featured = FEATURED_SLUGS.map((slug) => ARTICLES.find((a) => a.slug === slug)!).filter(Boolean);
+
   return (
     <>
       {/* Hero */}
@@ -80,9 +95,9 @@ function Home() {
               Research. Policy. Leadership. Practice.
             </p>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-foreground/85 md:text-lg">
-              A journal-style platform where evidence-informed practice meets school leadership —
-              built for principals, teachers, teacher educators, and policy leaders who take
-              student learning seriously.
+              A growing Educational Leadership, Research, Professional Learning & School
+              Improvement platform — built for principals, teachers, teacher educators, and
+              policy leaders who take student learning seriously.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Link
@@ -100,6 +115,47 @@ function Home() {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Credibility strip */}
+        <div className="relative border-t border-border/50 bg-ink">
+          <div className="container-editorial py-8 md:py-10">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 lg:gap-4">
+              {CREDIBILITY.map(({ icon: I, label, sub }) => (
+                <div
+                  key={label}
+                  className="group flex flex-col items-center gap-2.5 rounded-xl border border-primary/25 bg-background/60 px-3 py-5 text-center transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_10px_30px_-12px_var(--crimson)] sm:items-start sm:text-left"
+                >
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                    <I className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className="font-serif text-base leading-tight text-foreground md:text-lg">
+                      {label}
+                    </div>
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
+                      {sub}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick actions */}
+      <section className="border-b border-border/50 bg-background">
+        <div className="container-editorial flex flex-wrap justify-center gap-2 py-6 sm:justify-start">
+          {QUICK_ACTIONS.map(({ to, label, icon: I }) => (
+            <Link
+              key={label}
+              to={to}
+              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-foreground/85 transition-colors hover:border-primary hover:text-primary"
+            >
+              <I className="h-3.5 w-3.5" /> {label}
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -119,11 +175,13 @@ function Home() {
             All articles →
           </Link>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {FEATURED.map((a, i) => (
-            <article
-              key={i}
-              className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card red-glow"
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {featured.map((a) => (
+            <Link
+              key={a.slug}
+              to="/articles/$slug"
+              params={{ slug: a.slug }}
+              className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card red-glow"
             >
               <div className="aspect-16/10 w-full bg-linear-to-br from-primary/25 via-primary/10 to-transparent">
                 <div className="flex h-full items-end p-5">
@@ -133,18 +191,18 @@ function Home() {
                 </div>
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-serif text-xl leading-snug text-foreground group-hover:text-primary md:text-2xl">
-                  {a.title}
+                <h3 className="line-clamp-2 font-serif text-lg leading-snug text-foreground group-hover:text-primary">
+                  {a.shortTitle ?? a.title}
                 </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {a.excerpt}
                 </p>
                 <div className="mt-5 flex items-center justify-between text-xs text-muted-foreground">
                   <span>{a.author}</span>
-                  <span>{a.read}</span>
+                  <span>{a.readTime}</span>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>

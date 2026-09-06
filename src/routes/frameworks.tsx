@@ -12,6 +12,11 @@ export const Route = createFileRoute("/frameworks")({
         content:
           "The Bere Professional Learning Framework and its alignment with NEP 2020 and NCF-SE 2023.",
       },
+      {
+        name: "keywords",
+        content:
+          "educational framework, Bere Professional Learning Framework, NEP 2020, NCF-SE 2023, school leadership model",
+      },
       { property: "og:title", content: "Educational Frameworks" },
       {
         property: "og:description",
@@ -127,23 +132,54 @@ function Frameworks() {
                         strokeWidth="1"
                         strokeDasharray="3 3"
                       />
-                      <circle cx={n.x} cy={n.y} r="34" fill="oklch(0.19 0.006 260)" stroke="oklch(0.52 0.19 25)" strokeWidth="1.5" />
-                      <text x={n.x} y={n.y + 4} textAnchor="middle" fontSize="11" fill="oklch(0.94 0.005 90)" fontFamily="Inter">
+                      <circle
+                        cx={n.x}
+                        cy={n.y}
+                        r="34"
+                        fill="oklch(0.19 0.006 260)"
+                        stroke="oklch(0.52 0.19 25)"
+                        strokeWidth="1.5"
+                      />
+                      <text
+                        x={n.x}
+                        y={n.y + 4}
+                        textAnchor="middle"
+                        fontSize="11"
+                        fill="oklch(0.94 0.005 90)"
+                        fontFamily="Inter"
+                      >
                         {n.label}
                       </text>
                     </g>
                   ))}
                   <circle cx="160" cy="160" r="46" fill="oklch(0.52 0.19 25)" />
-                  <text x="160" y="156" textAnchor="middle" fontSize="10" fontWeight="700" fill="white" fontFamily="Inter">
+                  <text
+                    x="160"
+                    y="156"
+                    textAnchor="middle"
+                    fontSize="10"
+                    fontWeight="700"
+                    fill="white"
+                    fontFamily="Inter"
+                  >
                     STUDENT
                   </text>
-                  <text x="160" y="170" textAnchor="middle" fontSize="10" fontWeight="700" fill="white" fontFamily="Inter">
+                  <text
+                    x="160"
+                    y="170"
+                    textAnchor="middle"
+                    fontSize="10"
+                    fontWeight="700"
+                    fill="white"
+                    fontFamily="Inter"
+                  >
                     LEARNING
                   </text>
                 </svg>
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
-                The four pillars — research, policy, leadership, and practice — converge on student learning.
+                The four pillars — research, policy, leadership, and practice — converge on student
+                learning.
               </p>
             </div>
           </div>
@@ -163,15 +199,13 @@ function Frameworks() {
             {
               title: "NEP 2020",
               sub: "National Education Policy",
-              body:
-                "The framework aligns with NEP 2020's emphasis on competency-based education, continuous professional development, and holistic school improvement.",
+              body: "The framework aligns with NEP 2020's emphasis on competency-based education, continuous professional development, and holistic school improvement.",
               points: ["Competency-Based Education", "Teacher Development", "Assessment Reform"],
             },
             {
               title: "NCF-SE 2023",
               sub: "National Curriculum Framework — School Education",
-              body:
-                "The framework translates NCF-SE 2023's learning standards into instructional practice through leadership routines and PLCs.",
+              body: "The framework translates NCF-SE 2023's learning standards into instructional practice through leadership routines and PLCs.",
               points: ["Learning Standards", "Pedagogical Practices", "School Culture"],
             },
           ].map((c) => (
@@ -202,48 +236,56 @@ function Frameworks() {
           <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
             Framework Toolkit
           </div>
-          <h2 className="mt-2 font-serif text-3xl md:text-4xl">Self-assessment tools for leaders</h2>
+          <h2 className="mt-2 font-serif text-3xl md:text-4xl">
+            Self-assessment tools for leaders
+          </h2>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
             Printable, workshop-ready tools built on the Bere Professional Learning Framework.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-2">
-  {POSTERS.map((p) => (
-    <div key={p.title} className="flex flex-col rounded-2xl border border-border bg-card p-6 red-glow">
-      <h3 className="font-serif text-xl">{p.title}</h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
-      
-        <a href={p.img}
-        download
-        target="_blank"
-        rel="noreferrer"
-        className="mt-4 inline-flex items-center gap-2 self-start rounded-full border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
-      >
-        <Download className="h-3.5 w-3.5" /> Download
-      </a>
-    </div>
-  ))}
-</div>
+          {POSTERS.map((p) => (
+            <div
+              key={p.title}
+              className="flex flex-col rounded-2xl border border-border bg-card p-6 red-glow"
+            >
+              <h3 className="font-serif text-xl">{p.title}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+
+              <a
+                href={p.img}
+                download
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex items-center gap-2 self-start rounded-full border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+              >
+                <Download className="h-3.5 w-3.5" /> Download
+              </a>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Annual PL Calendar - full width, landscape image */}
       <section className="container-editorial mb-20">
-  <div className="rounded-2xl border border-border bg-card p-6 red-glow">
-    <h3 className="font-serif text-xl">Annual Professional Learning Calendar</h3>
-    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-      A month-by-month system for professional learning sessions, coaching, PLCs, and reflection across the full academic year.
-    </p>
-    
-      <a href="/images/framework/annual-pl-calendar.png"
-      download
-      target="_blank"
-      rel="noreferrer"
-      className="mt-4 inline-flex items-center gap-2 rounded-full border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
-    >
-      <Download className="h-3.5 w-3.5" /> Download
-    </a>
-  </div>
-</section>
+        <div className="rounded-2xl border border-border bg-card p-6 red-glow">
+          <h3 className="font-serif text-xl">Annual Professional Learning Calendar</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            A month-by-month system for professional learning sessions, coaching, PLCs, and
+            reflection across the full academic year.
+          </p>
+
+          <a
+            href="/images/framework/annual-pl-calendar.png"
+            download
+            target="_blank"
+            rel="noreferrer"
+            className="mt-4 inline-flex items-center gap-2 rounded-full border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+          >
+            <Download className="h-3.5 w-3.5" /> Download
+          </a>
+        </div>
+      </section>
     </>
   );
 }

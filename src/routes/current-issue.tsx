@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHeader } from "../components/site/PageHeader";
 import { ArrowRight } from "lucide-react";
+import { ARTICLES, getFeaturedArticle } from "../data/articles";
 
 export const Route = createFileRoute("/current-issue")({
   component: CurrentIssue,
@@ -11,92 +12,48 @@ export const Route = createFileRoute("/current-issue")({
       {
         name: "description",
         content:
-          "Read the inaugural issue: essays on the Bere Professional Learning Framework, instructional leadership, and NEP 2020 in practice.",
+          "Read the inaugural issue in full: the Editorial, the Foreword, and the Leader's Toolkit — on teacher professional development, instructional leadership, and NEP 2020 in practice.",
       },
+      { name: "keywords", content: "current issue, educational review, teacher professional development, NEP 2020, school leadership" },
       { property: "og:title", content: "Current Issue — Volume 1" },
-      { property: "og:description", content: "Essays from the inaugural issue of the Review." },
+      { property: "og:description", content: "The Editorial, Foreword, and Leader's Toolkit from the inaugural issue of the Review." },
       { property: "og:url", content: "/current-issue" },
     ],
     links: [{ rel: "canonical", href: "/current-issue" }],
   }),
 });
 
-const TAGS = ["All", "Framework", "Leadership", "Policy", "Assessment", "Teacher Development"] as const;
-
-const ARTICLES = [
-  {
-    tag: "Framework",
-    featured: true,
-    title: "The Bere Professional Learning Framework",
-    author: "Venugopal Bere",
-    excerpt:
-      "A practice-informed conceptual framework integrating research, policy, leadership, and classroom practice into a coherent model for continuous school improvement.",
-  },
-  {
-    tag: "Leadership",
-    title: "People Before Programmes: A Leader's First Task",
-    author: "Editorial",
-    excerpt:
-      "Why the growth of educators must precede the roll-out of new initiatives — and how principals can create that condition.",
-  },
-  {
-    tag: "Policy",
-    title: "NEP 2020 in the Classroom",
-    author: "Editorial",
-    excerpt: "Translating national policy into daily instructional decisions across subjects and stages.",
-  },
-  {
-    tag: "Assessment",
-    title: "From Testing to Learning: Rethinking Assessment",
-    author: "Editorial",
-    excerpt: "A practical account of assessment for learning aligned with competency-based education.",
-  },
-  {
-    tag: "Teacher Development",
-    title: "Professional Learning Communities That Move Practice",
-    author: "Editorial",
-    excerpt: "What separates high-impact PLCs from routine meetings — five design principles.",
-  },
-  {
-    tag: "Leadership",
-    title: "Coaching Coordinators: The Middle Layer That Matters",
-    author: "Editorial",
-    excerpt: "Investing in academic coordinators as the connective tissue of school improvement.",
-  },
-];
+const TAGS = ["All", "Journal Issue", "Editorial", "Foreword", "Leader's Toolkit"] as const;
 
 function CurrentIssue() {
   const [tag, setTag] = useState<(typeof TAGS)[number]>("All");
   const shown = tag === "All" ? ARTICLES : ARTICLES.filter((a) => a.tag === tag);
-  const featured = ARTICLES.find((a) => a.featured)!;
+  const featured = getFeaturedArticle();
 
   return (
     <>
       <PageHeader
         eyebrow="Volume 1 · Inaugural Issue"
         title="Current Issue"
-        lead="Essays and dispatches on the practice of school leadership, teacher learning, and evidence-informed classrooms."
+        lead="The Editorial, the Foreword, and the Leader's Toolkit from the inaugural issue — read in full below."
       />
-     <div className="container-editorial mt-6 flex flex-wrap gap-3">
-  <a
-  href="https://zcgjgcncubxujgwtbkqo.supabase.co/storage/v1/object/public/publications/editorial.pdf"
-  target="_blank"
-  rel="noreferrer"
-  className="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
->
-  Read the Editorial
-</a>
+      <div className="container-editorial mt-6 flex flex-wrap gap-3">
+        <Link
+          to="/articles/$slug"
+          params={{ slug: "editorial" }}
+          className="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+        >
+          Read the Editorial
+        </Link>
 
-<a
-  href="https://zcgjgcncubxujgwtbkqo.supabase.co/storage/v1/object/public/publications/foreword.pdf"
-  target="_blank"
-  rel="noreferrer"
-  className="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
->
-  Read the Foreword
-</a>
-</div>
-
+        <Link
+          to="/articles/$slug"
+          params={{ slug: "foreword" }}
+          className="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+        >
+          Read the Foreword
+        </Link>
+      </div>
 
       {/* Featured */}
       <section className="container-editorial mt-12">
@@ -106,19 +63,19 @@ function CurrentIssue() {
               Feature · {featured.tag}
             </div>
             <h2 className="mt-4 font-serif text-3xl leading-tight text-foreground md:text-5xl">
-              {featured.title}
+              {featured.shortTitle ?? featured.title}
             </h2>
             <p className="mt-4 text-sm text-muted-foreground">By {featured.author}</p>
           </div>
           <div className="p-8 md:p-12">
             <p className="text-base leading-relaxed text-foreground/90">{featured.excerpt}</p>
-              <a href="https://zcgjgcncubxujgwtbkqo.supabase.co/storage/v1/object/public/publications/leaders-toolkit.pdf"
-  target="_blank"
-  rel="noreferrer"
-  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
->
-  Read the essay <ArrowRight className="h-4 w-4" />
-</a>
+            <Link
+              to="/articles/$slug"
+              params={{ slug: featured.slug }}
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+            >
+              Read in full <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </article>
       </section>
@@ -142,23 +99,31 @@ function CurrentIssue() {
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {shown.map((a, i) => (
+          {shown.map((a) => (
             <article
-              key={i}
-              className="flex flex-col rounded-xl border border-border bg-card p-6 red-glow"
+              key={a.slug}
+              className="flex h-full flex-col rounded-xl border border-border bg-card p-6 red-glow"
             >
               <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
                 {a.tag}
               </span>
-              <h3 className="mt-3 font-serif text-xl leading-snug text-foreground">{a.title}</h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+              <h3 className="mt-3 line-clamp-2 font-serif text-lg leading-snug text-foreground">
+                <Link to="/articles/$slug" params={{ slug: a.slug }} className="hover:text-primary">
+                  {a.shortTitle ?? a.title}
+                </Link>
+              </h3>
+              <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                 {a.excerpt}
               </p>
               <div className="mt-5 flex items-center justify-between text-xs text-muted-foreground">
                 <span>{a.author}</span>
-                <a href="/pdfs/volume-1.pdf" target="_blank" rel="noreferrer" className="font-semibold text-primary hover:underline">
+                <Link
+                  to="/articles/$slug"
+                  params={{ slug: a.slug }}
+                  className="font-semibold text-primary hover:underline"
+                >
                   Read more →
-              </a>
+                </Link>
               </div>
             </article>
           ))}
@@ -183,7 +148,7 @@ function CurrentIssue() {
               id="jotform-submit-article"
               title="Submit an Article"
               src="https://form.jotform.com/262354920466056"
-              className="min-h-175 w-full border-0"
+              className="h-[70vh] min-h-125 w-full border-0 md:min-h-175"
               allow="geolocation; microphone; camera"
             />
           </div>

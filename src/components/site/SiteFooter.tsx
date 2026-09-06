@@ -92,6 +92,7 @@ export function SiteFooter() {
               ["/publications", "Publications"],
               ["/frameworks", "Frameworks"],
               ["/resources", "Resources"],
+              ["/speaking", "Speaking & Training"],
               ["/contact", "Contact"],
             ].map(([to, label]) => (
               <li key={to}>
@@ -125,7 +126,7 @@ export function SiteFooter() {
               <Youtube className="h-4 w-4" />
             </a>
             <a
-              href="mailto:contact@example.com"
+              href="mailto:venugopalbere@gmail.com"
               aria-label="Email"
               className="grid h-10 w-10 place-items-center rounded-full border border-border text-foreground/80 red-glow hover:text-primary"
             >

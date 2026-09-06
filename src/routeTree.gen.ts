@@ -16,6 +16,8 @@ import { Route as CurrentIssueRouteImport } from './routes/current-issue'
 import { Route as FrameworksRouteImport } from './routes/frameworks'
 import { Route as PublicationsRouteImport } from './routes/publications'
 import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as SpeakingRouteImport } from './routes/speaking'
+import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +54,16 @@ const ResourcesRoute = ResourcesRouteImport.update({
   path: '/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SpeakingRoute = SpeakingRouteImport.update({
+  id: '/speaking',
+  path: '/speaking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
+  id: '/articles/$slug',
+  path: '/articles/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +73,8 @@ export interface FileRoutesByFullPath {
   '/frameworks': typeof FrameworksRoute
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
+  '/speaking': typeof SpeakingRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +84,8 @@ export interface FileRoutesByTo {
   '/frameworks': typeof FrameworksRoute
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
+  '/speaking': typeof SpeakingRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +96,8 @@ export interface FileRoutesById {
   '/frameworks': typeof FrameworksRoute
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
+  '/speaking': typeof SpeakingRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +109,8 @@ export interface FileRouteTypes {
     | '/frameworks'
     | '/publications'
     | '/resources'
+    | '/speaking'
+    | '/articles/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +120,8 @@ export interface FileRouteTypes {
     | '/frameworks'
     | '/publications'
     | '/resources'
+    | '/speaking'
+    | '/articles/$slug'
   id:
     | '__root__'
     | '/'
@@ -109,6 +131,8 @@ export interface FileRouteTypes {
     | '/frameworks'
     | '/publications'
     | '/resources'
+    | '/speaking'
+    | '/articles/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +143,8 @@ export interface RootRouteChildren {
   FrameworksRoute: typeof FrameworksRoute
   PublicationsRoute: typeof PublicationsRoute
   ResourcesRoute: typeof ResourcesRoute
+  SpeakingRoute: typeof SpeakingRoute
+  ArticlesSlugRoute: typeof ArticlesSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +198,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/speaking': {
+      id: '/speaking'
+      path: '/speaking'
+      fullPath: '/speaking'
+      preLoaderRoute: typeof SpeakingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/articles/$slug': {
+      id: '/articles/$slug'
+      path: '/articles/$slug'
+      fullPath: '/articles/$slug'
+      preLoaderRoute: typeof ArticlesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +223,8 @@ const rootRouteChildren: RootRouteChildren = {
   FrameworksRoute: FrameworksRoute,
   PublicationsRoute: PublicationsRoute,
   ResourcesRoute: ResourcesRoute,
+  SpeakingRoute: SpeakingRoute,
+  ArticlesSlugRoute: ArticlesSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
