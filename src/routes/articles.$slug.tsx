@@ -178,12 +178,12 @@ function ArticlePage() {
           </Link>
 
           <div className="mt-6 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-            {article.tag} · {article.volume}
+            {article.tag} 
           </div>
 
-          <h1 className="mt-3 max-w-4xl font-serif text-4xl leading-tight text-foreground sm:text-5xl md:text-6xl">
-            {article.title}
-          </h1>
+          <h1 className="mt-3 max-w-4xl font-serif text-3xl leading-tight text-foreground sm:text-4xl md:text-5xl">
+  {article.title}
+</h1>
 
           <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
             <span>

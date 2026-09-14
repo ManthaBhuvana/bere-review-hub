@@ -17,6 +17,7 @@ import {
   FileText,
   Heart,
   Landmark,
+  LayoutDashboard,
   Lightbulb,
   Play,
   ShieldCheck,
@@ -175,12 +176,14 @@ const CATEGORIES = [
 
 const VISUAL_TOOLS = [
   {
+    icon: ClipboardCheck,
     title: "A Case-Study Visual Timeline",
     desc:
       "A one-year, month-by-month journey from compliance-driven PD to a collaborative learning culture — with leadership focus, teacher experience, and evidence of progress mapped at each stage.",
     img: "/images/framework/case-study-timeline.png",
   },
   {
+    icon: LayoutDashboard,
     title: "Professional Learning Dashboard",
     desc:
       "A sample live dashboard tracking teacher development participation, coaching conversations, PLC activity, and student learning impact against targets.",
@@ -424,46 +427,39 @@ function Resources() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {VISUAL_TOOLS.map((tool) => (
-            <article
-              key={tool.title}
-              className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card red-glow"
-            >
-              <a
-                href={tool.img}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`View ${tool.title}`}
-                className="block border-b border-border bg-background p-4"
-              >
-                <img
-                  src={tool.img}
-                  alt={tool.title}
-                  loading="lazy"
-                  className="h-64 w-full rounded-lg border border-border object-contain"
-                />
-              </a>
+          {VISUAL_TOOLS.map((tool) => {
+  const Icon = tool.icon;
 
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-serif text-xl text-foreground">
-                  {tool.title}
-                </h3>
+  return (
+    <article
+      key={tool.title}
+      className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card red-glow"
+    >
+      <div className="flex flex-1 flex-col p-6">
+        <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary">
+          <Icon className="h-5 w-5" />
+        </div>
 
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {tool.desc}
-                </p>
+        <h3 className="mt-4 font-serif text-xl text-foreground">
+          {tool.title}
+        </h3>
 
-                <a
-                  href={tool.img}
-                  download
-                  className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-                >
-                  <Download className="h-3.5 w-3.5" />
-                  Download Toolkit
-                </a>
-              </div>
-            </article>
-          ))}
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+          {tool.desc}
+        </p>
+
+        
+          <a href={tool.img}
+          download
+          className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+        >
+          <Download className="h-3.5 w-3.5" />
+          Download Toolkit
+        </a>
+      </div>
+    </article>
+  );
+})}
         </div>
       </section>
 

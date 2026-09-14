@@ -52,63 +52,73 @@ function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="on-ink border-b border-border/50 bg-ink">
-        <div className="container-editorial grid gap-10 py-16 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-primary">
-              Volume 1, Issue 1 · Inaugural Issue
-            </div>
+      <section className="on-ink relative overflow-hidden border-b border-border/50 bg-ink">
+        {/* Decorative background: soft gold glow */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 60% 55% at 50% 0%, oklch(0.78 0.14 85 / 0.18), transparent 70%)",
+          }}
+        />
 
-            <h1 className="font-serif text-5xl leading-[1.05] text-foreground sm:text-6xl md:text-7xl">
-              The Venugopal Bere{" "}
-              <span className="italic text-primary">Educational Review</span>
-            </h1>
-
-            <p className="mt-6 max-w-2xl font-serif text-xl italic text-muted-foreground md:text-2xl">
-              Research. Policy. Leadership. Practice.
-            </p>
-
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-foreground/85 md:text-lg">
-              An independent educational review connecting research, policy, leadership and
-              classroom practice — for principals, teachers, teacher educators, and policy
-              leaders who take student learning seriously.
-            </p>
-
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Link
-                to="/current-issue"
-                className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-crimson-glow hover:shadow-[0_10px_40px_-10px_var(--crimson)]"
-              >
-                Read Online
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-
-              {featured.pdfUrl && (
-                <a
-                  href={featured.pdfUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 text-sm font-semibold text-foreground/90 red-glow"
-                >
-                  <Download className="h-4 w-4" />
-                  Download Full Issue
-                </a>
-              )}
-            </div>
+        <div className="container-editorial relative py-20 text-center md:py-28">
+          <div className="mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.25em] text-primary">
+            Volume 1, Issue 1 · Inaugural Issue
           </div>
 
-          {/* Cover */}
-          <div className="mx-auto w-full max-w-xs lg:max-w-sm">
+          <h1 className="mx-auto max-w-4xl font-serif text-5xl leading-[1.05] text-foreground sm:text-6xl md:text-7xl">
+            The Venugopal Bere{" "}
+            <span className="italic text-primary">Educational Review</span>
+          </h1>
+
+          <p className="mx-auto mt-6 max-w-xl font-serif text-xl italic text-muted-foreground md:text-2xl">
+            Research. Policy. Leadership. Practice.
+          </p>
+
+          {/* Ornamental divider */}
+          <div className="mx-auto mt-6 flex max-w-[180px] items-center gap-3" aria-hidden="true">
+            <span className="h-px flex-1 bg-primary/40" />
+            <span className="h-1.5 w-1.5 rotate-45 bg-primary" />
+            <span className="h-px flex-1 bg-primary/40" />
+          </div>
+
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-foreground/85 md:text-lg">
+            An independent educational review connecting research, policy, leadership and
+            classroom practice — for principals, teachers, teacher educators, and policy
+            leaders who take student learning seriously.
+          </p>
+
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link
               to="/current-issue"
-              className="block overflow-hidden rounded-2xl border border-primary/30 shadow-2xl transition-transform hover:-translate-y-1"
+              className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-crimson-glow hover:shadow-[0_10px_40px_-10px_var(--crimson)]"
             >
-              <img
-                src="/images/pdfs/volume-1-cover.jpg"
-                alt="Cover of Volume 1, Issue 1 of The Venugopal Bere Educational Review"
-                className="w-full object-cover"
-              />
+              Read Online
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
+
+            {featured.pdfUrl && (
+              <a
+                href={featured.pdfUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 text-sm font-semibold text-foreground/90 red-glow"
+              >
+                <Download className="h-4 w-4" />
+                Download Full Issue
+              </a>
+            )}
+          </div>
+
+          {/* Credibility strip */}
+          <div className="mx-auto mt-14 flex max-w-3xl flex-wrap items-center justify-center gap-x-10 gap-y-4 border-t border-border/60 pt-8 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            <span>30+ Years in Education</span>
+            <span className="hidden text-primary/50 sm:inline">•</span>
+            <span>CBSE Resource Person</span>
+            <span className="hidden text-primary/50 sm:inline">•</span>
+            <span>NEP 2020 &amp; NCF-SE 2023 Aligned</span>
           </div>
         </div>
       </section>

@@ -84,22 +84,19 @@ function CurrentIssue() {
             Table of Contents
           </h2>
 
-          <ol className="mt-3 space-y-2 text-sm">
-            {ARTICLES.map((article, index) => (
-              <li key={article.slug}>
-                <span className="text-muted-foreground">
-                  {index + 1}.
-                </span>{" "}
-                <Link
-                  to="/articles/$slug"
-                  params={{ slug: article.slug }}
-                  className="text-foreground hover:text-primary"
-                >
-                  {article.shortTitle ?? article.title}
-                </Link>
-              </li>
-            ))}
-          </ol>
+          <ol className="mt-3 space-y-2 list-decimal list-inside font-serif text-lg leading-relaxed text-foreground">
+  {ARTICLES.map((article) => (
+    <li key={article.slug}>
+      <Link
+        to="/articles/$slug"
+        params={{ slug: article.slug }}
+        className="hover:text-primary"
+      >
+        {article.shortTitle ?? article.title}
+      </Link>
+    </li>
+  ))}
+</ol>
         </div>
       </section>
 

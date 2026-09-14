@@ -146,8 +146,7 @@ export function SiteFooter() {
 
       <div className="border-t border-border/40">
         <div className="container-editorial flex flex-col items-center justify-between gap-2 py-5 text-xs text-muted-foreground sm:flex-row">
-          <p>© {new Date().getFullYear()} The Venugopal Bere Educational Review.</p>
-          <p>Research. Policy. Leadership. Practice.</p>
+          <p>© {new Date().getFullYear()} Readmi Solutions.</p>
         </div>
       </div>
     </footer>

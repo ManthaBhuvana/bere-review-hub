@@ -1,0 +1,5 @@
+# Update the domain below once the site is live at its final address.
+User-agent: *
+Allow: /
+
+Sitemap: https://venugopalbere.com/sitemap.xml

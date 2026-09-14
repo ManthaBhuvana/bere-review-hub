@@ -44,20 +44,12 @@ export const Route = createFileRoute("/frameworks")({
   }),
 });
 
-/* Framework page links */
+/* Framework page links — only frameworks with a dedicated page go here.
+   The rest show "View Framework" as a full-size image preview instead
+   (their dedicated pages are planned for Phase 2). */
 const FRAMEWORK_LINKS: Record<string, string> = {
   "The Bere Professional Learning Framework":
     "/frameworks/professional-learning-framework",
-  "The Bere Policy-to-Practice Bridge":
-    "/frameworks/policy-to-practice-bridge",
-  "The Bere Reflective Practice Cycle":
-    "/frameworks/reflective-practice-cycle",
-  "The Bere Leadership Maturity Matrix":
-    "/frameworks/leadership-maturity-matrix",
-  "School Readiness Self-Assessment":
-    "/frameworks/school-readiness-assessment",
-  "The Bere 90-Day School Improvement Action Planner":
-    "/frameworks/90-day-action-planner",
 };
 
 /* Framework posters */
@@ -170,122 +162,122 @@ function Frameworks() {
 
               <div className="mt-6 grid aspect-square place-items-center rounded-2xl border border-border bg-background">
                 <svg
-                  viewBox="0 0 320 320"
-                  className="h-full w-full p-8"
-                  role="img"
-                  aria-label="Bere Professional Learning Framework showing Research, Policy, Leadership and Practice converging on Student Learning"
-                >
-                  <defs>
-                    <radialGradient
-                      id="framework-gradient"
-                      cx="50%"
-                      cy="50%"
-                      r="50%"
-                    >
-                      <stop
-                        offset="0"
-                        stopColor="oklch(0.52 0.19 25 / 0.35)"
-                      />
-                      <stop offset="1" stopColor="transparent" />
-                    </radialGradient>
-                  </defs>
+  viewBox="0 0 320 340"
+  className="h-full w-full p-8"
+  role="img"
+  aria-label="Bere Professional Learning Framework showing Research, Policy, Leadership and Practice converging on Student Learning"
+>
+  <defs>
+    <radialGradient
+      id="framework-gradient"
+      cx="50%"
+      cy="50%"
+      r="50%"
+    >
+      <stop
+        offset="0"
+        stopColor="oklch(0.52 0.19 25 / 0.35)"
+      />
+      <stop offset="1" stopColor="transparent" />
+    </radialGradient>
+  </defs>
 
-                  {/* Background Glow */}
-                  <circle
-                    cx="160"
-                    cy="160"
-                    r="140"
-                    fill="url(#framework-gradient)"
-                  />
+  {/* Background Glow */}
+  <circle
+    cx="160"
+    cy="175"
+    r="150"
+    fill="url(#framework-gradient)"
+  />
 
-                  {/* Framework Pillars */}
-                  {[
-                    {
-                      x: 160,
-                      y: 40,
-                      label: "Research",
-                    },
-                    {
-                      x: 280,
-                      y: 200,
-                      label: "Policy",
-                    },
-                    {
-                      x: 40,
-                      y: 200,
-                      label: "Leadership",
-                    },
-                    {
-                      x: 160,
-                      y: 290,
-                      label: "Practice",
-                    },
-                  ].map((node) => (
-                    <g key={node.label}>
-                      <line
-                        x1="160"
-                        y1="160"
-                        x2={node.x}
-                        y2={node.y}
-                        stroke="oklch(0.78 0.14 85)"
-                        strokeWidth="1"
-                        strokeDasharray="3 3"
-                      />
+  {/* Framework Pillars */}
+  {[
+    {
+      x: 160,
+      y: 50,
+      label: "Research",
+    },
+    {
+      x: 280,
+      y: 220,
+      label: "Policy",
+    },
+    {
+      x: 40,
+      y: 220,
+      label: "Leadership",
+    },
+    {
+      x: 160,
+      y: 300,
+      label: "Practice",
+    },
+  ].map((node) => (
+    <g key={node.label}>
+      <line
+        x1="160"
+        y1="175"
+        x2={node.x}
+        y2={node.y}
+        stroke="oklch(0.78 0.14 85)"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+      />
 
-                      <circle
-                        cx={node.x}
-                        cy={node.y}
-                        r="34"
-                        fill="oklch(0.20 0.07 255)"
-                        stroke="oklch(0.78 0.14 85)"
-                        strokeWidth="1.5"
-                      />
+      <circle
+        cx={node.x}
+        cy={node.y}
+        r="34"
+        fill="oklch(0.20 0.07 255)"
+        stroke="oklch(0.78 0.14 85)"
+        strokeWidth="1.5"
+      />
 
-                      <text
-                        x={node.x}
-                        y={node.y + 4}
-                        textAnchor="middle"
-                        fontSize="11"
-                        fill="oklch(0.94 0.005 90)"
-                        fontFamily="Inter, sans-serif"
-                      >
-                        {node.label}
-                      </text>
-                    </g>
-                  ))}
+      <text
+        x={node.x}
+        y={node.y + 4}
+        textAnchor="middle"
+        fontSize="11"
+        fill="oklch(0.94 0.005 90)"
+        fontFamily="Inter, sans-serif"
+      >
+        {node.label}
+      </text>
+    </g>
+  ))}
 
-                  {/* Central Student Learning Circle */}
-                  <circle
-                    cx="160"
-                    cy="160"
-                    r="46"
-                    fill="oklch(0.78 0.14 85)"
-                  />
+  {/* Central Student Learning Circle */}
+  <circle
+    cx="160"
+    cy="175"
+    r="46"
+    fill="oklch(0.78 0.14 85)"
+  />
 
-                  <text
-                    x="160"
-                    y="156"
-                    textAnchor="middle"
-                    fontSize="10"
-                    fontWeight="700"
-                    fill="oklch(0.18 0.05 255)"
-                    fontFamily="Inter, sans-serif"
-                  >
-                    STUDENT
-                  </text>
+  <text
+    x="160"
+    y="171"
+    textAnchor="middle"
+    fontSize="10"
+    fontWeight="700"
+    fill="oklch(0.18 0.05 255)"
+    fontFamily="Inter, sans-serif"
+  >
+    STUDENT
+  </text>
 
-                  <text
-                    x="160"
-                    y="170"
-                    textAnchor="middle"
-                    fontSize="10"
-                    fontWeight="700"
-                    fill="oklch(0.18 0.05 255)"
-                    fontFamily="Inter, sans-serif"
-                  >
-                    LEARNING
-                  </text>
-                </svg>
+  <text
+    x="160"
+    y="185"
+    textAnchor="middle"
+    fontSize="10"
+    fontWeight="700"
+    fill="oklch(0.18 0.05 255)"
+    fontFamily="Inter, sans-serif"
+  >
+    LEARNING
+  </text>
+</svg>
               </div>
 
               <p className="mt-3 text-xs text-muted-foreground">
@@ -400,9 +392,18 @@ function Frameworks() {
                 </p>
 
                 <div className="mt-5 flex flex-wrap gap-2">
-                  {frameworkLink && (
+                  {frameworkLink ? (
                     <a
                       href={frameworkLink}
+                      className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
+                    >
+                      View Framework
+                    </a>
+                  ) : (
+                    <a
+                      href={poster.img}
+                      target="_blank"
+                      rel="noreferrer"
                       className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
                     >
                       View Framework

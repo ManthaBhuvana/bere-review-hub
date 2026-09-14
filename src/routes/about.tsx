@@ -147,12 +147,12 @@ function About() {
                 className="absolute inset-0 h-full w-full object-cover"
               />
 
-              <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-background/95 to-transparent p-5">
-                <div className="font-serif text-lg text-foreground">
+              <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/90 via-black/50 to-transparent p-5 pt-10">
+                <div className="font-serif text-lg font-semibold text-white">
                   Venugopal Bere
                 </div>
 
-                <div className="text-[11px] uppercase tracking-widest text-primary">
+                <div className="text-[11px] font-semibold uppercase tracking-widest text-[oklch(0.82_0.13_85)]">
                   Academic Director
                 </div>
               </div>
@@ -249,48 +249,49 @@ function About() {
             Practice
           </h2>
 
-          <div className="prose-lg mt-6 space-y-5 text-base leading-relaxed text-foreground/90">
-            <p>
-              <strong className="font-semibold text-foreground">
-                Venugopal Bere
-              </strong>{" "}
-              is an educational leader with more than three decades of
-              experience in school education, teacher development, academic
-              leadership, and instructional improvement. Throughout his
-              professional journey as a teacher, principal, academic
-              administrator, and teacher educator, he has remained committed to
-              strengthening the quality of teaching and learning through
-              evidence-informed educational practice.
-            </p>
+          {/* Introduction */}
+<div className="prose-lg mt-6 space-y-5 text-base leading-relaxed text-justify text-foreground/90">
+  <p>
+    <strong className="font-semibold text-foreground">
+      Venugopal Bere
+    </strong>{" "}
+    is an educational leader with more than three decades of
+    experience in school education, teacher development, academic
+    leadership, and instructional improvement. Throughout his
+    professional journey as a teacher, principal, academic
+    administrator, and teacher educator, he has remained committed to
+    strengthening the quality of teaching and learning through
+    evidence-informed educational practice.
+  </p>
 
-            <p>
-              He currently serves as Academic Director, providing academic
-              leadership across multiple school campuses. In this role, he
-              works closely with principals, coordinators, and teachers to
-              enhance instructional quality, promote competency-based
-              education, strengthen assessment practices, and cultivate
-              professional learning cultures aligned with the vision of the
-              National Education Policy (NEP) 2020 and the National Curriculum
-              Framework for School Education (NCF-SE 2023).
-            </p>
+  <p>
+    He currently serves as Academic Director, providing academic
+    leadership across multiple school campuses. In this role, he
+    works closely with principals, coordinators, and teachers to
+    enhance instructional quality, promote competency-based
+    education, strengthen assessment practices, and cultivate
+    professional learning cultures aligned with the vision of the
+    National Education Policy (NEP) 2020 and the National Curriculum
+    Framework for School Education (NCF-SE 2023).
+  </p>
 
-            <p>
-              As a CBSE Resource Person, he has facilitated Capacity Building
-              Programmes for school leaders and teachers on themes including
-              instructional leadership, learning outcomes, competency-based
-              education, assessment reform, cyber safety, digital citizenship,
-              and teacher professional development. His workshops emphasise
-              the practical application of educational research within
-              authentic classroom and school contexts.
-            </p>
+  <p>
+    As a CBSE Resource Person, he has facilitated Capacity Building
+    Programmes for school leaders and teachers on themes including
+    instructional leadership, learning outcomes, competency-based
+    education, assessment reform, cyber safety, digital citizenship,
+    and teacher professional development. His workshops emphasise
+    the practical application of educational research within
+    authentic classroom and school contexts.
+  </p>
 
-            <p>
-              A strong advocate of lifelong learning, Venugopal Bere believes
-              that sustainable school improvement begins with the continuous
-              professional growth of educators. His leadership philosophy is
-              grounded in three interconnected principles:
-            </p>
-          </div>
+  <p>
+    A strong advocate of lifelong learning, Venugopal Bere believes
+    that sustainable school improvement begins with the continuous
+    professional growth of educators. His leadership philosophy is
+    grounded in three interconnected principles:
+  </p>
+</div>
 
           {/* Principles */}
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
@@ -324,28 +325,28 @@ function About() {
           </div>
 
           {/* Framework */}
-          <div className="prose-lg mt-8 space-y-5 text-base leading-relaxed text-foreground/90">
-            <p>
-              These principles have shaped both his leadership practice and the
-              development of the{" "}
-              <strong className="font-semibold text-primary">
-                Bere Professional Learning Framework
-              </strong>
-              , a practice-informed conceptual framework presented in this
-              inaugural issue. The framework integrates insights from
-              educational research, national policy, instructional leadership,
-              and classroom practice into a coherent model for continuous
-              school improvement.
-            </p>
+<div className="prose-lg mt-8 space-y-5 text-base leading-relaxed text-justify text-foreground/90">
+  <p>
+    These principles have shaped both his leadership practice and the
+    development of the{" "}
+    <strong className="font-semibold text-primary">
+      Bere Professional Learning Framework
+    </strong>
+    , a practice-informed conceptual framework presented in this
+    inaugural issue. The framework integrates insights from
+    educational research, national policy, instructional leadership,
+    and classroom practice into a coherent model for continuous
+    school improvement.
+  </p>
 
-            <p>
-              Beyond institutional leadership, Venugopal Bere actively
-              contributes to teacher education through professional learning
-              programmes, leadership mentoring, educational writing, and the
-              development of practical tools that support teachers and school
-              leaders in translating research into action.
-            </p>
-          </div>
+  <p>
+    Beyond institutional leadership, Venugopal Bere actively
+    contributes to teacher education through professional learning
+    programmes, leadership mentoring, educational writing, and the
+    development of practical tools that support teachers and school
+    leaders in translating research into action.
+  </p>
+</div>
 
           {/* Research & Professional Interests */}
           <div className="mt-12">
@@ -369,21 +370,21 @@ function About() {
           </div>
 
           {/* Scholarly Work */}
-          <div className="prose-lg mt-10 space-y-5 text-base leading-relaxed text-foreground/90">
-            <p>
-              He is also pursuing advanced scholarly work in educational
-              leadership and teacher professional development, with a long-term
-              focus on contributing to evidence-informed educational practice
-              and policy through research and publication.
-            </p>
+<div className="prose-lg mt-10 space-y-5 text-base leading-relaxed text-justify text-foreground/90">
+  <p>
+    He is also pursuing advanced scholarly work in educational
+    leadership and teacher professional development, with a long-term
+    focus on contributing to evidence-informed educational practice
+    and policy through research and publication.
+  </p>
 
-            <p>
-              Through <em>The Venugopal Bere Educational Review</em>, he seeks
-              to create a platform where educational research, policy,
-              leadership, and classroom practice converge to support meaningful
-              dialogue and continuous improvement within schools.
-            </p>
-          </div>
+  <p>
+    Through <em>The Venugopal Bere Educational Review</em>, he seeks
+    to create a platform where educational research, policy,
+    leadership, and classroom practice converge to support meaningful
+    dialogue and continuous improvement within schools.
+  </p>
+</div>
 
           {/* Professional Impact */}
           <div className="mt-14">
@@ -480,7 +481,8 @@ function About() {
               Educational Philosophy
             </div>
 
-            <blockquote className="mt-5 font-serif text-2xl italic leading-relaxed text-ash-foreground md:text-3xl">
+            {/* Professional Philosophy quote */}
+            <blockquote className="mt-5 font-serif text-2xl italic leading-relaxed text-justify text-ash-foreground md:text-3xl">
               <span className="mr-1 font-serif text-4xl text-primary">
                 “
               </span>
