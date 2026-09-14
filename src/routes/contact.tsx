@@ -1,12 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "../components/site/PageHeader";
-import { Linkedin, Mail, MapPin, Youtube } from "lucide-react";
+import { Linkedin, Mail, Youtube } from "lucide-react";
+
+const ENQUIRY_TYPES = [
+  "Editorial Enquiries",
+  "Article Submissions",
+  "Professional Development & Workshops",
+  "Research/Academic Collaboration",
+];
 
 export const Route = createFileRoute("/contact")({
   component: Contact,
+
   head: () => ({
     meta: [
-      { title: "Contact — The Venugopal Bere Educational Review" },
+      {
+        title: "Contact — The Venugopal Bere Educational Review",
+      },
       {
         name: "description",
         content:
@@ -14,16 +24,29 @@ export const Route = createFileRoute("/contact")({
       },
       {
         name: "keywords",
-        content: "contact, invite for a programme, workshop request, collaboration, Venugopal Bere",
+        content:
+          "contact, invite for a programme, workshop request, collaboration, Venugopal Bere",
       },
-      { property: "og:title", content: "Contact the Review" },
+      {
+        property: "og:title",
+        content: "Contact the Review",
+      },
       {
         property: "og:description",
         content: "Get in touch with the editorial team.",
       },
-      { property: "og:url", content: "/contact" },
+      {
+        property: "og:url",
+        content: "/contact",
+      },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "/contact",
+      },
+    ],
   }),
 });
 
@@ -36,12 +59,32 @@ function Contact() {
         lead="Inquiries, submissions, workshop requests, and collaboration proposals are all welcome."
       />
 
-      <section className="container-editorial mt-12 grid gap-8 lg:grid-cols-[1fr_360px]">
+      {/* Enquiry Types */}
+      <section className="container-editorial mt-6">
+        <div className="flex flex-wrap gap-2">
+          {ENQUIRY_TYPES.map((type) => (
+            <span
+              key={type}
+              className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground"
+            >
+              {type}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Main Contact Section */}
+      <section className="container-editorial mt-10 grid gap-8 lg:grid-cols-[1fr_360px]">
+        {/* Contact Form */}
         <div className="rounded-2xl border border-border bg-card p-6 md:p-8">
-          <h2 className="font-serif text-2xl">Send a message</h2>
+          <h2 className="font-serif text-2xl">
+            Send a message
+          </h2>
+
           <p className="mt-2 text-sm text-muted-foreground">
             Fill out the form below and the editorial team will follow up.
           </p>
+
           <div className="mt-6 overflow-hidden rounded-lg border border-border/60 bg-background">
             <iframe
               id="jotform-contact"
@@ -53,12 +96,18 @@ function Contact() {
           </div>
         </div>
 
+        {/* Contact Sidebar */}
         <aside className="space-y-6">
-          <div className="rounded-2xl border border-border bg-ink p-6">
-            <h3 className="font-serif text-lg">Reach us</h3>
+          <div className="on-ink rounded-2xl border border-border bg-ink p-6">
+            <h3 className="font-serif text-lg">
+              Reach us
+            </h3>
+
             <ul className="mt-4 space-y-4 text-sm">
+              {/* Email */}
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+
                 <a
                   href="mailto:venugopalbere@gmail.com"
                   className="text-foreground/85 hover:text-primary"
@@ -67,7 +116,10 @@ function Contact() {
                 </a>
               </li>
             </ul>
+
+            {/* Social Links */}
             <div className="mt-6 flex gap-3">
+              {/* LinkedIn */}
               <a
                 href="https://www.linkedin.com/in/bere-venu-gopal-lordven111"
                 target="_blank"
@@ -77,6 +129,8 @@ function Contact() {
               >
                 <Linkedin className="h-4 w-4" />
               </a>
+
+              {/* YouTube */}
               <a
                 href="https://www.youtube.com/@EdWise.Politent"
                 target="_blank"
@@ -93,3 +147,4 @@ function Contact() {
     </>
   );
 }
+

@@ -24,7 +24,7 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="mt-20 border-t border-border/60 bg-ink">
+    <footer className="on-ink mt-20 border-t border-border/60 bg-ink">
       <div className="border-b border-border/40 bg-linear-to-r from-primary/10 via-primary/20 to-primary/10">
         <div className="container-editorial flex flex-col items-center gap-2 py-5 text-center">
           <p className="font-serif text-lg tracking-[0.25em] text-primary sm:text-xl">
@@ -47,9 +47,15 @@ export function SiteFooter() {
               </div>
             </div>
           </div>
+          <p className="mt-3 text-xs font-medium uppercase tracking-wide text-foreground/70">
+            An Independent Educational Leadership &amp; Professional Learning Publication
+          </p>
+          <p className="mt-1 text-xs font-medium text-foreground/70">
+            Founder &amp; Editor: Venugopal Bere
+          </p>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-            An editorial platform where educational research, policy, leadership, and classroom
-            practice converge — in service of continuous school improvement.
+            An independent educational review connecting research, policy, leadership and
+            classroom practice — in service of continuous school improvement.
           </p>
           <form
             onSubmit={handleSubscribe}
@@ -86,16 +92,15 @@ export function SiteFooter() {
           </h4>
           <ul className="space-y-2 text-sm text-foreground/80">
             {[
-              ["/", "Home"],
-              ["/about", "About the Author"],
-              ["/current-issue", "Current Issue"],
+              ["/about", "About"],
               ["/publications", "Publications"],
               ["/frameworks", "Frameworks"],
               ["/resources", "Resources"],
-              ["/speaking", "Speaking & Training"],
+              ["/for-contributors", "Editorial Policy"],
+              ["/publications", "Citation"],
               ["/contact", "Contact"],
             ].map(([to, label]) => (
-              <li key={to}>
+              <li key={label}>
                 <Link to={to} className="hover:text-primary">
                   {label}
                 </Link>

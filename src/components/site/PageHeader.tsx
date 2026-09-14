@@ -12,7 +12,7 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="border-b border-border/50 bg-ink">
+    <section className="on-ink border-b border-border/50 bg-ink">
       <div className="container-editorial py-14 md:py-20">
         {eyebrow && (
           <div className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-primary">

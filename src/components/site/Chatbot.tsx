@@ -47,7 +47,7 @@ export function Chatbot() {
     <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
       {open ? (
         <div className="flex h-[70vh] max-h-130 w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
-          <div className="flex items-center justify-between border-b border-border bg-ink px-4 py-3">
+          <div className="on-ink flex items-center justify-between border-b border-border bg-ink px-4 py-3">
             <div>
               <div className="font-serif text-sm font-semibold text-foreground">
                 Ask the Review
@@ -88,14 +88,14 @@ export function Chatbot() {
               e.preventDefault();
               send();
             }}
-            className="flex items-center gap-2 border-t border-border bg-ink p-3"
+            className="on-ink flex items-center gap-2 border-t border-border bg-ink p-3"
           >
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your question…"
               disabled={loading}
-              className="flex-1 rounded-full border border-border bg-background px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60"
+              className="flex-1 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60"
             />
             <button
               type="submit"

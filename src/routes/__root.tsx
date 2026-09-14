@@ -85,12 +85,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "An educational leadership, research, professional learning, and school improvement platform bridging policy, leadership, and classroom practice.",
+          "An independent educational review connecting research, policy, leadership and classroom practice — by Venugopal Bere.",
       },
       {
         name: "keywords",
         content:
-          "educational leadership, school improvement, teacher professional development, NEP 2020, NCF, CBSE resource person, Venugopal Bere",
+          "Venugopal Bere, Teacher Professional Development, Educational Leadership, Teacher Education, Professional Learning, Instructional Leadership, NEP 2020, NCF-SE 2023, Competency-Based Education, School Improvement",
       },
       { name: "author", content: "Venugopal Bere" },
       { property: "og:site_name", content: "The Venugopal Bere Educational Review" },
@@ -107,12 +107,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "An editorial review bridging educational research, policy, leadership, and classroom practice.",
+          "An independent educational review connecting research, policy, leadership and classroom practice.",
       },
       {
         name: "twitter:description",
         content:
-          "An editorial review bridging educational research, policy, leadership, and classroom practice.",
+          "An independent educational review connecting research, policy, leadership and classroom practice.",
       },
       {
         property: "og:image",

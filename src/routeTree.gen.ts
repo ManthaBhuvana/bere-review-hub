@@ -13,11 +13,13 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CurrentIssueRouteImport } from './routes/current-issue'
+import { Route as ForContributorsRouteImport } from './routes/for-contributors'
 import { Route as FrameworksRouteImport } from './routes/frameworks'
 import { Route as PublicationsRouteImport } from './routes/publications'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as SpeakingRouteImport } from './routes/speaking'
 import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
+import { Route as FrameworksProfessionalLearningFrameworkRouteImport } from './routes/frameworks.professional-learning-framework'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -37,6 +39,11 @@ const ContactRoute = ContactRouteImport.update({
 const CurrentIssueRoute = CurrentIssueRouteImport.update({
   id: '/current-issue',
   path: '/current-issue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForContributorsRoute = ForContributorsRouteImport.update({
+  id: '/for-contributors',
+  path: '/for-contributors',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FrameworksRoute = FrameworksRouteImport.update({
@@ -64,28 +71,38 @@ const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
   path: '/articles/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FrameworksProfessionalLearningFrameworkRoute =
+  FrameworksProfessionalLearningFrameworkRouteImport.update({
+    id: '/professional-learning-framework',
+    path: '/professional-learning-framework',
+    getParentRoute: () => FrameworksRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/current-issue': typeof CurrentIssueRoute
-  '/frameworks': typeof FrameworksRoute
+  '/for-contributors': typeof ForContributorsRoute
+  '/frameworks': typeof FrameworksRouteWithChildren
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
   '/speaking': typeof SpeakingRoute
   '/articles/$slug': typeof ArticlesSlugRoute
+  '/frameworks/professional-learning-framework': typeof FrameworksProfessionalLearningFrameworkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/current-issue': typeof CurrentIssueRoute
-  '/frameworks': typeof FrameworksRoute
+  '/for-contributors': typeof ForContributorsRoute
+  '/frameworks': typeof FrameworksRouteWithChildren
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
   '/speaking': typeof SpeakingRoute
   '/articles/$slug': typeof ArticlesSlugRoute
+  '/frameworks/professional-learning-framework': typeof FrameworksProfessionalLearningFrameworkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,11 +110,13 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/current-issue': typeof CurrentIssueRoute
-  '/frameworks': typeof FrameworksRoute
+  '/for-contributors': typeof ForContributorsRoute
+  '/frameworks': typeof FrameworksRouteWithChildren
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
   '/speaking': typeof SpeakingRoute
   '/articles/$slug': typeof ArticlesSlugRoute
+  '/frameworks/professional-learning-framework': typeof FrameworksProfessionalLearningFrameworkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -106,33 +125,39 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/current-issue'
+    | '/for-contributors'
     | '/frameworks'
     | '/publications'
     | '/resources'
     | '/speaking'
     | '/articles/$slug'
+    | '/frameworks/professional-learning-framework'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/contact'
     | '/current-issue'
+    | '/for-contributors'
     | '/frameworks'
     | '/publications'
     | '/resources'
     | '/speaking'
     | '/articles/$slug'
+    | '/frameworks/professional-learning-framework'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/contact'
     | '/current-issue'
+    | '/for-contributors'
     | '/frameworks'
     | '/publications'
     | '/resources'
     | '/speaking'
     | '/articles/$slug'
+    | '/frameworks/professional-learning-framework'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -140,7 +165,8 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   CurrentIssueRoute: typeof CurrentIssueRoute
-  FrameworksRoute: typeof FrameworksRoute
+  ForContributorsRoute: typeof ForContributorsRoute
+  FrameworksRoute: typeof FrameworksRouteWithChildren
   PublicationsRoute: typeof PublicationsRoute
   ResourcesRoute: typeof ResourcesRoute
   SpeakingRoute: typeof SpeakingRoute
@@ -175,6 +201,13 @@ declare module '@tanstack/react-router' {
       path: '/current-issue'
       fullPath: '/current-issue'
       preLoaderRoute: typeof CurrentIssueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-contributors': {
+      id: '/for-contributors'
+      path: '/for-contributors'
+      fullPath: '/for-contributors'
+      preLoaderRoute: typeof ForContributorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/frameworks': {
@@ -212,15 +245,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArticlesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/frameworks/professional-learning-framework': {
+      id: '/frameworks/professional-learning-framework'
+      path: '/professional-learning-framework'
+      fullPath: '/frameworks/professional-learning-framework'
+      preLoaderRoute: typeof FrameworksProfessionalLearningFrameworkRouteImport
+      parentRoute: typeof FrameworksRoute
+    }
   }
 }
+
+interface FrameworksRouteChildren {
+  FrameworksProfessionalLearningFrameworkRoute: typeof FrameworksProfessionalLearningFrameworkRoute
+}
+
+const FrameworksRouteChildren: FrameworksRouteChildren = {
+  FrameworksProfessionalLearningFrameworkRoute:
+    FrameworksProfessionalLearningFrameworkRoute,
+}
+
+const FrameworksRouteWithChildren = FrameworksRoute._addFileChildren(
+  FrameworksRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   CurrentIssueRoute: CurrentIssueRoute,
-  FrameworksRoute: FrameworksRoute,
+  ForContributorsRoute: ForContributorsRoute,
+  FrameworksRoute: FrameworksRouteWithChildren,
   PublicationsRoute: PublicationsRoute,
   ResourcesRoute: ResourcesRoute,
   SpeakingRoute: SpeakingRoute,

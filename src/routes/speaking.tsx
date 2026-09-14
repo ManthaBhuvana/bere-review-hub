@@ -128,7 +128,7 @@ function Speaking() {
 
       {/* Areas of expertise */}
       <section className="container-editorial mt-16">
-        <div className="rounded-2xl border border-border bg-ink p-8 md:p-12">
+        <div className="on-ink rounded-2xl border border-border bg-ink p-8 md:p-12">
           <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
             Areas of Expertise
           </div>
@@ -137,7 +137,7 @@ function Speaking() {
             {AREAS.map((a) => (
               <span
                 key={a}
-                className="rounded-full border border-primary/30 bg-background/60 px-4 py-2 text-xs font-semibold text-foreground/85"
+                className="rounded-full border border-primary/30 bg-white/10 px-4 py-2 text-xs font-semibold text-foreground/85"
               >
                 {a}
               </span>
