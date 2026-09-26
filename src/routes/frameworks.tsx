@@ -68,7 +68,7 @@ function Frameworks() {
       <PageHeader
         eyebrow="Practice-Informed Conceptual Model"
         title="Frameworks"
-        lead="Original models developed from research and school-leadership practice — for professional learning, policy alignment, reflection, and leadership growth."
+        lead="Practice-informed frameworks and tools developed from research and school-leadership practice — for professional learning, policy alignment, reflection, and leadership growth."
       />
 
       {/* Featured Framework */}
