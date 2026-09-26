@@ -66,7 +66,7 @@ function Frameworks() {
     <>
       {/* Page Header */}
       <PageHeader
-        eyebrow="Practice-Informed Conceptual Frameworks / Tools"
+        eyebrow="Practice-Informed Conceptual Model"
         title="Frameworks"
         lead="Original models developed from research and school-leadership practice — for professional learning, policy alignment, reflection, and leadership growth."
       />
