@@ -291,7 +291,7 @@ function Frameworks() {
             {
               title: "NCF-SE 2023",
               sub: "National Curriculum Framework — School Education",
-              body: "The framework translates NCF-SE 2023's learning standards into instructional practice through leadership routines and PLCs.",
+              body: "The framework provides a practice-oriented approach for connecting themes in NCF-SE 2023 with instructional practice, leadership routines, and professional learning.",
               points: [
                 "Learning Standards",
                 "Pedagogical Practices",
