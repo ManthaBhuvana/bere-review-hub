@@ -40,10 +40,10 @@ function Home() {
         <div className="flex items-center gap-3">
           <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-white p-0.5 ring-1 ring-primary/30">
             <img
-              src="public\mnr.jpeg"
-              alt="MNR Scottsdale Group of Institutions"
-              className="h-full w-full object-contain"
-            />
+  src="/mnr.jpeg"
+  alt="MNR Scottsdale Group of Institutions"
+  className="h-full w-full object-contain"
+/>
           </span>
           <span className="hidden h-7 w-px bg-primary/40 sm:block" aria-hidden="true" />
           <div className="text-left leading-tight">
