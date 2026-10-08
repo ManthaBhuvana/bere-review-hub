@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -49,12 +50,16 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportLovableError(
+      error instanceof Error ? error : new Error(String(error)),
+      { boundary: "tanstack_root_error_component" },
+    );
   }, [error]);
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -133,6 +138,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           alternateName: "The Reviewer",
           url: "https://thereviewer.co.in/",
         }),
+      },
+      {
+        src: "https://www.googletagmanager.com/gtag/js?id=G-L0296QWPTF",
+        async: true,
+      },
+      {
+        children: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-L0296QWPTF');
+        `,
       },
     ],
   }),
