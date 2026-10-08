@@ -31,9 +31,46 @@ export const Route = createFileRoute("/")({
 function Home() {
   const featured = getFeaturedArticle();
   const latest = ARTICLES.filter((a) => a.slug !== featured.slug).slice(0, 3);
+    return (
+  <>
+    {/* Affiliation bar */}
+    <div className="on-ink border-b border-white/10 bg-ink">
+      <div className="container-editorial flex flex-col items-center gap-2 py-2.5 text-center sm:flex-row sm:justify-between sm:text-left">
+        {/* Left: logo + name + designation */}
+        <div className="flex items-center gap-3">
+          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-white p-0.5 ring-1 ring-primary/30">
+            <img
+              src="public\mnr.jpeg"
+              alt="MNR Scottsdale Group of Institutions"
+              className="h-full w-full object-contain"
+            />
+          </span>
+          <span className="hidden h-7 w-px bg-primary/40 sm:block" aria-hidden="true" />
+          <div className="text-left leading-tight">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground">
+              Venu Gopal Bere
+            </p>
+            <p className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-primary">
+              Director, MNR Indo-English High Schools
+            </p>
+          </div>
+        </div>
 
-  return (
-    <>
+        {/* Right: group + campuses */}
+        {/* Right: group + campuses */}
+<div className="leading-tight sm:text-right">
+  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+    MNR Scottsdale Group of Institutions
+  </p>
+  <p className="mt-1 text-xs font-medium text-muted-foreground">
+    Kukatpally <span className="mx-2 text-primary/60">|</span>
+    Miyapur <span className="mx-2 text-primary/60">|</span>
+    Santosh Nagar
+  </p>
+</div>
+      </div>
+    </div>
+
       {/* Hero */}
       <section className="on-ink relative overflow-hidden border-b border-border/50 bg-ink">
         {/* Decorative background: soft gold glow */}
