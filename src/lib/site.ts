@@ -28,7 +28,7 @@ export function absoluteUrl(path: string): string {
 }
 
 /** Default image shown when a page is shared on WhatsApp, LinkedIn, X, etc. */
-export const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+export const OG_IMAGE = `${SITE_URL}/og-image-v2.jpg`;
 export const OG_IMAGE_WIDTH = "1200";
 export const OG_IMAGE_HEIGHT = "630";
 export const OG_IMAGE_ALT = "The Venugopal Bere Educational Review";
