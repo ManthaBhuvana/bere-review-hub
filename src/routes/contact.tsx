@@ -1,6 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "../components/site/PageHeader";
-import { BookOpen, FileText, GraduationCap, Linkedin, Mail, Mic, Youtube } from "lucide-react";
+import {
+  ArrowUpRight,
+  BookOpen,
+  FileText,
+  GraduationCap,
+  Linkedin,
+  Mail,
+  Mic,
+  Youtube,
+} from "lucide-react";
 import {
   CONTACT_EMAIL,
   CONTACT_FORM_URL,
@@ -10,6 +19,13 @@ import {
   mailtoLink,
 } from "@/lib/site";
 import { seo } from "@/lib/seo";
+
+// Google Maps embed for M N R Educational Trust
+const MAP_EMBED_URL =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7610.191785924606!2d78.3826332935791!3d17.5029353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91bac138eff7%3A0x578b3c569beaae3f!2sM%20N%20R%20Educational%20Trust!5e0!3m2!1sen!2sin!4v1791718034298!5m2!1sen!2sin";
+
+const MAP_LINK_URL =
+  "https://www.google.com/maps/search/?api=1&query=M+N+R+Educational+Trust";
 
 // The four enquiry categories, in the order agreed for the site.
 // Each card offers a pre-addressed email (subject line already filled in) so the
@@ -118,7 +134,7 @@ function Contact() {
       </section>
 
       {/* Main Contact Section */}
-      <section className="container-editorial mt-10 grid gap-8 lg:grid-cols-[1fr_360px]">
+      <section className="container-editorial mt-10 mb-20 grid gap-8 lg:grid-cols-[1fr_360px]">
         {/* Contact Form */}
         <div className="rounded-2xl border border-border bg-card p-6 md:p-8">
           <h2 className="font-serif text-2xl">Send a message</h2>
@@ -141,6 +157,7 @@ function Contact() {
 
         {/* Contact Sidebar */}
         <aside className="space-y-6">
+          {/* Reach us */}
           <div className="on-ink rounded-2xl border border-border bg-ink p-6">
             <h3 className="font-serif text-primary text-lg">Reach us</h3>
 
@@ -182,6 +199,33 @@ function Contact() {
                 <Youtube className="h-4 w-4" />
               </a>
             </div>
+          </div>
+
+          {/* Find us — Google Map */}
+          <div className="on-ink rounded-2xl border border-border bg-ink p-6">
+            <h3 className="font-serif text-primary text-lg">Find us</h3>
+            <p className="mt-1 text-sm text-foreground/70">M N R Educational Trust</p>
+
+            <div className="mt-4 overflow-hidden rounded-lg border border-border/60">
+              <iframe
+                title="Map showing M N R Educational Trust"
+                src={MAP_EMBED_URL}
+                className="h-64 w-full border-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
+
+            <a
+              href={MAP_LINK_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+            >
+              Open in Google Maps
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
           </div>
         </aside>
       </section>
