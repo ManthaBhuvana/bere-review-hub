@@ -8,6 +8,7 @@ import {
   Linkedin,
   Mail,
   Mic,
+  MapPin,
   Youtube,
 } from "lucide-react";
 import {
@@ -202,31 +203,49 @@ function Contact() {
           </div>
 
           {/* Find us — Google Map */}
-          <div className="on-ink rounded-2xl border border-border bg-ink p-6">
-            <h3 className="font-serif text-primary text-lg">Find us</h3>
-            <p className="mt-1 text-sm text-foreground/70">M N R Educational Trust</p>
+<div className="on-ink rounded-2xl border border-border bg-ink p-6">
+  <h3 className="font-serif text-primary text-lg">Find us</h3>
 
-            <div className="mt-4 overflow-hidden rounded-lg border border-border/60">
-              <iframe
-                title="Map showing M N R Educational Trust"
-                src={MAP_EMBED_URL}
-                className="h-64 w-full border-0"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
-            </div>
+  <div className="mt-4 flex items-start gap-3">
+    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary">
+      <MapPin className="h-4 w-4" />
+    </div>
 
-            <a
-              href={MAP_LINK_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
-            >
-              Open in Google Maps
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
+    <address className="not-italic text-sm leading-relaxed">
+      <p className="font-semibold text-foreground">Bere Venu Gopal</p>
+      <p className="text-foreground/70">Dean, Academic Director</p>
+      <p className="mt-2 text-foreground/80">MNR Indo-English High Schools</p>
+      <p className="text-foreground/70">
+        59 &amp; 60, AS Raju Nagar,
+        <br />
+        Behind South India Shopping Mall,
+        <br />
+        Kukatpally, Hyderabad – 500072
+      </p>
+    </address>
+  </div>
+
+  <div className="mt-5 overflow-hidden rounded-lg border border-border/60">
+    <iframe
+      title="Map showing M N R Educational Trust"
+      src={MAP_EMBED_URL}
+      className="h-64 w-full border-0"
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="strict-origin-when-cross-origin"
+    />
+  </div>
+
+  <a
+    href={MAP_LINK_URL}
+    target="_blank"
+    rel="noreferrer"
+    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+  >
+    Open in Google Maps
+    <ArrowUpRight className="h-4 w-4" />
+  </a>
+</div>
         </aside>
       </section>
     </>
