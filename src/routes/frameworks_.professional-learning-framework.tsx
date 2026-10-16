@@ -6,7 +6,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, Check, Copy, Download } from "lucide-react";
 import { PageHeader } from "../components/site/PageHeader";
-import { SITE_NAME, absoluteUrl } from "@/lib/site";
+import { SITE_NAME, SITE_SHORT_NAME, absoluteUrl } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute(
@@ -15,7 +15,7 @@ export const Route = createFileRoute(
   component: ProfessionalLearningFramework,
   head: () =>
     seo({
-      title: `The Bere Professional Learning Framework — ${SITE_NAME}`,
+      title: `The Bere Professional Learning Framework`,
       ogTitle: "The Bere Professional Learning Framework",
       description:
         "A Practice-Informed Conceptual Framework connecting teacher professional learning with continuous school improvement — Overview, Diagram, Purpose, Application, Research Foundations, and How to Cite.",

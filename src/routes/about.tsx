@@ -11,14 +11,14 @@ import {
   Target,
   Users,
 } from "lucide-react";
-import { FOUNDER_NAME, FOUNDER_TITLE, LINKEDIN_URL, SITE_NAME } from "@/lib/site";
+import { FOUNDER_NAME, FOUNDER_TITLE, LINKEDIN_URL, SITE_SHORT_NAME } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
   component: About,
   head: () =>
     seo({
-      title: `About Venugopal Bere — ${SITE_NAME}`,
+      title: `About Venugopal Bere`,
       ogTitle: "About Venugopal Bere — Founder & Editor",
       description:
         "Venugopal Bere, Founder & Editor: Academic Director, Teacher Educator, and CBSE Resource Person with 30+ years bridging educational research, leadership, and classroom practice.",

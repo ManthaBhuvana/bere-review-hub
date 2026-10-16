@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ChevronDown, Copy, Check, Download } from "lucide-react";
 import { PageHeader } from "../components/site/PageHeader";
-import { ISSUE_DATE, SITE_NAME } from "@/lib/site";
+import { ISSUE_DATE, SITE_NAME, SITE_SHORT_NAME } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/publications")({
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/publications")({
 
   head: () =>
     seo({
-      title: `Publications — ${SITE_NAME}`,
+      title: `Publications Archive & Citations`,
       ogTitle: "Publications Archive — The Venugopal Bere Educational Review",
       description:
         "Archive of issues and publications on educational leadership, teacher development, and classroom practice, with full citation details and downloadable PDFs.",
@@ -65,17 +65,9 @@ const PUBS = [
   },
 ];
 
-const YEARS = ["All", "2026", "2025", "2024", "2023"] as const;
+const YEARS = ["All", "2026"] as const;
 
-const CATS = [
-  "All",
-  "Review Issue",
-  "Monograph",
-  "Working Paper",
-  "Guide",
-  "Essay",
-  "Report",
-] as const;
+const CATS = ["All", "Review Issue"] as const;
 
 // Derived from PUBS so new entries automatically appear as a filter option.
 const THEMES = ["All", ...Array.from(new Set(PUBS.map((p) => p.theme)))] as const;

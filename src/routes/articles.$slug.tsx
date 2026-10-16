@@ -15,7 +15,14 @@ import {
   getArticleBySlug,
   formatCitation,
 } from "../data/articles";
-import { COPYRIGHT_NOTICE, SITE_NAME, absoluteUrl } from "@/lib/site";
+import {
+  COPYRIGHT_NOTICE,
+  SITE_NAME,
+  SITE_SHORT_NAME,
+  SITE_URL,
+  ISSUE_DATE_ISO,
+  absoluteUrl,
+} from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/articles/$slug")({
@@ -31,28 +38,81 @@ export const Route = createFileRoute("/articles/$slug")({
 
   component: ArticlePage,
 
-  head: ({ loaderData }) => {
+    head: ({ loaderData }) => {
     if (!loaderData) {
       return {};
     }
 
     const article = loaderData;
+    const url = absoluteUrl(`/articles/${article.slug}`);
+    const title = article.seoTitle ?? article.title;
+    const description = article.seoDescription ?? article.excerpt;
 
     const base = seo({
-      title: `${article.title} — ${SITE_NAME}`,
+      title: `${title} | ${SITE_SHORT_NAME}`,
       ogTitle: article.title,
-      description: article.excerpt,
+      description,
       keywords: `${article.tag}, school leadership, educational leadership, Venugopal Bere, teacher development, NEP 2020`,
       path: `/articles/${article.slug}`,
       type: "article",
     });
 
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          headline: article.title,
+          description,
+          inLanguage: "en-IN",
+          datePublished: ISSUE_DATE_ISO,
+          dateModified: ISSUE_DATE_ISO,
+          image: `${SITE_URL}/og-image-v2.jpg`,
+          mainEntityOfPage: url,
+          author: { "@type": "Person", "@id": `${SITE_URL}/#person`, name: article.author },
+          publisher: { "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE_NAME },
+        },
+        {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+            { "@type": "ListItem", position: 2, name: "Current Issue", item: `${SITE_URL}/current-issue` },
+            { "@type": "ListItem", position: 3, name: article.shortTitle ?? article.title, item: url },
+          ],
+        },
+      ],
+    };
+
     return {
-      meta: [...base.meta, { property: "article:author", content: article.author }],
+      meta: [
+        ...base.meta,
+        { property: "article:author", content: article.author },
+        { property: "article:published_time", content: ISSUE_DATE_ISO },
+      ],
       links: base.links,
+      scripts: [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }],
     };
   },
 });
+
+const RELATED_LINKS: Record<string, { to: string; label: string }[]> = {
+  "volume-1": [
+    { to: "/frameworks/professional-learning-framework", label: "The Bere Professional Learning Framework" },
+    { to: "/articles/leaders-toolkit", label: "10 coaching questions for post-observation conferences" },
+  ],
+  editorial: [
+    { to: "/for-contributors", label: "Contributor guidelines and editorial policy" },
+    { to: "/articles/foreword", label: "Foreword: building better schools begins with educators" },
+  ],
+  foreword: [
+    { to: "/articles/volume-1", label: "Volume 1, Issue 1: teacher professional development" },
+    { to: "/frameworks", label: "School improvement frameworks and tools" },
+  ],
+  "leaders-toolkit": [
+    { to: "/frameworks", label: "Reflective Practice Cycle and other leadership tools" },
+    { to: "/resources", label: "School leadership resource centre" },
+  ],
+};
 
 function CitationBox({
   article,
@@ -204,6 +264,23 @@ function ArticlePage() {
                 </ul>
               </div>
             )}
+
+                      {/* Related reading */}
+          {RELATED_LINKS[article.slug] && (
+            <div className="not-prose mt-10 rounded-xl border border-border bg-card p-6">
+              <h2 className="font-serif text-lg text-foreground">Related reading</h2>
+              <ul className="mt-3 space-y-2 text-sm">
+                {RELATED_LINKS[article.slug].map((r) => (
+                  <li key={r.to}>
+                    <Link to={r.to as never} className="text-primary hover:underline">
+                      {r.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        
 
           {/* CTA Row */}
           <div className="mt-10 flex flex-wrap gap-3 not-prose">

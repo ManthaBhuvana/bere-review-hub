@@ -108,6 +108,15 @@ export function SiteFooter() {
                   Something went wrong. Please try again.
                 </p>
               )}
+
+                            <p className="mt-2 text-[11px] leading-relaxed text-foreground/50">
+                By subscribing you agree to our{" "}
+                <Link to="/privacy-policy" className="underline hover:text-primary">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+              
             </div>
           </div>
 
@@ -118,15 +127,14 @@ export function SiteFooter() {
             </h4>
 
             <ul className="space-y-2.5 text-sm text-foreground/75">
-              {[
+                            {[
                 ["/about", "About"],
                 ["/current-issue", "Current Issue"],
                 ["/publications", "Publications"],
                 ["/frameworks", "Frameworks"],
                 ["/resources", "Resources"],
                 ["/speaking", "Speaking & Training"],
-                ["/for-contributors", "Editorial Policy"],
-                ["/publications", "Citation"],
+                ["/for-contributors", "Contributor Guidelines"],
                 ["/contact", "Contact"],
               ].map(([to, label]) => (
                 <li key={label}>
@@ -189,6 +197,16 @@ export function SiteFooter() {
         <div className="container-editorial flex flex-col items-center justify-center py-5 text-center">
           <p className="text-xs text-muted-foreground">
             {COPYRIGHT_NOTICE}
+          </p>
+
+                    <p className="mt-1 flex gap-3 text-xs text-muted-foreground">
+            <Link to="/privacy-policy" className="hover:text-primary">
+              Privacy Policy
+            </Link>
+            <span aria-hidden="true">•</span>
+            <Link to="/terms" className="hover:text-primary">
+              Terms of Use
+            </Link>
           </p>
 
           {/* Small editorial divider */}

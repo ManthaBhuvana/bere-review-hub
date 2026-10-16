@@ -15,6 +15,7 @@ import {
   CONTACT_EMAIL,
   CONTACT_FORM_URL,
   LINKEDIN_URL,
+  SITE_SHORT_NAME,
   SITE_NAME,
   YOUTUBE_URL,
   mailtoLink,
@@ -71,7 +72,7 @@ export const Route = createFileRoute("/contact")({
 
   head: () =>
     seo({
-      title: `Contact — ${SITE_NAME}`,
+      title: `Contact`,
       ogTitle: "Contact the Review",
       description:
         "Contact The Venugopal Bere Educational Review for editorial enquiries, article submissions, speaking and training, and research or academic collaboration.",

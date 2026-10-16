@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 import { PageHeader } from "../components/site/PageHeader";
 import { ARTICLES, getFeaturedArticle } from "../data/articles";
-import { SITE_NAME, SUBMISSION_FORM_URL } from "@/lib/site";
+import { SITE_NAME, SITE_SHORT_NAME, SUBMISSION_FORM_URL } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/current-issue")({
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/current-issue")({
 
   head: () =>
     seo({
-      title: `Current Issue — ${SITE_NAME}`,
+      title: `Current Issue: Teacher Professional Development`,
       ogTitle: "Current Issue — Volume 1, Issue 1",
       description:
         "Read the inaugural issue, Volume 1, Issue 1, in full: the Editorial, the Foreword, and the Leader's Toolkit — on teacher professional development, instructional leadership, and NEP 2020 in practice.",

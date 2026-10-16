@@ -23,7 +23,9 @@ export interface Article {
   tag: string;
   featured?: boolean;
   title: string;
-  shortTitle?: string; // Shorter title used on teaser cards (Home, Current Issue grid); falls back to title.
+  shortTitle?: string;
+  seoTitle?: string; // Search-result title (≤ 60 chars). Falls back to title.
+  seoDescription?: string; // Search-result description. Falls back to excerpt. // Shorter title used on teaser cards (Home, Current Issue grid); falls back to title.
   author: string;
   authorRole?: string;
   date: string; // Display date, e.g. "October 2026" (see ISSUE_DATE in src/lib/site.ts)
@@ -42,6 +44,8 @@ export const ARTICLES: Article[] = [
     featured: true,
     title: "Volume 1, Issue 1 (2026): Teacher Professional Development — The Most Powerful Investment a School Can Make",
     shortTitle: "Volume 1, Issue 1 (2026)",
+    seoTitle: "Teacher Professional Development: Volume 1, Issue 1",
+    seoDescription:"Volume 1, Issue 1 of The Bere Review: research foundations, NEP 2020 and NCF-SE 2023 policy context, instructional leadership, and a 90-day approach to school improvement.",
     author: FOUNDER_NAME,
     authorRole: FOUNDER_TITLE,
     date: ISSUE_DATE,
@@ -64,6 +68,7 @@ export const ARTICLES: Article[] = [
     tag: "Editorial",
     title: "From the Editor: Why The Venugopal Bere Educational Review?",
     shortTitle: "From the Editor",
+    seoTitle: "Why The Bere Review? Bridging Research and Practice",
     author: FOUNDER_NAME,
     authorRole: FOUNDER_TITLE,
     date: ISSUE_DATE,
@@ -90,6 +95,7 @@ export const ARTICLES: Article[] = [
     tag: "Foreword",
     title: "Foreword: Building Better Schools Begins with Building Better Educators",
     shortTitle: "Foreword",
+    seoTitle: "Foreword: Building Better Schools Begins with Educators",
     author: FOUNDER_NAME,
     authorRole: FOUNDER_TITLE,
     date: ISSUE_DATE,
@@ -115,6 +121,7 @@ export const ARTICLES: Article[] = [
     tag: "Leader's Toolkit",
     title: "The Leader's Toolkit: Ten Powerful Coaching Questions for Post-Observation Conferences",
     shortTitle: "The Leader's Toolkit",
+    seoTitle: "10 Coaching Questions for Post-Observation Conferences",
     author: FOUNDER_NAME,
     authorRole: FOUNDER_TITLE,
     date: ISSUE_DATE,

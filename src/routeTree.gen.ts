@@ -15,9 +15,11 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CurrentIssueRouteImport } from './routes/current-issue'
 import { Route as ForContributorsRouteImport } from './routes/for-contributors'
 import { Route as FrameworksRouteImport } from './routes/frameworks'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PublicationsRouteImport } from './routes/publications'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as SpeakingRouteImport } from './routes/speaking'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 import { Route as FrameworksProfessionalLearningFrameworkRouteImport } from './routes/frameworks_.professional-learning-framework'
 
@@ -51,6 +53,11 @@ const FrameworksRoute = FrameworksRouteImport.update({
   path: '/frameworks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PublicationsRoute = PublicationsRouteImport.update({
   id: '/publications',
   path: '/publications',
@@ -64,6 +71,11 @@ const ResourcesRoute = ResourcesRouteImport.update({
 const SpeakingRoute = SpeakingRouteImport.update({
   id: '/speaking',
   path: '/speaking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
@@ -85,9 +97,11 @@ export interface FileRoutesByFullPath {
   '/current-issue': typeof CurrentIssueRoute
   '/for-contributors': typeof ForContributorsRoute
   '/frameworks': typeof FrameworksRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
   '/speaking': typeof SpeakingRoute
+  '/terms': typeof TermsRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/frameworks/professional-learning-framework': typeof FrameworksProfessionalLearningFrameworkRoute
 }
@@ -98,9 +112,11 @@ export interface FileRoutesByTo {
   '/current-issue': typeof CurrentIssueRoute
   '/for-contributors': typeof ForContributorsRoute
   '/frameworks': typeof FrameworksRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
   '/speaking': typeof SpeakingRoute
+  '/terms': typeof TermsRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/frameworks/professional-learning-framework': typeof FrameworksProfessionalLearningFrameworkRoute
 }
@@ -112,9 +128,11 @@ export interface FileRoutesById {
   '/current-issue': typeof CurrentIssueRoute
   '/for-contributors': typeof ForContributorsRoute
   '/frameworks': typeof FrameworksRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
   '/speaking': typeof SpeakingRoute
+  '/terms': typeof TermsRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/frameworks_/professional-learning-framework': typeof FrameworksProfessionalLearningFrameworkRoute
 }
@@ -127,9 +145,11 @@ export interface FileRouteTypes {
     | '/current-issue'
     | '/for-contributors'
     | '/frameworks'
+    | '/privacy-policy'
     | '/publications'
     | '/resources'
     | '/speaking'
+    | '/terms'
     | '/articles/$slug'
     | '/frameworks/professional-learning-framework'
   fileRoutesByTo: FileRoutesByTo
@@ -140,9 +160,11 @@ export interface FileRouteTypes {
     | '/current-issue'
     | '/for-contributors'
     | '/frameworks'
+    | '/privacy-policy'
     | '/publications'
     | '/resources'
     | '/speaking'
+    | '/terms'
     | '/articles/$slug'
     | '/frameworks/professional-learning-framework'
   id:
@@ -153,9 +175,11 @@ export interface FileRouteTypes {
     | '/current-issue'
     | '/for-contributors'
     | '/frameworks'
+    | '/privacy-policy'
     | '/publications'
     | '/resources'
     | '/speaking'
+    | '/terms'
     | '/articles/$slug'
     | '/frameworks_/professional-learning-framework'
   fileRoutesById: FileRoutesById
@@ -167,9 +191,11 @@ export interface RootRouteChildren {
   CurrentIssueRoute: typeof CurrentIssueRoute
   ForContributorsRoute: typeof ForContributorsRoute
   FrameworksRoute: typeof FrameworksRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   PublicationsRoute: typeof PublicationsRoute
   ResourcesRoute: typeof ResourcesRoute
   SpeakingRoute: typeof SpeakingRoute
+  TermsRoute: typeof TermsRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
   FrameworksProfessionalLearningFrameworkRoute: typeof FrameworksProfessionalLearningFrameworkRoute
 }
@@ -218,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrameworksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/publications': {
       id: '/publications'
       path: '/publications'
@@ -237,6 +270,13 @@ declare module '@tanstack/react-router' {
       path: '/speaking'
       fullPath: '/speaking'
       preLoaderRoute: typeof SpeakingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/articles/$slug': {
@@ -263,9 +303,11 @@ const rootRouteChildren: RootRouteChildren = {
   CurrentIssueRoute: CurrentIssueRoute,
   ForContributorsRoute: ForContributorsRoute,
   FrameworksRoute: FrameworksRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   PublicationsRoute: PublicationsRoute,
   ResourcesRoute: ResourcesRoute,
   SpeakingRoute: SpeakingRoute,
+  TermsRoute: TermsRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
   FrameworksProfessionalLearningFrameworkRoute:
     FrameworksProfessionalLearningFrameworkRoute,

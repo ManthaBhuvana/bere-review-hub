@@ -9,14 +9,14 @@ import {
   Users,
 } from "lucide-react";
 import { PageHeader } from "../components/site/PageHeader";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_SHORT_NAME } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/speaking")({
   component: Speaking,
   head: () =>
     seo({
-      title: `Speaking & Training — ${SITE_NAME}`,
+      title: `Teacher Training & Keynote Speaking`,
       ogTitle: "Speaking & Training — Venugopal Bere",
       description:
         "Keynote speaking, CBSE Capacity Building Programmes, teacher training, school leadership workshops, and parent education sessions with Venugopal Bere.",

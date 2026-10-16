@@ -24,7 +24,7 @@ import {
   Users,
 } from "lucide-react";
 import { PageHeader } from "../components/site/PageHeader";
-import { SITE_NAME, YOUTUBE_URL } from "@/lib/site";
+import { SITE_NAME, SITE_SHORT_NAME, YOUTUBE_URL } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/resources")({
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/resources")({
 
   head: () =>
     seo({
-      title: `School Leadership Resource Centre — ${SITE_NAME}`,
+      title: `School Leadership Resource Centre`,
       ogTitle: "School Leadership Resource Centre",
       description:
         "A growing professional resource library for school leaders, teachers, teacher educators, and policy leaders — guides, toolkits, dashboards, and workshop videos.",

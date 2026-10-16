@@ -11,17 +11,18 @@ import {
 } from "lucide-react";
 import { SubscribeForm } from "../components/site/SubscribeForm";
 import { ARTICLES, getFeaturedArticle } from "../data/articles";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_STRAPLINE } from "@/lib/site";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_STRAPLINE, SITE_SHORT_NAME } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   component: Home,
 
-  head: () =>
+   head: () =>
     seo({
-      title: `${SITE_NAME} — ${SITE_STRAPLINE}`,
+      title: `Teacher Development & School Leadership | ${SITE_SHORT_NAME}`,
       ogTitle: SITE_NAME,
-      description: `${SITE_DESCRIPTION} Read the inaugural issue, Volume 1, Issue 1.`,
+      description:
+        "An independent educational review connecting research, policy, leadership and classroom practice, with frameworks and tools for school leaders and teachers. Read Volume 1, Issue 1.",
       keywords:
         "Venugopal Bere, Teacher Professional Development, Educational Leadership, Teacher Education, Professional Learning, Instructional Leadership, NEP 2020, NCF-SE 2023, Competency-Based Education, School Improvement",
       path: "/",
@@ -48,7 +49,7 @@ function Home() {
           <span className="hidden h-7 w-px bg-primary/40 sm:block" aria-hidden="true" />
           <div className="text-left leading-tight">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground">
-              Venu Gopal Bere
+                            Venugopal Bere
             </p>
             <p className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-primary">
               Director, MNR Indo-English High Schools

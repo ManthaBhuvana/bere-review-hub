@@ -41,31 +41,37 @@ function resolveSiteUrl() {
 try {
   const siteUrl = resolveSiteUrl();
 
-  // Static pages: [path, changefreq, priority]
+    // Update these dates only when a page's content really changes.
+  const ISSUE_DATE = "2026-09-01";
+  const LASTMOD = "2026-10-16";
+
+  // Static pages: [path, changefreq, priority, lastmod]
   const pages = [
-    ["/", "weekly", "1.0"],
-    ["/about", "monthly", "0.8"],
-    ["/current-issue", "weekly", "0.9"],
-    ["/publications", "weekly", "0.8"],
-    ["/frameworks", "monthly", "0.8"],
-    ["/frameworks/professional-learning-framework", "monthly", "0.7"],
-    ["/resources", "weekly", "0.7"],
-    ["/speaking", "monthly", "0.6"],
-    ["/for-contributors", "monthly", "0.5"],
-    ["/contact", "monthly", "0.6"],
+    ["/", "weekly", "1.0", LASTMOD],
+    ["/about", "monthly", "0.8", LASTMOD],
+    ["/current-issue", "weekly", "0.9", ISSUE_DATE],
+    ["/publications", "weekly", "0.8", ISSUE_DATE],
+    ["/frameworks", "monthly", "0.8", LASTMOD],
+    ["/frameworks/professional-learning-framework", "monthly", "0.7", LASTMOD],
+    ["/resources", "weekly", "0.7", LASTMOD],
+    ["/speaking", "monthly", "0.6", LASTMOD],
+    ["/for-contributors", "monthly", "0.5", LASTMOD],
+    ["/contact", "monthly", "0.6", LASTMOD],
+    ["/privacy-policy", "yearly", "0.2", LASTMOD],
+    ["/terms", "yearly", "0.2", LASTMOD],
   ];
 
   // Article pages are picked up automatically from src/data/articles.ts.
   const articlesSource = readFileSync(join(root, "src/data/articles.ts"), "utf8");
   const slugs = [...articlesSource.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
   for (const slug of slugs) {
-    pages.push([`/articles/${slug}`, "monthly", slug === "volume-1" ? "0.7" : "0.6"]);
+    pages.push([`/articles/${slug}`, "monthly", slug === "volume-1" ? "0.7" : "0.6", ISSUE_DATE]);
   }
 
   const urls = pages
     .map(
-      ([path, freq, priority]) =>
-        `  <url><loc>${siteUrl}${path === "/" ? "/" : path}</loc><changefreq>${freq}</changefreq><priority>${priority}</priority></url>`,
+      ([path, freq, priority, lastmod]) =>
+        `  <url><loc>${siteUrl}${path === "/" ? "/" : path}</loc><lastmod>${lastmod}</lastmod><changefreq>${freq}</changefreq><priority>${priority}</priority></url>`,
     )
     .join("\n");
 

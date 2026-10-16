@@ -33,6 +33,12 @@ export const OG_IMAGE_WIDTH = "1200";
 export const OG_IMAGE_HEIGHT = "630";
 export const OG_IMAGE_ALT = "The Venugopal Bere Educational Review";
 
+/** Short brand used as a title suffix so page titles stay under ~60 characters. */
+export const SITE_SHORT_NAME = "The Bere Review";
+
+/** Machine-readable publication date for structured data. Change if the real release date differs. */
+export const ISSUE_DATE_ISO = "2026-09-01";
+
 // --- Brand wording -----------------------------------------------------------
 export const SITE_NAME = "The Venugopal Bere Educational Review";
 export const SITE_STRAPLINE = "Research. Policy. Leadership. Practice.";

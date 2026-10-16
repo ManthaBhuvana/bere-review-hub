@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "../components/site/PageHeader";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_SHORT_NAME } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/for-contributors")({
   component: ForContributors,
   head: () =>
     seo({
-      title: `For Contributors — ${SITE_NAME}`,
+      title: `Submission Guidelines & Editorial Policy`,
       ogTitle: "For Contributors — Submission Guidelines & Editorial Policy",
       description:
         "Scope, submission guidelines, referencing style, editorial review process, and publication ethics for The Venugopal Bere Educational Review.",

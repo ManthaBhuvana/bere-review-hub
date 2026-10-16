@@ -24,9 +24,48 @@ import {
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_STRAPLINE,
+  SITE_SHORT_NAME,
+  SITE_URL,
+  FOUNDER_NAME,
+  LINKEDIN_URL,
+  YOUTUBE_URL,
 } from "../lib/site";
 
 const DEFAULT_TITLE = `${SITE_NAME} — ${SITE_STRAPLINE}`;
+
+const SITE_JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#org`,
+      name: SITE_NAME,
+      alternateName: ["The Bere Review", "The Reviewer"],
+      url: `${SITE_URL}/`,
+      logo: OG_IMAGE,
+      founder: { "@id": `${SITE_URL}/#person` },
+      sameAs: [LINKEDIN_URL, YOUTUBE_URL],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: `${SITE_URL}/`,
+      name: SITE_NAME,
+      description: SITE_DESCRIPTION,
+      inLanguage: "en-IN",
+      publisher: { "@id": `${SITE_URL}/#org` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name: FOUNDER_NAME,
+      jobTitle: "Director, MNR Indo-English High Schools",
+      url: `${SITE_URL}/about`,
+      image: `${SITE_URL}/author.jpg`,
+      sameAs: [LINKEDIN_URL, YOUTUBE_URL],
+    },
+  ],
+};
 
 function NotFoundComponent() {
   return (
@@ -131,13 +170,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: SITE_NAME,
-          alternateName: "The Reviewer",
-          url: "https://thereviewer.co.in/",
-        }),
+        children: JSON.stringify(SITE_JSON_LD),
+    
       },
       {
         src: "https://www.googletagmanager.com/gtag/js?id=G-L0296QWPTF",
@@ -161,7 +195,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         <HeadContent />
       </head>

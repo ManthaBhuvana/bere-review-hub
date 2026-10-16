@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "../components/site/PageHeader";
 import { Search, Target, Users, Download } from "lucide-react";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_SHORT_NAME } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/frameworks")({
@@ -9,7 +9,7 @@ export const Route = createFileRoute("/frameworks")({
 
   head: () =>
     seo({
-      title: `Educational Frameworks — ${SITE_NAME}`,
+      title: `School Improvement Frameworks & Tools | ${SITE_SHORT_NAME}`,
       ogTitle: "Educational Frameworks — The Bere Professional Learning Framework",
       description:
         "The Bere Professional Learning Framework, a Practice-Informed Conceptual Framework, and its alignment with NEP 2020 and NCF-SE 2023 — with downloadable leadership tools.",
@@ -137,122 +137,106 @@ function Frameworks() {
 
               <div className="mt-6 grid aspect-square place-items-center rounded-2xl border border-border bg-background">
                 <svg
-  viewBox="0 0 320 340"
-  className="h-full w-full p-8"
-  role="img"
-  aria-label="Bere Professional Learning Framework showing Research, Policy, Leadership and Practice converging on Student Learning"
->
-  <defs>
-    <radialGradient
-      id="framework-gradient"
-      cx="50%"
-      cy="50%"
-      r="50%"
-    >
-      <stop
-        offset="0"
-        stopColor="oklch(0.52 0.19 25 / 0.35)"
-      />
-      <stop offset="1" stopColor="transparent" />
-    </radialGradient>
-  </defs>
+                  viewBox="0 0 320 340"
+                  className="h-full w-full p-8"
+                  role="img"
+                  aria-label="Bere Professional Learning Framework showing Research, Policy, Leadership and Practice converging on Student Learning"
+                >
+                  <defs>
+                    <radialGradient
+                      id="framework-gradient"
+                      cx="50%"
+                      cy="50%"
+                      r="50%"
+                    >
+                      <stop
+                        offset="0"
+                        stopColor="oklch(0.52 0.19 25 / 0.35)"
+                      />
+                      <stop offset="1" stopColor="transparent" />
+                    </radialGradient>
+                  </defs>
 
-  {/* Background Glow */}
-  <circle
-    cx="160"
-    cy="175"
-    r="150"
-    fill="url(#framework-gradient)"
-  />
+                  {/* Background Glow */}
+                  <circle
+                    cx="160"
+                    cy="175"
+                    r="150"
+                    fill="url(#framework-gradient)"
+                  />
 
-  {/* Framework Pillars */}
-  {[
-    {
-      x: 160,
-      y: 50,
-      label: "Research",
-    },
-    {
-      x: 280,
-      y: 220,
-      label: "Policy",
-    },
-    {
-      x: 40,
-      y: 220,
-      label: "Leadership",
-    },
-    {
-      x: 160,
-      y: 300,
-      label: "Practice",
-    },
-  ].map((node) => (
-    <g key={node.label}>
-      <line
-        x1="160"
-        y1="175"
-        x2={node.x}
-        y2={node.y}
-        stroke="oklch(0.78 0.14 85)"
-        strokeWidth="1"
-        strokeDasharray="3 3"
-      />
+                  {/* Framework Pillars */}
+                  {[
+                    { x: 160, y: 50, label: "Research" },
+                    { x: 280, y: 220, label: "Policy" },
+                    { x: 40, y: 220, label: "Leadership" },
+                    { x: 160, y: 300, label: "Practice" },
+                  ].map((node) => (
+                    <g key={node.label}>
+                      <line
+                        x1="160"
+                        y1="175"
+                        x2={node.x}
+                        y2={node.y}
+                        stroke="oklch(0.78 0.14 85)"
+                        strokeWidth="1"
+                        strokeDasharray="3 3"
+                      />
 
-      <circle
-        cx={node.x}
-        cy={node.y}
-        r="34"
-        fill="oklch(0.20 0.07 255)"
-        stroke="oklch(0.78 0.14 85)"
-        strokeWidth="1.5"
-      />
+                      <circle
+                        cx={node.x}
+                        cy={node.y}
+                        r="34"
+                        fill="oklch(0.20 0.07 255)"
+                        stroke="oklch(0.78 0.14 85)"
+                        strokeWidth="1.5"
+                      />
 
-      <text
-        x={node.x}
-        y={node.y + 4}
-        textAnchor="middle"
-        fontSize="11"
-        fill="oklch(0.94 0.005 90)"
-        fontFamily="Inter, sans-serif"
-      >
-        {node.label}
-      </text>
-    </g>
-  ))}
+                      <text
+                        x={node.x}
+                        y={node.y + 4}
+                        textAnchor="middle"
+                        fontSize="11"
+                        fill="oklch(0.94 0.005 90)"
+                        fontFamily="Inter, sans-serif"
+                      >
+                        {node.label}
+                      </text>
+                    </g>
+                  ))}
 
-  {/* Central Student Learning Circle */}
-  <circle
-    cx="160"
-    cy="175"
-    r="46"
-    fill="oklch(0.78 0.14 85)"
-  />
+                  {/* Central Student Learning Circle */}
+                  <circle
+                    cx="160"
+                    cy="175"
+                    r="46"
+                    fill="oklch(0.78 0.14 85)"
+                  />
 
-  <text
-    x="160"
-    y="171"
-    textAnchor="middle"
-    fontSize="10"
-    fontWeight="700"
-    fill="oklch(0.18 0.05 255)"
-    fontFamily="Inter, sans-serif"
-  >
-    STUDENT
-  </text>
+                  <text
+                    x="160"
+                    y="171"
+                    textAnchor="middle"
+                    fontSize="10"
+                    fontWeight="700"
+                    fill="oklch(0.18 0.05 255)"
+                    fontFamily="Inter, sans-serif"
+                  >
+                    STUDENT
+                  </text>
 
-  <text
-    x="160"
-    y="185"
-    textAnchor="middle"
-    fontSize="10"
-    fontWeight="700"
-    fill="oklch(0.18 0.05 255)"
-    fontFamily="Inter, sans-serif"
-  >
-    LEARNING
-  </text>
-</svg>
+                  <text
+                    x="160"
+                    y="185"
+                    textAnchor="middle"
+                    fontSize="10"
+                    fontWeight="700"
+                    fill="oklch(0.18 0.05 255)"
+                    fontFamily="Inter, sans-serif"
+                  >
+                    LEARNING
+                  </text>
+                </svg>
               </div>
 
               <p className="mt-3 text-xs text-muted-foreground">
@@ -366,6 +350,23 @@ function Frameworks() {
                   {poster.desc}
                 </p>
 
+                <a
+                  href={poster.img}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 block overflow-hidden rounded-lg border border-border/60"
+                >
+                  <img
+                    src={poster.img}
+                    alt={`${poster.title}: ${poster.desc}`}
+                    width={1200}
+                    height={800}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-40 w-full object-cover object-top"
+                  />
+                </a>
+
                 <div className="mt-5 flex flex-wrap gap-2">
                   {frameworkLink ? (
                     <a
@@ -373,6 +374,7 @@ function Frameworks() {
                       className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
                     >
                       View Framework
+                      <span className="sr-only"> — {poster.title}</span>
                     </a>
                   ) : (
                     <a
@@ -382,6 +384,7 @@ function Frameworks() {
                       className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
                     >
                       View Framework
+                      <span className="sr-only"> — {poster.title}</span>
                     </a>
                   )}
 
@@ -392,6 +395,7 @@ function Frameworks() {
                   >
                     <Download className="h-3.5 w-3.5" />
                     Download
+                    <span className="sr-only"> {poster.title} (image)</span>
                   </a>
                 </div>
               </div>
@@ -419,6 +423,7 @@ function Frameworks() {
           >
             <Download className="h-3.5 w-3.5" />
             Download
+            <span className="sr-only"> Annual Professional Learning Calendar (image)</span>
           </a>
         </div>
       </section>
