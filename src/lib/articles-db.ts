@@ -79,6 +79,16 @@ const PUBLIC_COLUMNS =
 
 const nowIso = () => new Date().toISOString();
 
+/** Rejects after `ms`, so a slow database never holds a page hostage. */
+function withTimeout<T>(p: PromiseLike<T>, ms = 4000): Promise<T> {
+  return Promise.race([
+    Promise.resolve(p),
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error(`Supabase timed out after ${ms} ms`)), ms),
+    ),
+  ]);
+}
+
 /** All live articles, newest first. */
 export async function listPublishedArticles(limit = 100): Promise<ArticleSummary[]> {
   const { data, error } = await supabase
@@ -95,7 +105,7 @@ export async function listPublishedArticles(limit = 100): Promise<ArticleSummary
 /** Same as above, but never throws — for the homepage, so it can't break. */
 export async function listLatestArticlesSafe(limit = 3): Promise<ArticleSummary[]> {
   try {
-    return await listPublishedArticles(limit);
+    return await withTimeout(listPublishedArticles(limit), 2500);
   } catch (e) {
     console.error("[articles] latest articles unavailable", e);
     return [];
@@ -164,12 +174,15 @@ export async function listPublishedResources(): Promise<
   (Resource & { article_slug?: string; article_title?: string })[]
 > {
   try {
-    const { data, error } = await supabase
-      .from("resources")
-      .select("*, article:articles!resources_article_id_fkey(slug,title,status,publish_at)")
-      .eq("status", "published")
-      .lte("publish_at", nowIso())
-      .order("publish_at", { ascending: false });
+    const { data, error } = await withTimeout(
+      supabase
+        .from("resources")
+        .select("*, article:articles!resources_article_id_fkey(slug,title,status,publish_at)")
+        .eq("status", "published")
+        .lte("publish_at", nowIso())
+        .order("publish_at", { ascending: false }),
+      2500,
+    );
     if (error) throw error;
     const now = Date.now();
     return (data ?? []).map((r) => {

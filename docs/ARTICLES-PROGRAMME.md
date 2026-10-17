@@ -42,6 +42,14 @@ the preview function, the approval rules, and the 12 calendar entries as **draft
 - `/admin` — sign in; the Editorial Desk lists Weeks 1–12 as *Draft*.
 - Homepage — the *Latest Articles* section is hidden until the first article is live (correct).
 
+**A5. Run the automatic check.** From the project folder:
+```
+npm run verify:articles -- https://thereviewer.co.in
+```
+It confirms, as a public visitor, that no draft, scheduled article or unpublished PDF is visible, that the public
+cannot create, edit or upload anything, that preview links reject wrong tokens, and that both storage buckets
+exist. Fix anything marked ✗ before continuing.
+
 ---
 
 ## Part B — The ten points of the brief
@@ -200,8 +208,15 @@ not go live until the Editor approves again. Any editorial change must be referr
 
 1. **Sat 17 Oct** — Part A (merge, SQL, log-ins). Upload the checklist PDF (§5).
 2. **Sat 17 / Sun 18 Oct** — prepare Article 1 (§4) and send the preview link to the Editor.
-3. **Sun 18 Oct** — the Editor reviews and clicks *Approve & schedule*.
-4. **Mon 19 Oct, after 06:00 IST** — open the article, the homepage, `/resources` and `/sitemap.xml`; test the PDF
+3. **Sun 18 Oct** — the Editor reviews and clicks *Approve & schedule*. Then run the readiness check with an
+   /admin login; every line should be ✓:
+   ```
+   VERIFY_EMAIL=... VERIFY_PASSWORD=... npm run verify:articles -- https://thereviewer.co.in
+   ```
+   It checks the manuscript, subheadings, references, reflective question, images, SEO, the 06:00 IST schedule,
+   that the PDF is linked, published and opens as a PDF, and that the Editor has approved.
+4. **Mon 19 Oct, after 06:00 IST** — run `npm run verify:articles -- https://thereviewer.co.in` again (it now
+   checks Article 1 is in the sitemap), open the article, the homepage, `/resources` and `/sitemap.xml`; test the PDF
    on a phone; run `check:links`; request indexing in Search Console.
 5. **Wed 21 Oct** — LinkedIn post with the UTM link.
 
@@ -222,5 +237,6 @@ Answers to the two questions in the brief:
 - `src/components/site/` — `InsightArticlePage`, `ArticleBody`, `ArticleCard`, `ShareButtons`, `DownloadableResources`
 - `src/routes/index.tsx` (Latest Articles), `src/routes/resources.tsx` (Downloadable Resources),
   `src/components/site/SiteNav.tsx` (menu item), `src/components/site/SubscribeForm.tsx` (sign-up event)
+- `scripts/verify-articles-setup.mjs` — `npm run verify:articles` security and readiness check
 - `scripts/generate-seo-files.mjs` — now writes only `robots.txt` (adds `Disallow: /admin`)
 - `public/images/articles/why-one-day-teacher-training-featured.webp` — Article 1 featured image
