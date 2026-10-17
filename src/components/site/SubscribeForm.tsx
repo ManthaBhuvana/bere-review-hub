@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { trackNewsletterSignup } from "@/lib/analytics";
 
-export function SubscribeForm({ className = "" }: { className?: string }) {
+export function SubscribeForm({ className = "", location = "page" }: { className?: string; location?: string }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -17,6 +18,7 @@ export function SubscribeForm({ className = "" }: { className?: string }) {
       setStatus("error");
       return;
     }
+    if (!error) trackNewsletterSignup(location);
     setStatus("success");
     setEmail("");
   };

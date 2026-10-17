@@ -24,11 +24,14 @@ import {
   Users,
 } from "lucide-react";
 import { PageHeader } from "../components/site/PageHeader";
+import { DownloadableResources } from "../components/site/DownloadableResources";
+import { listPublishedResources } from "@/lib/articles-db";
 import { SITE_NAME, SITE_SHORT_NAME, YOUTUBE_URL } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/resources")({
   component: Resources,
+  loader: async () => ({ downloads: await listPublishedResources() }),
 
   head: () =>
     seo({
@@ -250,6 +253,7 @@ function YoutubeFacade({ videoId }: { videoId: string }) {
 /* -------------------------------------------------------------------------- */
 
 function Resources() {
+  const { downloads } = Route.useLoaderData();
   return (
     <>
       {/* Page Header */}
@@ -274,6 +278,9 @@ function Resources() {
           </Link>
         </div>
       </PageHeader>
+
+      {/* Downloadable PDFs from Supabase (newest first) */}
+      <DownloadableResources resources={downloads} />
 
       {/* Resource Library */}
       <section className="container-editorial mt-12">

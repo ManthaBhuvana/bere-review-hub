@@ -35,7 +35,8 @@ Then tap the Jotform forms, chat assistant and Subscribe box once on a real phon
 ## Where things live
 - Site-wide wording, copyright, footer text, publication date, contact email, social links, site address: `src/lib/site.ts`
 - Page titles / descriptions / share previews: `src/lib/seo.ts` (used by every route)
-- Articles: `src/data/articles.ts`
+- Volume 1, Issue 1 pieces: `src/data/articles.ts`
+- Weekly Articles & Insights + downloadable PDFs: Supabase, managed at `/admin` — see `docs/ARTICLES-PROGRAMME.md`
 - PDFs: `public/images/pdfs/`
 - Framework infographics: `public/images/framework/` (WebP)
 

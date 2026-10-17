@@ -14,86 +14,189 @@ import {
   ARTICLES,
   getArticleBySlug,
   formatCitation,
+  type Article,
 } from "../data/articles";
+import {
+  getArticlePreview,
+  getNeighbours,
+  getPublishedArticle,
+  summaryText,
+  type InsightArticle,
+} from "@/lib/articles-db";
+import { InsightArticlePage } from "../components/site/InsightArticlePage";
 import {
   COPYRIGHT_NOTICE,
   SITE_NAME,
   SITE_SHORT_NAME,
   SITE_URL,
   ISSUE_DATE_ISO,
+  FOUNDER_NAME,
   absoluteUrl,
 } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
+type LoaderData =
+  | { kind: "issue"; article: Article }
+  | {
+      kind: "insight";
+      article: InsightArticle;
+      preview: boolean;
+      previous: { slug: string; title: string } | null;
+      next: { slug: string; title: string } | null;
+    };
+
 export const Route = createFileRoute("/articles/$slug")({
-  loader: ({ params }) => {
-    const article = getArticleBySlug(params.slug);
+  validateSearch: (search: Record<string, unknown>): { preview?: string } =>
+    typeof search.preview === "string" ? { preview: search.preview } : {},
+  loaderDeps: ({ search }) => ({ preview: search.preview }),
 
-    if (!article) {
-      throw notFound();
-    }
+  loader: async ({ params, deps }): Promise<LoaderData> => {
+    // 1. The four pieces of Volume 1, Issue 1 (static, src/data/articles.ts)
+    const issueArticle = getArticleBySlug(params.slug);
+    if (issueArticle) return { kind: "issue", article: issueArticle };
 
-    return article;
+    // 2. Articles & Insights (Supabase). A valid ?preview=<token> shows a draft.
+    const article = deps.preview
+      ? await getArticlePreview(params.slug, deps.preview)
+      : await getPublishedArticle(params.slug);
+    if (!article) throw notFound();
+
+    const { previous, next } = deps.preview
+      ? { previous: null, next: null }
+      : await getNeighbours(article.publish_at);
+    return { kind: "insight", article, preview: !!deps.preview, previous, next };
   },
 
-  component: ArticlePage,
+  component: ArticleRoute,
 
-    head: ({ loaderData }) => {
-    if (!loaderData) {
-      return {};
-    }
-
-    const article = loaderData;
-    const url = absoluteUrl(`/articles/${article.slug}`);
-    const title = article.seoTitle ?? article.title;
-    const description = article.seoDescription ?? article.excerpt;
-
-    const base = seo({
-      title: `${title} | ${SITE_SHORT_NAME}`,
-      ogTitle: article.title,
-      description,
-      keywords: `${article.tag}, school leadership, educational leadership, Venugopal Bere, teacher development, NEP 2020`,
-      path: `/articles/${article.slug}`,
-      type: "article",
-    });
-
-    const jsonLd = {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          headline: article.title,
-          description,
-          inLanguage: "en-IN",
-          datePublished: ISSUE_DATE_ISO,
-          dateModified: ISSUE_DATE_ISO,
-          image: `${SITE_URL}/og-image-v2.jpg`,
-          mainEntityOfPage: url,
-          author: { "@type": "Person", "@id": `${SITE_URL}/#person`, name: article.author },
-          publisher: { "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE_NAME },
-        },
-        {
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-            { "@type": "ListItem", position: 2, name: "Current Issue", item: `${SITE_URL}/current-issue` },
-            { "@type": "ListItem", position: 3, name: article.shortTitle ?? article.title, item: url },
-          ],
-        },
-      ],
-    };
-
-    return {
-      meta: [
-        ...base.meta,
-        { property: "article:author", content: article.author },
-        { property: "article:published_time", content: ISSUE_DATE_ISO },
-      ],
-      links: base.links,
-      scripts: [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }],
-    };
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    return loaderData.kind === "issue" ? issueHead(loaderData.article) : insightHead(loaderData.article, loaderData.preview);
   },
 });
+
+function ArticleRoute() {
+  const data = Route.useLoaderData();
+  return data.kind === "issue" ? (
+    <IssueArticlePage article={data.article} />
+  ) : (
+    <InsightArticlePage article={data.article} preview={data.preview} previous={data.previous} next={data.next} />
+  );
+}
+
+function insightHead(article: InsightArticle, preview: boolean) {
+  const path = `/articles/${article.slug}`;
+  const url = absoluteUrl(path);
+  const description = article.seo_description ?? summaryText(article, 160);
+  const image = article.featured_image_url
+    ? article.featured_image_url.startsWith("http")
+      ? article.featured_image_url
+      : absoluteUrl(article.featured_image_url)
+    : undefined;
+
+  const base = seo({
+    title: article.seo_title ?? `${article.title} | ${FOUNDER_NAME}`,
+    ogTitle: article.title,
+    description,
+    keywords: article.seo_keywords ?? `${article.category}, ${FOUNDER_NAME}`,
+    path,
+    type: "article",
+    image,
+  });
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: article.title,
+        alternativeHeadline: article.subtitle ?? undefined,
+        description,
+        inLanguage: "en-IN",
+        articleSection: article.category,
+        keywords: article.seo_keywords ?? undefined,
+        datePublished: article.publish_at,
+        dateModified: article.updated_at > article.publish_at ? article.updated_at : article.publish_at,
+        image: image ?? `${SITE_URL}/og-image-v2.jpg`,
+        mainEntityOfPage: url,
+        isPartOf: article.series ? { "@type": "CreativeWorkSeries", name: article.series } : undefined,
+        author: { "@type": "Person", "@id": `${SITE_URL}/#person`, name: article.author, jobTitle: article.author_role },
+        publisher: { "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE_NAME },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "Articles & Insights", item: `${SITE_URL}/articles` },
+          { "@type": "ListItem", position: 3, name: article.title, item: url },
+        ],
+      },
+    ],
+  };
+
+  return {
+    meta: [
+      ...base.meta,
+      ...(preview ? [{ name: "robots", content: "noindex, nofollow" }] : []),
+      { property: "article:author", content: article.author },
+      { property: "article:published_time", content: article.publish_at },
+      { property: "article:section", content: article.category },
+    ],
+    links: base.links,
+    scripts: preview ? [] : [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }],
+  };
+}
+
+function issueHead(article: Article) {
+  const url = absoluteUrl(`/articles/${article.slug}`);
+  const title = article.seoTitle ?? article.title;
+  const description = article.seoDescription ?? article.excerpt;
+
+  const base = seo({
+    title: `${title} | ${SITE_SHORT_NAME}`,
+    ogTitle: article.title,
+    description,
+    keywords: `${article.tag}, school leadership, educational leadership, Venugopal Bere, teacher development, NEP 2020`,
+    path: `/articles/${article.slug}`,
+    type: "article",
+  });
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: article.title,
+        description,
+        inLanguage: "en-IN",
+        datePublished: ISSUE_DATE_ISO,
+        dateModified: ISSUE_DATE_ISO,
+        image: `${SITE_URL}/og-image-v2.jpg`,
+        mainEntityOfPage: url,
+        author: { "@type": "Person", "@id": `${SITE_URL}/#person`, name: article.author },
+        publisher: { "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE_NAME },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "Current Issue", item: `${SITE_URL}/current-issue` },
+          { "@type": "ListItem", position: 3, name: article.shortTitle ?? article.title, item: url },
+        ],
+      },
+    ],
+  };
+
+  return {
+    meta: [
+      ...base.meta,
+      { property: "article:author", content: article.author },
+      { property: "article:published_time", content: ISSUE_DATE_ISO },
+    ],
+    links: base.links,
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }],
+  };
+}
 
 const RELATED_LINKS: Record<string, { to: string; label: string }[]> = {
   "volume-1": [
@@ -164,8 +267,7 @@ function CitationBox({
   );
 }
 
-function ArticlePage() {
-  const article = Route.useLoaderData();
+function IssueArticlePage({ article }: { article: Article }) {
 
   const shareUrl =
     typeof window !== "undefined"

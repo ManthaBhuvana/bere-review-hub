@@ -11,11 +11,15 @@ import {
 } from "lucide-react";
 import { SubscribeForm } from "../components/site/SubscribeForm";
 import { ARTICLES, getFeaturedArticle } from "../data/articles";
+import { ArticleCard } from "../components/site/ArticleCard";
+import { listLatestArticlesSafe } from "@/lib/articles-db";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_STRAPLINE, SITE_SHORT_NAME } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   component: Home,
+  // Three most recent live articles — updates by itself each Monday.
+  loader: async () => ({ latestArticles: await listLatestArticlesSafe(3) }),
 
    head: () =>
     seo({
@@ -32,6 +36,7 @@ export const Route = createFileRoute("/")({
 function Home() {
   const featured = getFeaturedArticle();
   const latest = ARTICLES.filter((a) => a.slug !== featured.slug).slice(0, 3);
+  const { latestArticles } = Route.useLoaderData();
     return (
   <>
     {/* Affiliation bar */}
@@ -145,6 +150,34 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* Latest Articles (Articles & Insights) — hidden until the first article is live */}
+      {latestArticles.length > 0 && (
+        <section className="container-editorial mt-16" aria-labelledby="latest-articles">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+                Articles &amp; Insights · Every Monday
+              </div>
+              <h2 id="latest-articles" className="mt-2 font-serif text-3xl text-foreground md:text-4xl">
+                Latest Articles
+              </h2>
+            </div>
+            <Link
+              to="/articles"
+              className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-primary hover:underline"
+            >
+              View all articles
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {latestArticles.map((a) => (
+              <ArticleCard key={a.slug} article={a} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Principal Feature — Volume 1, Issue 1 */}
       <section className="container-editorial mt-16">
@@ -359,7 +392,7 @@ function Home() {
           <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
             No spam — just new publications and frameworks as they are released.
           </p>
-          <SubscribeForm className="mx-auto mt-6 max-w-md" />
+          <SubscribeForm className="mx-auto mt-6 max-w-md" location="home" />
         </div>
       </section>
     </>

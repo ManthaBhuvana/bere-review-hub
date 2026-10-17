@@ -18,10 +18,14 @@ import { Route as FrameworksRouteImport } from './routes/frameworks'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PublicationsRouteImport } from './routes/publications'
 import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SpeakingRouteImport } from './routes/speaking'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as ArticlesIndexRouteImport } from './routes/articles.index'
 import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 import { Route as FrameworksProfessionalLearningFrameworkRouteImport } from './routes/frameworks_.professional-learning-framework'
+import { Route as AdminArticlesIdRouteImport } from './routes/admin.articles.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -68,6 +72,11 @@ const ResourcesRoute = ResourcesRouteImport.update({
   path: '/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SpeakingRoute = SpeakingRouteImport.update({
   id: '/speaking',
   path: '/speaking',
@@ -76,6 +85,16 @@ const SpeakingRoute = SpeakingRouteImport.update({
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
+  id: '/articles/',
+  path: '/articles/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
@@ -89,6 +108,11 @@ const FrameworksProfessionalLearningFrameworkRoute =
     path: '/frameworks/professional-learning-framework',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminArticlesIdRoute = AdminArticlesIdRouteImport.update({
+  id: '/admin/articles/$id',
+  path: '/admin/articles/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -100,10 +124,14 @@ export interface FileRoutesByFullPath {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
   '/terms': typeof TermsRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/frameworks/professional-learning-framework': typeof FrameworksProfessionalLearningFrameworkRoute
+  '/admin/': typeof AdminIndexRoute
+  '/articles/': typeof ArticlesIndexRoute
+  '/admin/articles/$id': typeof AdminArticlesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -115,10 +143,14 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
   '/terms': typeof TermsRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/frameworks/professional-learning-framework': typeof FrameworksProfessionalLearningFrameworkRoute
+  '/admin': typeof AdminIndexRoute
+  '/articles': typeof ArticlesIndexRoute
+  '/admin/articles/$id': typeof AdminArticlesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -131,10 +163,14 @@ export interface FileRoutesById {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/publications': typeof PublicationsRoute
   '/resources': typeof ResourcesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
   '/terms': typeof TermsRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/frameworks_/professional-learning-framework': typeof FrameworksProfessionalLearningFrameworkRoute
+  '/admin/': typeof AdminIndexRoute
+  '/articles/': typeof ArticlesIndexRoute
+  '/admin/articles/$id': typeof AdminArticlesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -148,10 +184,14 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/publications'
     | '/resources'
+    | '/sitemap.xml'
     | '/speaking'
     | '/terms'
     | '/articles/$slug'
     | '/frameworks/professional-learning-framework'
+    | '/admin/'
+    | '/articles/'
+    | '/admin/articles/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -163,10 +203,14 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/publications'
     | '/resources'
+    | '/sitemap.xml'
     | '/speaking'
     | '/terms'
     | '/articles/$slug'
     | '/frameworks/professional-learning-framework'
+    | '/admin'
+    | '/articles'
+    | '/admin/articles/$id'
   id:
     | '__root__'
     | '/'
@@ -178,10 +222,14 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/publications'
     | '/resources'
+    | '/sitemap.xml'
     | '/speaking'
     | '/terms'
     | '/articles/$slug'
     | '/frameworks_/professional-learning-framework'
+    | '/admin/'
+    | '/articles/'
+    | '/admin/articles/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -194,10 +242,14 @@ export interface RootRouteChildren {
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   PublicationsRoute: typeof PublicationsRoute
   ResourcesRoute: typeof ResourcesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SpeakingRoute: typeof SpeakingRoute
   TermsRoute: typeof TermsRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
   FrameworksProfessionalLearningFrameworkRoute: typeof FrameworksProfessionalLearningFrameworkRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  ArticlesIndexRoute: typeof ArticlesIndexRoute
+  AdminArticlesIdRoute: typeof AdminArticlesIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -265,6 +317,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/speaking': {
       id: '/speaking'
       path: '/speaking'
@@ -277,6 +336,20 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/articles/': {
+      id: '/articles/'
+      path: '/articles'
+      fullPath: '/articles/'
+      preLoaderRoute: typeof ArticlesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/articles/$slug': {
@@ -293,6 +366,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrameworksProfessionalLearningFrameworkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/articles/$id': {
+      id: '/admin/articles/$id'
+      path: '/admin/articles/$id'
+      fullPath: '/admin/articles/$id'
+      preLoaderRoute: typeof AdminArticlesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -306,11 +386,15 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   PublicationsRoute: PublicationsRoute,
   ResourcesRoute: ResourcesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SpeakingRoute: SpeakingRoute,
   TermsRoute: TermsRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
   FrameworksProfessionalLearningFrameworkRoute:
     FrameworksProfessionalLearningFrameworkRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  ArticlesIndexRoute: ArticlesIndexRoute,
+  AdminArticlesIdRoute: AdminArticlesIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
