@@ -7,6 +7,7 @@ import { ARTICLES } from "../../data/articles";
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
+  { to: "/articles", label: "Articles & Insights" },
   { to: "/current-issue", label: "Current Issue" },
   { to: "/publications", label: "Publications" },
   { to: "/frameworks", label: "Frameworks" },
@@ -18,6 +19,7 @@ const NAV = [
 // Static pages that aren't in ARTICLES but should still be searchable.
 const SEARCHABLE_PAGES = [
   { to: "/about", label: "About the Author", type: "Page" },
+  { to: "/articles", label: "Articles & Insights", type: "Page" },
   { to: "/current-issue", label: "Current Issue", type: "Page" },
   { to: "/publications", label: "Publications", type: "Page" },
   { to: "/frameworks", label: "Frameworks", type: "Page" },
@@ -103,12 +105,12 @@ export function SiteNav() {
           </div>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-4 xl:gap-6 lg:flex">
+        <nav className="ml-auto hidden items-center gap-3 xl:gap-5 lg:flex">
           {NAV.map((n) => (
             <Link
               key={n.to}
               to={n.to}
-              className="link-underline link-underline-hover text-sm font-medium text-foreground/85 transition-colors hover:text-primary [&.active]:text-primary"
+              className="link-underline link-underline-hover whitespace-nowrap text-[13px] font-medium xl:text-sm text-foreground/85 transition-colors hover:text-primary [&.active]:text-primary"
               activeProps={{ className: "active" }}
               activeOptions={{ exact: n.to === "/" }}
             >
