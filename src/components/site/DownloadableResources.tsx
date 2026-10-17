@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Download, FileText } from "lucide-react";
-import { downloadUrl, type Resource } from "@/lib/articles-db";
+import { downloadAttr, downloadUrl, type Resource } from "@/lib/articles-db";
 import { trackResourceDownload } from "@/lib/analytics";
 
 type Item = Resource & { article_slug?: string; article_title?: string };
@@ -49,6 +49,7 @@ export function DownloadableResources({ resources }: { resources: Item[] }) {
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <a
                 href={downloadUrl(r)}
+                download={downloadAttr(r)}
                 onClick={() =>
                   trackResourceDownload({
                     resourceSlug: r.slug,

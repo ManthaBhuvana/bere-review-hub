@@ -10,6 +10,8 @@ export interface RelatedLink {
   kind: "publication" | "framework" | "resource" | "article" | "other";
   label: string;
   url: string;
+  /** Optional formal citation shown on the card (Markdown, e.g. *italic* titles). */
+  citation?: string;
 }
 
 export interface Resource {
@@ -44,6 +46,7 @@ export interface InsightArticle {
   reference_list: string[];
   related_links: RelatedLink[];
   reflective_question: string | null;
+  reflective_heading: string | null;
   reading_time_minutes: number | null;
   seo_title: string | null;
   seo_description: string | null;
@@ -75,7 +78,7 @@ const SUMMARY_COLUMNS =
 
 // Never select preview_token for public pages.
 const PUBLIC_COLUMNS =
-  "id,slug,week_number,title,subtitle,author,author_role,category,series,excerpt,body_md,featured_image_url,featured_image_alt,framework_image_url,reference_list,related_links,reflective_question,reading_time_minutes,seo_title,seo_description,seo_keywords,resource_id,status,publish_at,updated_at,resource:resources!articles_resource_fk(*)";
+  "id,slug,week_number,title,subtitle,author,author_role,category,series,excerpt,body_md,featured_image_url,featured_image_alt,framework_image_url,reference_list,related_links,reflective_question,reflective_heading,reading_time_minutes,seo_title,seo_description,seo_keywords,resource_id,status,publish_at,updated_at,resource:resources!articles_resource_fk(*)";
 
 const nowIso = () => new Date().toISOString();
 
@@ -245,6 +248,11 @@ export function summaryText(
     "";
   const plain = src.replace(/[*_`#>]/g, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
   return plain.length > max ? `${plain.slice(0, max - 1).trimEnd()}…` : plain;
+}
+
+/** For files the site hosts itself (/resources/…): the browser's own "save as" name. */
+export function downloadAttr(r: Pick<Resource, "file_url" | "file_name">): string | undefined {
+  return r.file_url.startsWith("/") ? r.file_name : undefined;
 }
 
 /** Public URL with a "save as" filename, so the PDF downloads rather than only opens. */

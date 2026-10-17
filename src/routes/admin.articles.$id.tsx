@@ -28,15 +28,24 @@ export const Route = createFileRoute("/admin/articles/$id")({
   component: () => <AdminGate>{({ role }) => <Editor role={role} />}</AdminGate>,
 });
 
-// Related links are edited as lines:  kind | label | url
+// Related links are edited as lines:  kind | label | url | citation (citation optional)
 const linksToText = (l: RelatedLink[]) =>
-  l.map((x) => `${x.kind} | ${x.label} | ${x.url}`).join("\n");
+  l
+    .map((x) =>
+      [x.kind, x.label, x.url, x.citation].filter((v) => v !== undefined && v !== "").join(" | "),
+    )
+    .join("\n");
 const textToLinks = (t: string): RelatedLink[] =>
   t
     .split("\n")
     .map((line) => line.split("|").map((p) => p.trim()))
-    .filter((p) => p.length === 3 && p[2])
-    .map(([kind, label, url]) => ({ kind: (kind || "other") as RelatedLink["kind"], label, url }));
+    .filter((p) => p.length >= 3 && p[2])
+    .map(([kind, label, url, ...rest]) => ({
+      kind: (kind || "other") as RelatedLink["kind"],
+      label,
+      url,
+      ...(rest.length && rest.join(" | ") ? { citation: rest.join(" | ") } : {}),
+    }));
 
 function Editor({ role }: { role: Role }) {
   const { id } = Route.useParams();
@@ -93,6 +102,7 @@ function Editor({ role }: { role: Role }) {
         .filter(Boolean),
       related_links: textToLinks(links),
       reflective_question: a.reflective_question || null,
+      reflective_heading: a.reflective_heading || null,
       reading_time_minutes: a.reading_time_minutes || null,
       seo_title: a.seo_title || null,
       seo_description: a.seo_description || null,
@@ -384,12 +394,19 @@ function Editor({ role }: { role: Role }) {
         </Field>
         <Field
           label="Related links"
-          hint="kind | label | url  (kind: publication, framework, resource, article, other)"
+          hint="kind | label | url | citation (optional) — kind: publication, framework, resource, article, other"
         >
           <textarea
             className={`${inputCls} min-h-40 font-mono text-xs`}
             value={links}
             onChange={(e) => setLinks(e.target.value)}
+          />
+        </Field>
+        <Field label="Reflective question heading" hint="default “Pause & Reflect”">
+          <input
+            className={inputCls}
+            value={a.reflective_heading ?? ""}
+            onChange={(e) => set("reflective_heading", e.target.value)}
           />
         </Field>
         <Field label="Concluding reflective question">

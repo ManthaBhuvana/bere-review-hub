@@ -7,14 +7,14 @@ import { ARTICLES } from "../../data/articles";
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
-  { to: "/articles", label: "Articles & Insights" },
+  { to: "/articles", label: "Articles & Insights", short: "Articles" },
   { to: "/current-issue", label: "Current Issue" },
   { to: "/publications", label: "Publications" },
   { to: "/frameworks", label: "Frameworks" },
   { to: "/resources", label: "Resources" },
-  { to: "/speaking", label: "Speaking & Training" },
+  { to: "/speaking", label: "Speaking & Training", short: "Speaking" },
   { to: "/contact", label: "Contact" },
-] as const;
+] as const satisfies readonly { to: string; label: string; short?: string }[];
 
 // Static pages that aren't in ARTICLES but should still be searchable.
 const SEARCHABLE_PAGES = [
@@ -106,15 +106,23 @@ export function SiteNav() {
         </Link>
 
         <nav className="ml-auto hidden items-center gap-3 xl:gap-5 lg:flex">
-          {NAV.map((n) => (
+          {/* "Home" is left out on desktop: the logo already links home (keeps the logo readable). */}
+          {NAV.filter((n) => n.to !== "/").map((n) => (
             <Link
               key={n.to}
               to={n.to}
               className="link-underline link-underline-hover whitespace-nowrap text-[13px] font-medium xl:text-sm text-foreground/85 transition-colors hover:text-primary [&.active]:text-primary"
               activeProps={{ className: "active" }}
-              activeOptions={{ exact: n.to === "/" }}
+              activeOptions={{ exact: false }}
             >
-              {n.label}
+              {"short" in n ? (
+                <>
+                  <span className="xl:hidden">{n.short}</span>
+                  <span className="hidden xl:inline">{n.label}</span>
+                </>
+              ) : (
+                n.label
+              )}
             </Link>
           ))}
         </nav>

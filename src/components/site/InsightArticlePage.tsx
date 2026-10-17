@@ -10,10 +10,11 @@ import {
   FileText,
   Lightbulb,
 } from "lucide-react";
-import { ArticleBody } from "./ArticleBody";
+import { ArticleBody, InlineMd } from "./ArticleBody";
 import { ShareButtons } from "./ShareButtons";
 import { SubscribeForm } from "./SubscribeForm";
 import {
+  downloadAttr,
   downloadUrl,
   formatPublishDate,
   readingMinutes,
@@ -52,6 +53,11 @@ function RelatedLinkItem({ link, articleSlug }: { link: RelatedLink; articleSlug
         <span className="mt-1 block font-serif text-base leading-snug text-foreground group-hover:text-primary">
           {link.label}
         </span>
+        {link.citation && (
+          <span className="mt-2 block text-xs leading-relaxed text-muted-foreground">
+            <InlineMd>{link.citation}</InlineMd>
+          </span>
+        )}
       </span>
       <ArrowRight className="ml-auto mt-1 h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
     </>
@@ -125,9 +131,13 @@ export function InsightArticlePage({
             Articles &amp; Insights
           </Link>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
+          <div className="mt-6 flex flex-col gap-1 text-xs font-semibold uppercase tracking-[0.25em] text-primary sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
             {article.series && <span>{article.series}</span>}
-            {article.series && <span aria-hidden="true">·</span>}
+            {article.series && (
+              <span aria-hidden="true" className="hidden sm:inline">
+                ·
+              </span>
+            )}
             <span>{article.category}</span>
           </div>
 
@@ -184,7 +194,7 @@ export function InsightArticlePage({
           {article.reflective_question && (
             <section className="mt-12 rounded-2xl border-l-4 border-primary bg-ink p-6 text-white md:p-8">
               <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-primary">
-                <Lightbulb className="h-4 w-4" /> Pause &amp; Reflect
+                <Lightbulb className="h-4 w-4" /> {article.reflective_heading || "Pause & Reflect"}
               </div>
               <p className="mt-3 font-serif text-xl leading-relaxed md:text-2xl">
                 {article.reflective_question}
@@ -201,7 +211,7 @@ export function InsightArticlePage({
               <ol className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/80">
                 {article.reference_list.map((r, i) => (
                   <li key={i} className="pl-8 -indent-8">
-                    {r}
+                    <InlineMd>{r}</InlineMd>
                   </li>
                 ))}
               </ol>
@@ -305,6 +315,7 @@ export function InsightArticlePage({
               )}
               <a
                 href={downloadUrl(resource)}
+                download={downloadAttr(resource)}
                 onClick={() =>
                   trackResourceDownload({
                     resourceSlug: resource.slug,

@@ -69,6 +69,9 @@ create table if not exists public.articles (
   created_at           timestamptz not null default now(),
   updated_at           timestamptz not null default now()
 );
+-- Added for Article 1: the heading above the concluding reflective question.
+alter table public.articles add column if not exists reflective_heading text;
+
 create index if not exists articles_live_idx on public.articles (status, publish_at desc);
 
 alter table public.articles enable row level security;
@@ -100,11 +103,11 @@ begin
 
   if r = 'developer' and tg_op = 'UPDATE' and old.status = 'approved'
      and (new.title, new.subtitle, new.body_md, new.reference_list, new.related_links,
-          new.reflective_question, new.featured_image_url, new.framework_image_url,
+          new.reflective_question, new.reflective_heading, new.featured_image_url, new.framework_image_url,
           new.publish_at, new.slug)
          is distinct from
          (old.title, old.subtitle, old.body_md, old.reference_list, old.related_links,
-          old.reflective_question, old.featured_image_url, old.framework_image_url,
+          old.reflective_question, old.reflective_heading, old.featured_image_url, old.framework_image_url,
           old.publish_at, old.slug)
   then
     new.status := 'in_review';

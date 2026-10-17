@@ -2,8 +2,32 @@ import { Link } from "@tanstack/react-router";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArrowRight, Compass, Download, FileText } from "lucide-react";
-import { downloadUrl, type InsightArticle, type Resource } from "@/lib/articles-db";
+import { downloadAttr, downloadUrl, type InsightArticle, type Resource } from "@/lib/articles-db";
 import { trackArticleToResource, trackResourceDownload } from "@/lib/analytics";
+import { FrameworkCycle } from "./FrameworkCycle";
+
+/** One line of Markdown rendered inline (italics, bold, links) — for references and citations. */
+export function InlineMd({ children }: { children: string }) {
+  return (
+    <ReactMarkdown
+      components={{
+        p: ({ children: c }) => <>{c}</>,
+        a: ({ href, children: c }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className="break-all text-foreground underline decoration-primary underline-offset-2 hover:text-primary"
+          >
+            {c}
+          </a>
+        ),
+      }}
+    >
+      {children}
+    </ReactMarkdown>
+  );
+}
 
 // The manuscript is stored as Markdown. Two shortcodes may be placed on a line
 // of their own, exactly where the Editor wants them to appear:
@@ -120,7 +144,9 @@ export function FrameworkPanel({ article }: { article: InsightArticle }) {
             className="mx-auto w-full max-w-3xl"
           />
         </a>
-      ) : null}
+      ) : (
+        <FrameworkCycle />
+      )}
       <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4">
         <p className="text-sm text-muted-foreground">
           Explore each stage of the framework in detail.
@@ -185,6 +211,7 @@ export function DownloadCta({
           <div className="mt-5 flex flex-wrap gap-3">
             <a
               href={downloadUrl(resource)}
+              download={downloadAttr(resource)}
               onClick={onDownload}
               className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-wider text-white hover:opacity-90"
             >
