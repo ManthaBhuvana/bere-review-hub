@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Linkedin, Youtube, Mail } from "lucide-react";
+import { Linkedin, Youtube, Mail, MapPin } from "lucide-react";
 import { Crest } from "./Crest";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -52,14 +52,15 @@ export function SiteFooter() {
                 <div className="font-serif text-lg font-bold leading-snug text-foreground">
                   {FOOTER_TEXT.name}
                 </div>
-
-                <p className="mt-2 max-w-xl text-xs font-medium uppercase leading-relaxed tracking-wide text-foreground/65">
-                  {FOOTER_TEXT.descriptor}
-                </p>
-
-                <p className="mt-1 text-xs font-medium text-foreground/65">
-                  {FOOTER_TEXT.founder}
-                </p>
+                <p className="mt-3 flex items-start gap-2 max-w-xl text-xs leading-relaxed text-foreground/65">
+  <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
+  <span>
+    Venugopal Bere – Educational Consultant &amp; Teacher Trainer,
+    Plot No: 59 &amp; 60, behind South India Shopping Mall,
+    A.S. Raju Nagar, Vivekananda Nagar, Kukatpally,
+    Hyderabad, Telangana 500072
+  </span>
+</p>
               </div>
             </div>
 
@@ -192,34 +193,54 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* ================= COPYRIGHT BAR ================= */}
-      <div className="border-t border-border/40">
-        <div className="container-editorial flex flex-col items-center justify-center py-5 text-center">
-          <p className="text-xs text-muted-foreground">
-            {COPYRIGHT_NOTICE}
-          </p>
+      
+{/* ================= COPYRIGHT BAR ================= */}
+<div className="border-t border-border/40">
+  <div className="container-editorial flex flex-col items-center justify-center gap-3 py-6 text-center sm:py-7">
 
-                    <p className="mt-1 flex gap-3 text-xs text-muted-foreground">
-            <Link to="/privacy-policy" className="hover:text-primary">
-              Privacy Policy
-            </Link>
-            <span aria-hidden="true">•</span>
-            <Link to="/terms" className="hover:text-primary">
-              Terms of Use
-            </Link>
-          </p>
+    {/* Copyright */}
+    <p className="text-sm leading-relaxed text-muted-foreground">
+      {COPYRIGHT_NOTICE}
+    </p>
 
-          {/* Small editorial divider */}
-          <span
-            aria-hidden="true"
-            className="my-2 h-px w-8 bg-primary/60"
-          />
+    {/* Legal Links */}
+    <nav
+      aria-label="Legal information"
+      className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground"
+    >
+      <Link
+        to="/privacy-policy"
+        className="transition-colors duration-200 hover:text-primary"
+      >
+        Privacy Policy
+      </Link>
 
-          <p className="text-xs font-medium text-foreground/60">
-            {DEVELOPER_CREDIT}
-          </p>
-        </div>
-      </div>
+      <span
+        aria-hidden="true"
+        className="h-3 w-px bg-border"
+      />
+
+      <Link
+        to="/terms"
+        className="transition-colors duration-200 hover:text-primary"
+      >
+        Terms of Use
+      </Link>
+    </nav>
+
+    {/* Subtle Divider */}
+    <span
+      aria-hidden="true"
+      className="mt-1 h-px w-10 bg-primary/60"
+    />
+
+    {/* Developer Credit */}
+    <p className="text-xs leading-relaxed text-muted-foreground/80">
+      {DEVELOPER_CREDIT}
+    </p>
+
+  </div>
+</div>
     </footer>
   );
 }

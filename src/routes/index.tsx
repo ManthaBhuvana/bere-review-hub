@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
 
    head: () =>
     seo({
-      title: `Teacher Development & School Leadership | ${SITE_SHORT_NAME}`,
+      title: `Venugopal Bere | Educational Consultant & Teacher Trainer, Hyderabad | ${SITE_SHORT_NAME}`,
       ogTitle: SITE_NAME,
       description:
         "An independent educational review connecting research, policy, leadership and classroom practice, with frameworks and tools for school leaders and teachers. Read Volume 1, Issue 1.",

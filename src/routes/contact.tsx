@@ -213,9 +213,8 @@ function Contact() {
     </div>
 
     <address className="not-italic text-sm leading-relaxed">
-      <p className="font-semibold text-foreground">Bere Venu Gopal</p>
-      <p className="text-foreground/70">Dean, Academic Director</p>
-      <p className="mt-2 text-foreground/80">MNR Indo-English High Schools</p>
+      <p className="font-semibold text-foreground">Venugopal Bere</p>
+      <p className="text-foreground/70">Educational Consultant & Teacher Trainer</p>
       <p className="text-foreground/70">
         59 &amp; 60, AS Raju Nagar,
         <br />

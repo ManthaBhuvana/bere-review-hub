@@ -16,7 +16,7 @@ export const Route = createFileRoute("/speaking")({
   component: Speaking,
   head: () =>
     seo({
-      title: `Teacher Training & Keynote Speaking`,
+      title: ` Teacher Training & CBSE Workshops in Hyderabad | Venugopal Bere`,
       ogTitle: "Speaking & Training — Venugopal Bere",
       description:
         "Keynote speaking, CBSE Capacity Building Programmes, teacher training, school leadership workshops, and parent education sessions with Venugopal Bere.",
