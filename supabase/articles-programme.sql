@@ -1,3 +1,10 @@
+-- Remove the earlier setup's versions of these functions so the new ones can be created.
+-- CASCADE also removes any old trigger/policy that used them (on the *_legacy tables);
+-- the new script recreates everything the website needs.
+drop function if exists public.get_article_preview(text, uuid) cascade;
+drop function if exists public.current_editor_role() cascade;
+drop function if exists public.articles_protocol() cascade;
+
 -- =============================================================================
 -- Articles & Insights + Resources — run ONCE in Supabase:
 --   Dashboard → SQL Editor → New query → paste this whole file → Run.
