@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Linkedin, Youtube, Mail, MapPin } from "lucide-react";
+import { Linkedin, Youtube, Mail, MapPin, Phone } from "lucide-react";
 import { Crest } from "./Crest";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -10,6 +10,8 @@ import {
   FOOTER_TEXT,
   LINKEDIN_URL,
   YOUTUBE_URL,
+  BUSINESS_PHONE,
+  BUSINESS_PHONE_LINK,
 } from "@/lib/site";
 
 export function SiteFooter() {
@@ -57,9 +59,15 @@ export function SiteFooter() {
   <span>
     Venugopal Bere – Educational Consultant &amp; Teacher Trainer,
     Plot No: 59 &amp; 60, behind South India Shopping Mall,
-    A.S. Raju Nagar, Vivekananda Nagar, Kukatpally,
+    A.S.Raju Nagar, Vivekananda Nagar, Kukatpally,
     Hyderabad, Telangana 500072
   </span>
+</p>
+<p className="mt-2 flex items-center gap-2 text-xs text-foreground/65">
+  <Phone className="h-4 w-4 shrink-0" />
+  <a href={BUSINESS_PHONE_LINK} className="hover:text-primary">
+    {BUSINESS_PHONE}
+  </a>
 </p>
               </div>
             </div>
