@@ -6,19 +6,23 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, Check, Copy, Download } from "lucide-react";
 import { PageHeader } from "../components/site/PageHeader";
+import {
+  BERE_PLF_STAGES,
+  FRAMEWORK_DESCRIPTOR,
+  FrameworkCycle,
+  downloadFrameworkPng,
+} from "../components/site/FrameworkCycle";
 import { SITE_NAME, SITE_SHORT_NAME, absoluteUrl } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
-export const Route = createFileRoute(
-  "/frameworks_/professional-learning-framework",
-)({
+export const Route = createFileRoute("/frameworks_/professional-learning-framework")({
   component: ProfessionalLearningFramework,
   head: () =>
     seo({
       title: `The Bere Professional Learning Framework`,
       ogTitle: "The Bere Professional Learning Framework",
       description:
-        "A Practice-Informed Conceptual Framework connecting teacher professional learning with continuous school improvement — Overview, Diagram, Purpose, Application, Research Foundations, and How to Cite.",
+        "A Practice-Informed Conceptual Framework of eight interconnected stages connecting teacher professional learning with continuous school improvement — Overview, Diagram, Purpose, Application, Research Foundations, and How to Cite.",
       keywords:
         "Bere Professional Learning Framework, teacher professional development, instructional leadership, NEP 2020, NCF-SE 2023, Practice-Informed Conceptual Framework",
       path: "/frameworks/professional-learning-framework",
@@ -78,9 +82,9 @@ function ProfessionalLearningFramework() {
   return (
     <>
       <PageHeader
-        eyebrow="Practice-Informed Conceptual Framework"
+        eyebrow={FRAMEWORK_DESCRIPTOR}
         title="The Bere Professional Learning Framework"
-        lead="A framework connecting teacher learning with continuous school improvement — integrating research, policy, leadership, and classroom practice."
+        lead="Eight interconnected stages connecting teacher professional learning with continuous school improvement — a continuous cycle in which Continuous School Improvement feeds back into School Vision."
       >
         <Link
           to="/frameworks"
@@ -97,18 +101,24 @@ function ProfessionalLearningFramework() {
           <h2 className="font-serif text-2xl text-foreground">Overview</h2>
           <div className="mt-3 max-w-3xl space-y-3 text-sm leading-relaxed text-muted-foreground">
             <p>
-              The Bere Professional Learning Framework is a Practice-Informed Conceptual
-              Framework that treats teacher professional development not as an isolated training event, but
-              as a continuous cycle connecting educational research, national policy, instructional
-              leadership, and everyday classroom practice.
+              The Bere Professional Learning Framework is a {FRAMEWORK_DESCRIPTOR} that treats
+              teacher professional development not as an isolated training event, but as a
+              continuous cycle connecting professional development with continuous school
+              improvement.
+            </p>
+            <p>The framework identifies eight interconnected stages:</p>
+            <ol className="grid gap-x-6 gap-y-1 pl-5 text-foreground/90 sm:grid-cols-2 [&>li]:list-decimal">
+              {BERE_PLF_STAGES.map((stage) => (
+                <li key={stage}>{stage}</li>
+              ))}
+            </ol>
+            <p>
+              The cycle then continues: Continuous School Improvement feeds back into School Vision,
+              so that each round of professional learning informs the next.
             </p>
             <p>
-              At its centre sits student learning — the measure against which every professional
-              learning decision is ultimately judged. Around that centre, four pillars —
-              Research, Policy, Leadership, and Practice — work together rather than in isolation:
-              research shapes what is worth trying, policy (NEP 2020 and NCF-SE 2023) sets the
-              national direction, leadership creates the conditions for teachers to grow, and
-              classroom practice is where all of it is tested against real learners.
+              It is offered as a practice-informed conceptual framework for schools to apply and
+              adapt in their own context, rather than as an empirically validated model.
             </p>
           </div>
         </div>
@@ -116,83 +126,22 @@ function ProfessionalLearningFramework() {
         {/* Diagram */}
         <div id="diagram" className="scroll-mt-24">
           <h2 className="font-serif text-2xl text-foreground">Diagram</h2>
-          <div className="mt-4 max-w-3xl overflow-hidden rounded-2xl border border-border bg-card p-8">
-            <svg
-              viewBox="0 0 320 320"
-              className="mx-auto h-full w-full max-w-md"
-              role="img"
-              aria-label="The Bere Professional Learning Framework showing Research, Policy, Leadership and Practice converging on Student Learning"
-            >
-              <defs>
-                <radialGradient id="plf-gradient" cx="50%" cy="50%" r="50%">
-                  <stop offset="0" stopColor="oklch(0.52 0.19 25 / 0.35)" />
-                  <stop offset="1" stopColor="transparent" />
-                </radialGradient>
-              </defs>
-              <circle cx="160" cy="160" r="140" fill="url(#plf-gradient)" />
-              {[
-                { x: 160, y: 40, label: "Research" },
-                { x: 280, y: 200, label: "Policy" },
-                { x: 40, y: 200, label: "Leadership" },
-                { x: 160, y: 290, label: "Practice" },
-              ].map((node) => (
-                <g key={node.label}>
-                  <line
-                    x1="160"
-                    y1="160"
-                    x2={node.x}
-                    y2={node.y}
-                    stroke="oklch(0.78 0.14 85)"
-                    strokeWidth="1"
-                    strokeDasharray="3 3"
-                  />
-                  <circle
-                    cx={node.x}
-                    cy={node.y}
-                    r="34"
-                    fill="oklch(0.20 0.07 255)"
-                    stroke="oklch(0.78 0.14 85)"
-                    strokeWidth="1.5"
-                  />
-                  <text
-                    x={node.x}
-                    y={node.y + 4}
-                    textAnchor="middle"
-                    fontSize="11"
-                    fill="oklch(0.94 0.005 90)"
-                    fontFamily="Inter, sans-serif"
-                  >
-                    {node.label}
-                  </text>
-                </g>
-              ))}
-              <circle cx="160" cy="160" r="46" fill="oklch(0.78 0.14 85)" />
-              <text
-                x="160"
-                y="156"
-                textAnchor="middle"
-                fontSize="10"
-                fontWeight="700"
-                fill="oklch(0.18 0.05 255)"
-                fontFamily="Inter, sans-serif"
-              >
-                STUDENT
-              </text>
-              <text
-                x="160"
-                y="170"
-                textAnchor="middle"
-                fontSize="10"
-                fontWeight="700"
-                fill="oklch(0.18 0.05 255)"
-                fontFamily="Inter, sans-serif"
-              >
-                LEARNING
-              </text>
-            </svg>
-            <p className="mt-4 text-center text-xs text-muted-foreground">
-              The four pillars — research, policy, leadership, and practice — converge on student
-              learning.
+          <div className="on-ink mt-4 max-w-3xl overflow-hidden rounded-2xl border border-primary/40 bg-ink">
+            <FrameworkCycle svgId="plf-diagram" />
+          </div>
+        </div>
+
+        {/* Editorial pillars — kept distinct from the framework */}
+        <div id="editorial-pillars" className="scroll-mt-24">
+          <div className="max-w-3xl rounded-2xl border border-border bg-card p-6">
+            <h2 className="font-serif text-xl text-foreground">The Review’s editorial pillars</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              <span className="font-semibold text-foreground">
+                Research, Policy, Leadership and Practice
+              </span>{" "}
+              are the four editorial pillars that organise each issue of The Venugopal Bere
+              Educational Review. They describe how the Review approaches its subjects and are
+              distinct from the eight stages of the Bere Professional Learning Framework.
             </p>
           </div>
         </div>
@@ -203,8 +152,8 @@ function ProfessionalLearningFramework() {
           <div className="mt-3 max-w-3xl space-y-3 text-sm leading-relaxed text-muted-foreground">
             <p>
               The framework exists to answer a practical question school leaders ask constantly:
-              what happens after a teacher attends a training programme? Its purpose is to close
-              the gap between professional development as an event and professional learning as a
+              what happens after a teacher attends a training programme? Its purpose is to close the
+              gap between professional development as an event and professional learning as a
               culture — giving schools a coherent way to plan, sequence, and evaluate the growth of
               their teaching staff.
             </p>
@@ -212,7 +161,8 @@ function ProfessionalLearningFramework() {
               It is deliberately conceptual rather than prescriptive: schools apply it using their
               own context, calendar, and constraints, guided by the supporting tools (the School
               Readiness Self-Assessment, the Bere Policy-to-Practice Bridge, the Bere Reflective
-              Practice Cycle, and the Bere 90-Day School Improvement Action Planner) described below.
+              Practice Cycle, and the Bere 90-Day School Improvement Action Planner) described
+              below.
             </p>
           </div>
         </div>
@@ -221,11 +171,14 @@ function ProfessionalLearningFramework() {
         <div id="application" className="scroll-mt-24">
           <h2 className="font-serif text-2xl text-foreground">Application</h2>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            Schools typically apply the framework in five overlapping stages:
+            Schools typically apply the framework in five overlapping steps:
           </p>
           <ol className="mt-5 max-w-3xl space-y-4">
             {APPLICATION_STEPS.map((step, i) => (
-              <li key={step.title} className="flex gap-4 rounded-xl border border-border bg-card p-4">
+              <li
+                key={step.title}
+                className="flex gap-4 rounded-xl border border-border bg-card p-4"
+              >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
                   {i + 1}
                 </span>
@@ -245,9 +198,7 @@ function ProfessionalLearningFramework() {
             <li>
               Ministry of Education, Government of India. (2020). National Education Policy 2020.
             </li>
-            <li>
-              NCERT. (2023). National Curriculum Framework for School Education (NCF-SE).
-            </li>
+            <li>NCERT. (2023). National Curriculum Framework for School Education (NCF-SE).</li>
             <li>
               Knight, J. (2007). Instructional Coaching: A Partnership Approach to Improving
               Instruction. Corwin Press.
@@ -257,8 +208,8 @@ function ProfessionalLearningFramework() {
               Practices for Enhancing Student Achievement. Solution Tree.
             </li>
             <li>
-              Hattie, J. (2009). Visible Learning: A Synthesis of Over 800 Meta-Analyses Relating
-              to Achievement. Routledge.
+              Hattie, J. (2009). Visible Learning: A Synthesis of Over 800 Meta-Analyses Relating to
+              Achievement. Routledge.
             </li>
           </ul>
         </div>
@@ -269,14 +220,15 @@ function ProfessionalLearningFramework() {
           className="rounded-2xl border border-border bg-card p-6 md:flex md:items-start md:justify-between md:gap-8"
         >
           <div>
-            <a
-              href="/images/framework/professional-learning-dashboard.webp"
-              download
+            <button
+              type="button"
+              // Works on phones too: the circular diagram is in the page (hidden there), so it can still be exported.
+              onClick={() => void downloadFrameworkPng("plf-diagram")}
               className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
             >
               <Download className="h-4 w-4" />
-              Download Framework
-            </a>
+              Download Framework (PNG)
+            </button>
           </div>
 
           <div className="mt-6 md:mt-0">

@@ -1,9 +1,14 @@
-import { OG_IMAGE, OG_IMAGE_ALT, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH, SITE_NAME, absoluteUrl } from "./site";
+import {
+  OG_IMAGE,
+  OG_IMAGE_ALT,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_WIDTH,
+  SITE_NAME,
+  absoluteUrl,
+} from "./site";
 
 type MetaTag =
-  | { title: string }
-  | { name: string; content: string }
-  | { property: string; content: string };
+  { title: string } | { name: string; content: string } | { property: string; content: string };
 
 export interface SeoOptions {
   /** Full <title> (also used for the social-sharing title unless ogTitle is given). */
@@ -18,6 +23,8 @@ export interface SeoOptions {
   type?: "website" | "article";
   /** Absolute image URL for social previews (defaults to the site-wide image). */
   image?: string;
+  /** Description of the image for screen readers and social previews. */
+  imageAlt?: string;
 }
 
 /**
@@ -33,6 +40,7 @@ export function seo({
   ogTitle,
   type = "website",
   image = OG_IMAGE,
+  imageAlt = OG_IMAGE_ALT,
 }: SeoOptions): { meta: MetaTag[]; links: { rel: string; href: string }[] } {
   const url = absoluteUrl(path);
   const socialTitle = ogTitle ?? title;
@@ -49,11 +57,12 @@ export function seo({
     { property: "og:image", content: image },
     { property: "og:image:width", content: OG_IMAGE_WIDTH },
     { property: "og:image:height", content: OG_IMAGE_HEIGHT },
-    { property: "og:image:alt", content: OG_IMAGE_ALT },
+    { property: "og:image:alt", content: imageAlt },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: socialTitle },
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: image },
+    { name: "twitter:image:alt", content: imageAlt },
   ];
 
   return { meta, links: [{ rel: "canonical", href: url }] };

@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { PageHeader } from "../components/site/PageHeader";
+import { FRAMEWORK_DESCRIPTOR, FrameworkCycle } from "../components/site/FrameworkCycle";
 import { Search, Target, Users, Download } from "lucide-react";
 import { SITE_SHORT_NAME } from "@/lib/site";
 import { seo } from "@/lib/seo";
@@ -12,7 +14,7 @@ export const Route = createFileRoute("/frameworks")({
       title: `School Improvement Frameworks & Tools | ${SITE_SHORT_NAME}`,
       ogTitle: "Educational Frameworks — The Bere Professional Learning Framework",
       description:
-        "The Bere Professional Learning Framework, a Practice-Informed Conceptual Framework, and its alignment with NEP 2020 and NCF-SE 2023 — with downloadable leadership tools.",
+        "The Bere Professional Learning Framework, a Practice-Informed Conceptual Framework of eight interconnected stages, and its alignment with NEP 2020 and NCF-SE 2023 — with downloadable leadership tools.",
       keywords:
         "educational framework, Bere Professional Learning Framework, Practice-Informed Conceptual Framework, NEP 2020, NCF-SE 2023, school leadership",
       path: "/frameworks",
@@ -23,8 +25,7 @@ export const Route = createFileRoute("/frameworks")({
    The rest show "View Framework" as a full-size image preview instead
    (their dedicated pages are planned for Phase 2). */
 const FRAMEWORK_LINKS: Record<string, string> = {
-  "The Bere Professional Learning Framework":
-    "/frameworks/professional-learning-framework",
+  "The Bere Professional Learning Framework": "/frameworks/professional-learning-framework",
 };
 
 /* Framework posters */
@@ -66,7 +67,7 @@ function Frameworks() {
     <>
       {/* Page Header */}
       <PageHeader
-        eyebrow="Practice-Informed Conceptual Model"
+        eyebrow="Practice-Informed Frameworks & Tools"
         title="Frameworks"
         lead="Practice-informed frameworks and tools developed from research and school-leadership practice — for professional learning, policy alignment, reflection, and leadership growth."
       />
@@ -74,7 +75,7 @@ function Frameworks() {
       {/* Featured Framework */}
       <section className="container-editorial mt-12">
         <div className="on-ink overflow-hidden rounded-2xl border border-primary/30 bg-ink">
-          <div className="grid gap-0 md:grid-cols-2">
+          <div className="grid gap-0">
             {/* Framework Introduction */}
             <div className="p-8 md:p-12">
               <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
@@ -86,10 +87,9 @@ function Frameworks() {
               </h2>
 
               <p className="mt-5 text-base leading-relaxed text-foreground/90">
-                A Practice-Informed Conceptual Framework integrating educational
-                research, national policy, instructional leadership, and
-                classroom practice into a coherent path for continuous school
-                improvement.
+                A {FRAMEWORK_DESCRIPTOR} connecting teacher professional learning with continuous
+                school improvement through eight interconnected stages. The cycle then continues:
+                Continuous School Improvement feeds back into School Vision.
               </p>
 
               {/* Three Principles */}
@@ -111,140 +111,48 @@ function Frameworks() {
                     description: "The measure of success",
                   },
                 ].map(({ icon: Icon, title, description }) => (
-                  <div
-                    key={title}
-                    className="rounded-lg border border-border bg-background p-4"
-                  >
+                  <div key={title} className="rounded-lg border border-border bg-background p-4">
                     <Icon className="h-5 w-5 text-primary" />
 
-                    <div className="mt-3 text-sm font-semibold text-foreground">
-                      {title}
-                    </div>
+                    <div className="mt-3 text-sm font-semibold text-foreground">{title}</div>
 
-                    <div className="text-xs text-muted-foreground">
-                      {description}
-                    </div>
+                    <div className="text-xs text-muted-foreground">{description}</div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Framework Diagram */}
-            <div className="border-t border-border p-8 md:border-l md:border-t-0 md:p-12">
-              <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+            {/* Framework Diagram — the eight-stage cycle */}
+            <div className="border-t border-border px-4 pb-6 pt-8 md:px-12">
+              <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary md:px-0">
                 Framework Diagram
               </div>
-
-              <div className="mt-6 grid aspect-square place-items-center rounded-2xl border border-border bg-background">
-                <svg
-                  viewBox="0 0 320 340"
-                  className="h-full w-full p-8"
-                  role="img"
-                  aria-label="Bere Professional Learning Framework showing Research, Policy, Leadership and Practice converging on Student Learning"
+              <FrameworkCycle />
+              <div className="text-center">
+                <Link
+                  to="/frameworks/professional-learning-framework"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
                 >
-                  <defs>
-                    <radialGradient
-                      id="framework-gradient"
-                      cx="50%"
-                      cy="50%"
-                      r="50%"
-                    >
-                      <stop
-                        offset="0"
-                        stopColor="oklch(0.52 0.19 25 / 0.35)"
-                      />
-                      <stop offset="1" stopColor="transparent" />
-                    </radialGradient>
-                  </defs>
-
-                  {/* Background Glow */}
-                  <circle
-                    cx="160"
-                    cy="175"
-                    r="150"
-                    fill="url(#framework-gradient)"
-                  />
-
-                  {/* Framework Pillars */}
-                  {[
-                    { x: 160, y: 50, label: "Research" },
-                    { x: 280, y: 220, label: "Policy" },
-                    { x: 40, y: 220, label: "Leadership" },
-                    { x: 160, y: 300, label: "Practice" },
-                  ].map((node) => (
-                    <g key={node.label}>
-                      <line
-                        x1="160"
-                        y1="175"
-                        x2={node.x}
-                        y2={node.y}
-                        stroke="oklch(0.78 0.14 85)"
-                        strokeWidth="1"
-                        strokeDasharray="3 3"
-                      />
-
-                      <circle
-                        cx={node.x}
-                        cy={node.y}
-                        r="34"
-                        fill="oklch(0.20 0.07 255)"
-                        stroke="oklch(0.78 0.14 85)"
-                        strokeWidth="1.5"
-                      />
-
-                      <text
-                        x={node.x}
-                        y={node.y + 4}
-                        textAnchor="middle"
-                        fontSize="11"
-                        fill="oklch(0.94 0.005 90)"
-                        fontFamily="Inter, sans-serif"
-                      >
-                        {node.label}
-                      </text>
-                    </g>
-                  ))}
-
-                  {/* Central Student Learning Circle */}
-                  <circle
-                    cx="160"
-                    cy="175"
-                    r="46"
-                    fill="oklch(0.78 0.14 85)"
-                  />
-
-                  <text
-                    x="160"
-                    y="171"
-                    textAnchor="middle"
-                    fontSize="10"
-                    fontWeight="700"
-                    fill="oklch(0.18 0.05 255)"
-                    fontFamily="Inter, sans-serif"
-                  >
-                    STUDENT
-                  </text>
-
-                  <text
-                    x="160"
-                    y="185"
-                    textAnchor="middle"
-                    fontSize="10"
-                    fontWeight="700"
-                    fill="oklch(0.18 0.05 255)"
-                    fontFamily="Inter, sans-serif"
-                  >
-                    LEARNING
-                  </text>
-                </svg>
+                  Explore the framework
+                </Link>
               </div>
-
-              <p className="mt-3 text-xs text-muted-foreground">
-                The four pillars — research, policy, leadership, and practice —
-                converge on student learning.
-              </p>
             </div>
           </div>
+        </div>
+
+        {/* Editorial pillars — kept distinct from the framework */}
+        <div className="mt-6 rounded-2xl border border-border bg-card p-6 md:p-8">
+          <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+            Editorial Pillars of the Review
+          </div>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+            <span className="font-semibold text-foreground">
+              Research, Policy, Leadership and Practice
+            </span>{" "}
+            are the four editorial pillars that organise each issue of The Venugopal Bere
+            Educational Review. They describe how the Review approaches its subjects, and are
+            distinct from the eight stages of the Bere Professional Learning Framework.
+          </p>
         </div>
       </section>
 
@@ -266,40 +174,23 @@ function Frameworks() {
               title: "NEP 2020",
               sub: "National Education Policy",
               body: "The framework aligns with NEP 2020's emphasis on competency-based education, continuous professional development, and holistic school improvement.",
-              points: [
-                "Competency-Based Education",
-                "Teacher Development",
-                "Assessment Reform",
-              ],
+              points: ["Competency-Based Education", "Teacher Development", "Assessment Reform"],
             },
             {
               title: "NCF-SE 2023",
               sub: "National Curriculum Framework — School Education",
               body: "The framework provides a practice-oriented approach for connecting themes in NCF-SE 2023 with instructional practice, leadership routines, and professional learning.",
-              points: [
-                "Learning Standards",
-                "Pedagogical Practices",
-                "School Culture",
-              ],
+              points: ["Learning Standards", "Pedagogical Practices", "School Culture"],
             },
           ].map((card) => (
-            <div
-              key={card.title}
-              className="rounded-2xl border border-border bg-card p-8 red-glow"
-            >
+            <div key={card.title} className="rounded-2xl border border-border bg-card p-8 red-glow">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-                <h3 className="font-serif text-2xl text-foreground">
-                  {card.title}
-                </h3>
+                <h3 className="font-serif text-2xl text-foreground">{card.title}</h3>
 
-                <span className="text-xs uppercase tracking-widest text-primary">
-                  {card.sub}
-                </span>
+                <span className="text-xs uppercase tracking-widest text-primary">{card.sub}</span>
               </div>
 
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                {card.body}
-              </p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{card.body}</p>
 
               <ul className="mt-5 flex flex-wrap gap-2">
                 {card.points.map((point) => (
@@ -328,8 +219,7 @@ function Frameworks() {
           </h2>
 
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Printable, workshop-ready tools built on the Bere Professional
-            Learning Framework.
+            Printable, workshop-ready tools built on the Bere Professional Learning Framework.
           </p>
         </div>
 
@@ -342,9 +232,7 @@ function Frameworks() {
                 key={poster.title}
                 className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 red-glow"
               >
-                <h3 className="font-serif text-xl text-foreground">
-                  {poster.title}
-                </h3>
+                <h3 className="font-serif text-xl text-foreground">{poster.title}</h3>
 
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {poster.desc}
@@ -412,8 +300,8 @@ function Frameworks() {
           </h3>
 
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            A month-by-month system for professional learning sessions,
-            coaching, PLCs, and reflection across the full academic year.
+            A month-by-month system for professional learning sessions, coaching, PLCs, and
+            reflection across the full academic year.
           </p>
 
           <a
