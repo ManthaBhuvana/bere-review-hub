@@ -81,6 +81,19 @@ export function mailtoLink(subject: string): string {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`;
 }
 
+// --- Google Business Profile -------------------------------------------------
+// Must match the Google Business Profile EXACTLY (name and address, character for character).
+export const BUSINESS_NAME = "The Venugopal Bere Educational Review";
+export const BUSINESS_PROFILE_URL = "https://share.google/CRfiQHKTblFVpsmqz";
+export const BUSINESS_ADDRESS = {
+  "@type": "PostalAddress",
+  streetAddress: "59 & 60, AS Raju Nagar, Behind South India Shopping Mall, Kukatpally",
+  addressLocality: "Hyderabad",
+  addressRegion: "Telangana",
+  postalCode: "500072",
+  addressCountry: "IN",
+} as const;
+
 // --- Embedded forms (Jotform) ------------------------------------------------
 export const SUBMISSION_FORM_URL = "https://form.jotform.com/262354920466056";
 export const CONTACT_FORM_URL = "https://form.jotform.com/262355375920056";
