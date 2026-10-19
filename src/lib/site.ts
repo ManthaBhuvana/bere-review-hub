@@ -85,11 +85,9 @@ export function mailtoLink(subject: string): string {
 // These must match the Google Business Profile EXACTLY. Google compares them
 // with the profile to confirm the website and the profile are the same business.
 //
-// BUSINESS_PROFILE_URL: the FULL Google Maps link of the profile, not a
-// share.google short link. To get it: open the share link in Chrome, wait for
-// Google Maps to open "The Venugopal Bere Educational Review", and copy the
-// address bar (starts https://www.google.com/maps/place/...).
-export const BUSINESS_PROFILE_URL = "https://share.google/CRfiQHKTblFVpsmqz"; // TODO: replace with full Maps link
+// BUSINESS_PROFILE_URL: the profile's permanent Google Maps link (its "cid"),
+// taken from the profile's own embed code. Also used for the Contact page map.
+export const BUSINESS_PROFILE_URL = "https://maps.google.com/?cid=15820370811731085560";
 export const BUSINESS_PHONE = "+91 89193 31999"; // same number as on the Business Profile
 export const BUSINESS_PHONE_LINK = "tel:+918919331999";
 export const BUSINESS_ADDRESS = {

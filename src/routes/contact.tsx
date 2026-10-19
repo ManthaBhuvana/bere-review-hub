@@ -21,14 +21,16 @@ import {
   mailtoLink,
   BUSINESS_PHONE,
   BUSINESS_PHONE_LINK,
+  BUSINESS_PROFILE_URL,
 } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
-// Google Maps embed for M N R Educational Trust
+// Google Maps — the Review's own Google Business Profile
+// ("The Venugopal Bere Educational Review"), so the map and the profile match.
 const MAP_EMBED_URL =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7610.191785924606!2d78.3826332935791!3d17.5029353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91bac138eff7%3A0x578b3c569beaae3f!2sM%20N%20R%20Educational%20Trust!5e0!3m2!1sen!2sin!4v1791718034298!5m2!1sen!2sin";
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.303318178179!2d78.404574!3d17.493028400000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb912a736611cd%3A0xdb8d3f6ef03088f8!2sThe%20Venugopal%20Bere%20Educational%20Review!5e0!3m2!1sen!2sin!4v1792434873172!5m2!1sen!2sin";
 
-const MAP_LINK_URL = "https://www.google.com/maps/search/?api=1&query=M+N+R+Educational+Trust";
+const MAP_LINK_URL = BUSINESS_PROFILE_URL;
 
 // The four enquiry categories, in the order agreed for the site.
 // Each card offers a pre-addressed email (subject line already filled in) so the
@@ -236,7 +238,7 @@ function Contact() {
 
             <div className="mt-5 overflow-hidden rounded-lg border border-border/60">
               <iframe
-                title="Map showing M N R Educational Trust"
+                title="Map showing The Venugopal Bere Educational Review"
                 src={MAP_EMBED_URL}
                 className="h-64 w-full border-0"
                 allowFullScreen
