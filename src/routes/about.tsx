@@ -1,5 +1,3 @@
-
-
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Award,
@@ -11,7 +9,7 @@ import {
   Target,
   Users,
 } from "lucide-react";
-import { FOUNDER_NAME, FOUNDER_TITLE, LINKEDIN_URL, SITE_SHORT_NAME } from "@/lib/site";
+import { FOUNDER_NAME, FOUNDER_TITLE, LINKEDIN_URL, BUSINESS_PROFILE_URL,SITE_SHORT_NAME } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
@@ -27,6 +25,7 @@ export const Route = createFileRoute("/about")({
       path: "/about",
     }),
 });
+
 
 const TRAINING_PHOTOS = [
   {
@@ -187,7 +186,6 @@ function About() {
             <div className="text-xs font-semibold uppercase tracking-[0.25em] text-primary">
               Full Profile
             </div>
-
             <p className="mt-2 text-xs text-muted-foreground">
               Download a printable profile summarising credentials, philosophy,
               and contact details.
@@ -220,7 +218,13 @@ function About() {
             Educational Leader · Teacher Educator · CBSE Resource Person ·
             Practitioner-Scholar
           </p>
-
+<p className="mt-4 text-sm text-muted-foreground">
+  Venugopal Bere is the Founder &amp; Editor of The Venugopal Bere Educational Review, based in Kukatpally,
+  Hyderabad.{" "}
+  <a href={BUSINESS_PROFILE_URL} target="_blank" rel="noreferrer" className="text-primary underline">
+    Find us on Google
+  </a>
+</p>
           {/* Introduction */}
           <h2 className="mt-10 font-serif text-2xl text-primary md:text-3xl">
             Bridging Educational Research with School Leadership and Classroom
