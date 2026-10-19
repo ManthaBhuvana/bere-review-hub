@@ -2,7 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowLeft, ExternalLink, Save } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { readingMinutes, type InsightArticle, type RelatedLink } from "@/lib/articles-db";
+import {
+  formatPublishDate,
+  readingMinutes,
+  type InsightArticle,
+  type RelatedLink,
+} from "@/lib/articles-db";
 import { absoluteUrl } from "@/lib/site";
 import { ArticleBody } from "../components/site/ArticleBody";
 import {
@@ -46,6 +51,13 @@ const textToLinks = (t: string): RelatedLink[] =>
       url,
       ...(rest.length && rest.join(" | ") ? { citation: rest.join(" | ") } : {}),
     }));
+
+const istTime = (iso: string) =>
+  new Intl.DateTimeFormat("en-IN", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "Asia/Kolkata",
+  }).format(new Date(iso));
 
 function Editor({ role }: { role: Role }) {
   const { id } = Route.useParams();
@@ -175,10 +187,22 @@ function Editor({ role }: { role: Role }) {
         )}
         {role === "editor" && a.status !== "approved" && (
           <button
-            onClick={() => save("approved")}
+            onClick={() => {
+              // If the scheduled time has already passed, approval publishes at once.
+              const due = new Date(a.publish_at) <= new Date();
+              if (
+                due &&
+                !window.confirm(
+                  `The scheduled time (${formatPublishDate(a.publish_at, true)}, ${istTime(a.publish_at)} IST) has already passed.\n\n` +
+                    "Approving now will publish the article immediately, keeping that publication date.\n\nContinue?",
+                )
+              )
+                return;
+              void save("approved");
+            }}
             className="rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white"
           >
-            Approve &amp; schedule
+            {new Date(a.publish_at) <= new Date() ? "Approve & publish now" : "Approve & schedule"}
           </button>
         )}
         {a.status === "approved" && (

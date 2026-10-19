@@ -252,7 +252,7 @@ $md$,
   reflective_heading  = 'A Question for School Leaders',
   reflective_question = $q$When you look back at the teacher-training programmes conducted in your school during the past year, what specific changes can you identify in classroom practice—and what evidence tells you those changes benefited students?$q$,
   featured_image_url  = '/images/articles/why-one-day-teacher-training-featured.webp',
-  featured_image_alt  = 'Venugopal Bere leading a teacher professional development session',
+  featured_image_alt  = 'Venugopal Bere addressing teachers at a professional development session, in front of a slide titled “What happens when a teacher stops changing?”',
   framework_image_url = null,        -- the eight-stage visual is drawn by the website
   seo_title           = 'Why One-Day Teacher Training Rarely Transforms Classrooms | Venugopal Bere',
   seo_description     = $sd$Explore why one-day teacher training often fails to produce lasting classroom change and discover practical strategies for continuous professional learning.$sd$,

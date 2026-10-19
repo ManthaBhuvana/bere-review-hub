@@ -246,7 +246,7 @@ update public.articles set
   category            = 'Teacher Professional Development',
   series              = 'Research to Classroom Practice',
   featured_image_url  = '/images/articles/why-one-day-teacher-training-featured.webp',
-  featured_image_alt  = 'Venugopal Bere leading a teacher professional development session',
+  featured_image_alt  = 'Venugopal Bere addressing teachers at a professional development session, in front of a slide titled “What happens when a teacher stops changing?”',
   seo_title           = 'Why One-Day Teacher Training Rarely Transforms Classrooms | Venugopal Bere',
   seo_description     = 'Explore why one-day teacher training often fails to produce lasting classroom change and discover practical strategies for continuous professional learning.',
   seo_keywords        = 'Teacher Professional Development, Teacher Training, Instructional Leadership, Professional Learning, Classroom Observation, Teacher Reflection, School Improvement, Venugopal Bere',

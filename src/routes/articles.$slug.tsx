@@ -102,6 +102,7 @@ function insightHead(article: InsightArticle, preview: boolean) {
     path,
     type: "article",
     image,
+    imageAlt: article.featured_image_alt ?? undefined,
   });
 
   const jsonLd = {

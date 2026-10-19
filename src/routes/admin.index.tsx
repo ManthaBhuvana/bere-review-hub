@@ -34,6 +34,28 @@ type Row = {
   body_md: string;
 };
 
+/** The Editor asks for each preview at least three days before publication. */
+function PreviewDue({ row }: { row: Row }) {
+  const due = new Date(new Date(row.publish_at).getTime() - 3 * 864e5);
+  const label = formatPublishDate(due.toISOString(), true);
+  if (row.status !== "draft") return <span className="text-emerald-700">Sent</span>;
+  const late = Date.now() > due.getTime();
+  const soon = !late && due.getTime() - Date.now() < 3 * 864e5;
+  return (
+    <span
+      className={
+        late
+          ? "font-semibold text-destructive"
+          : soon
+            ? "font-semibold text-amber-700"
+            : "text-muted-foreground"
+      }
+    >
+      {late ? `Overdue (${label})` : label}
+    </span>
+  );
+}
+
 function Dashboard({ role }: { role: string }) {
   const [rows, setRows] = useState<Row[]>([]);
   const [resources, setResources] = useState<Resource[]>([]);
@@ -101,9 +123,10 @@ function Dashboard({ role }: { role: string }) {
       </div>
 
       <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
-        Workflow: Draft → paste approved manuscript → <b>Awaiting approval</b> (share preview link)
-        → Editor sets <b>Approved</b> → goes live automatically at 6:00 am IST on the publication
-        date. Only the Editor can approve.
+        Workflow: approved Word manuscript → developer uploads it → <b>Send for approval</b> and
+        share the preview link at least <b>3 days</b> before publication → Editor clicks{" "}
+        <b>Approve</b> → goes live automatically at 6:00 am IST on the publication date →
+        post-publication check. Only the Editor can approve.
       </p>
 
       <div className="mt-6 overflow-x-auto rounded-xl border border-border">
@@ -112,6 +135,7 @@ function Dashboard({ role }: { role: string }) {
             <tr>
               <th className="px-3 py-2">Wk</th>
               <th className="px-3 py-2">Publication date</th>
+              <th className="px-3 py-2">Preview due</th>
               <th className="px-3 py-2">Title</th>
               <th className="px-3 py-2">Status</th>
               <th className="px-3 py-2">Manuscript</th>
@@ -126,6 +150,9 @@ function Dashboard({ role }: { role: string }) {
                   <td className="px-3 py-2">{r.week_number ?? "–"}</td>
                   <td className="whitespace-nowrap px-3 py-2">
                     {formatPublishDate(r.publish_at, true)}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-2 text-xs">
+                    <PreviewDue row={r} />
                   </td>
                   <td className="px-3 py-2">
                     <Link
