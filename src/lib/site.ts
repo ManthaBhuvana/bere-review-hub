@@ -82,12 +82,18 @@ export function mailtoLink(subject: string): string {
 }
 
 // --- Google Business Profile -------------------------------------------------
-// Must match the Google Business Profile EXACTLY (name and address, character for character).
-export const BUSINESS_NAME = "The Venugopal Bere Educational Review";
-export const BUSINESS_PROFILE_URL = "https://share.google/CRfiQHKTblFVpsmqz";
+// These must match the Google Business Profile EXACTLY. Google compares them
+// with the profile to confirm the website and the profile are the same business.
+//
+// BUSINESS_PROFILE_URL: the profile's permanent Google Maps link (its "cid"),
+// taken from the profile's own embed code. Also used for the Contact page map.
+export const BUSINESS_PROFILE_URL = "https://maps.google.com/?cid=15820370811731085560";
+export const BUSINESS_PHONE = "+91 89193 31999"; // same number as on the Business Profile
+export const BUSINESS_PHONE_LINK = "tel:+918919331999";
 export const BUSINESS_ADDRESS = {
   "@type": "PostalAddress",
-  streetAddress: "59 & 60, AS Raju Nagar, Behind South India Shopping Mall, Kukatpally",
+  streetAddress:
+    "Plot No: 59 & 60, behind South India Shopping Mall, A.S.Raju Nagar, Vivekananda Nagar, Kukatpally",
   addressLocality: "Hyderabad",
   addressRegion: "Telangana",
   postalCode: "500072",

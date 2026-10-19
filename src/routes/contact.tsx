@@ -19,15 +19,18 @@ import {
   SITE_NAME,
   YOUTUBE_URL,
   mailtoLink,
+  BUSINESS_PHONE,
+  BUSINESS_PHONE_LINK,
+  BUSINESS_PROFILE_URL,
 } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
-// Google Maps embed for M N R Educational Trust
+// Google Maps — the Review's own Google Business Profile
+// ("The Venugopal Bere Educational Review"), so the map and the profile match.
 const MAP_EMBED_URL =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7610.191785924606!2d78.3826332935791!3d17.5029353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91bac138eff7%3A0x578b3c569beaae3f!2sM%20N%20R%20Educational%20Trust!5e0!3m2!1sen!2sin!4v1791718034298!5m2!1sen!2sin";
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.303318178179!2d78.404574!3d17.493028400000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb912a736611cd%3A0xdb8d3f6ef03088f8!2sThe%20Venugopal%20Bere%20Educational%20Review!5e0!3m2!1sen!2sin!4v1792434873172!5m2!1sen!2sin";
 
-const MAP_LINK_URL =
-  "https://www.google.com/maps/search/?api=1&query=M+N+R+Educational+Trust";
+const MAP_LINK_URL = BUSINESS_PROFILE_URL;
 
 // The four enquiry categories, in the order agreed for the site.
 // Each card offers a pre-addressed email (subject line already filled in) so the
@@ -97,8 +100,8 @@ function Contact() {
           How can we help?
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Choose the category that fits your enquiry — the email opens with the subject line
-          already filled in.
+          Choose the category that fits your enquiry — the email opens with the subject line already
+          filled in.
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -204,48 +207,56 @@ function Contact() {
           </div>
 
           {/* Find us — Google Map */}
-<div className="on-ink rounded-2xl border border-border bg-ink p-6">
-  <h3 className="font-serif text-primary text-lg">Find us</h3>
+          <div className="on-ink rounded-2xl border border-border bg-ink p-6">
+            <h3 className="font-serif text-primary text-lg">Find us</h3>
 
-  <div className="mt-4 flex items-start gap-3">
-    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary">
-      <MapPin className="h-4 w-4" />
-    </div>
+            <div className="mt-4 flex items-start gap-3">
+              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary">
+                <MapPin className="h-4 w-4" />
+              </div>
 
-    <address className="not-italic text-sm leading-relaxed">
-      <p className="font-semibold text-foreground">Venugopal Bere</p>
-      <p className="text-foreground/70">Educational Consultant & Teacher Trainer</p>
-      <p className="text-foreground/70">
-        59 &amp; 60, AS Raju Nagar,
-        <br />
-        Behind South India Shopping Mall,
-        <br />
-        Kukatpally, Hyderabad – 500072
-      </p>
-    </address>
-  </div>
+              <address className="not-italic text-sm leading-relaxed">
+                <p className="font-semibold text-foreground">Venugopal Bere</p>
+                <p className="text-foreground/70">Educational Consultant & Teacher Trainer</p>
+                <p className="text-foreground/70">
+                  Plot No: 59 &amp; 60, behind South India Shopping Mall,
+                  <br />
+                  A.S.Raju Nagar, Vivekananda Nagar,
+                  <br />
+                  Kukatpally, Hyderabad, Telangana 500072
+                </p>
+                <p className="mt-2">
+                  <a
+                    href={BUSINESS_PHONE_LINK}
+                    className="font-semibold text-primary hover:underline"
+                  >
+                    {BUSINESS_PHONE}
+                  </a>
+                </p>
+              </address>
+            </div>
 
-  <div className="mt-5 overflow-hidden rounded-lg border border-border/60">
-    <iframe
-      title="Map showing M N R Educational Trust"
-      src={MAP_EMBED_URL}
-      className="h-64 w-full border-0"
-      allowFullScreen
-      loading="lazy"
-      referrerPolicy="strict-origin-when-cross-origin"
-    />
-  </div>
+            <div className="mt-5 overflow-hidden rounded-lg border border-border/60">
+              <iframe
+                title="Map showing The Venugopal Bere Educational Review"
+                src={MAP_EMBED_URL}
+                className="h-64 w-full border-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
 
-  <a
-    href={MAP_LINK_URL}
-    target="_blank"
-    rel="noreferrer"
-    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
-  >
-    Open in Google Maps
-    <ArrowUpRight className="h-4 w-4" />
-  </a>
-</div>
+            <a
+              href={MAP_LINK_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+            >
+              Open in Google Maps
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </div>
         </aside>
       </section>
     </>

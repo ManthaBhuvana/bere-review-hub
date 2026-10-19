@@ -24,15 +24,15 @@ import {
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_STRAPLINE,
-  LINKEDIN_URL, 
-  YOUTUBE_URL,
   SITE_SHORT_NAME,
   SITE_URL,
   FOUNDER_NAME,
+  LINKEDIN_URL,
+  YOUTUBE_URL,
   CONTACT_EMAIL,
-  BUSINESS_NAME,
-  BUSINESS_PROFILE_URL,
+  BUSINESS_PHONE,
   BUSINESS_ADDRESS,
+  BUSINESS_PROFILE_URL,
 } from "../lib/site";
 
 const DEFAULT_TITLE = `${SITE_NAME} — ${SITE_STRAPLINE}`;
@@ -41,14 +41,23 @@ const SITE_JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      // The Review itself. A ProfessionalService is an Organization with a
+      // physical location, so Google can match it to the Google Business Profile.
+      // One entry only: articles name this "#org" as their publisher.
+      "@type": "ProfessionalService",
       "@id": `${SITE_URL}/#org`,
       name: SITE_NAME,
       alternateName: ["The Bere Review", "The Reviewer"],
       url: `${SITE_URL}/`,
       logo: OG_IMAGE,
+      image: OG_IMAGE,
+      email: CONTACT_EMAIL,
+      telephone: BUSINESS_PHONE,
+      address: BUSINESS_ADDRESS,
+      areaServed: "IN",
+      hasMap: BUSINESS_PROFILE_URL,
       founder: { "@id": `${SITE_URL}/#person` },
-      sameAs: [LINKEDIN_URL, YOUTUBE_URL],
+      sameAs: [BUSINESS_PROFILE_URL, LINKEDIN_URL, YOUTUBE_URL],
     },
     {
       "@type": "WebSite",
@@ -59,11 +68,11 @@ const SITE_JSON_LD = {
       inLanguage: "en-IN",
       publisher: { "@id": `${SITE_URL}/#org` },
     },
-        {
+    {
       "@type": "Person",
       "@id": `${SITE_URL}/#person`,
       name: FOUNDER_NAME,
-      alternateName: ["Bere Venu Gopal", "Venu Gopal Bere", "Venugopal Bere"],
+      alternateName: ["Bere Venu Gopal", "Venu Gopal Bere"],
       jobTitle: "Director, MNR Indo-English High Schools",
       description:
         "Founder & Editor of The Venugopal Bere Educational Review; educational consultant and teacher trainer in Hyderabad.",
@@ -86,20 +95,6 @@ const SITE_JSON_LD = {
         "NCF-SE 2023",
       ],
       sameAs: [LINKEDIN_URL, YOUTUBE_URL],
-    },,
-        {
-      "@type": "ProfessionalService",
-      "@id": `${SITE_URL}/#business`,
-      name: BUSINESS_NAME,
-      url: `${SITE_URL}/`,
-      logo: OG_IMAGE,
-      image: OG_IMAGE,
-      email: CONTACT_EMAIL,
-      address: BUSINESS_ADDRESS,
-      areaServed: "IN",
-      hasMap: BUSINESS_PROFILE_URL,
-      sameAs: [BUSINESS_PROFILE_URL, LINKEDIN_URL, YOUTUBE_URL],
-      founder: { "@id": `${SITE_URL}/#person` },
     },
   ],
 };
@@ -130,12 +125,10 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(
-      error instanceof Error ? error : new Error(String(error)),
-      { boundary: "tanstack_root_error_component" },
-    );
+    reportLovableError(error instanceof Error ? error : new Error(String(error)), {
+      boundary: "tanstack_root_error_component",
+    });
   }, [error]);
-
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -204,11 +197,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap",
       },
     ],
-        scripts: [
+    scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify(SITE_JSON_LD),
-    
       },
       {
         src: "https://www.googletagmanager.com/gtag/js?id=G-L0296QWPTF",
