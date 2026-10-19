@@ -7,7 +7,7 @@ export const Route = createFileRoute("/for-contributors")({
   component: ForContributors,
   head: () =>
     seo({
-      title: `Submission Guidelines & Editorial Policy`,
+      title: `Submission Guidelines & Editorial Policy | ${SITE_SHORT_NAME}`,
       ogTitle: "For Contributors — Submission Guidelines & Editorial Policy",
       description:
         "Scope, submission guidelines, referencing style, editorial review process, and publication ethics for The Venugopal Bere Educational Review.",
