@@ -24,15 +24,16 @@ import {
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_STRAPLINE,
-  LINKEDIN_URL, 
-  YOUTUBE_URL,
   SITE_SHORT_NAME,
   SITE_URL,
   FOUNDER_NAME,
+  LINKEDIN_URL,
+  YOUTUBE_URL,
   CONTACT_EMAIL,
+  BUSINESS_PHONE,
   BUSINESS_NAME,
-  BUSINESS_PROFILE_URL,
   BUSINESS_ADDRESS,
+  BUSINESS_PROFILE_URL,
 } from "../lib/site";
 
 const DEFAULT_TITLE = `${SITE_NAME} — ${SITE_STRAPLINE}`;
@@ -41,14 +42,22 @@ const SITE_JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      // The Review itself — a ProfessionalService (a kind of Organization with a
+      // physical location), so Google can match it to the Google Business Profile.
+      "@type": "ProfessionalService",
       "@id": `${SITE_URL}/#org`,
       name: SITE_NAME,
       alternateName: ["The Bere Review", "The Reviewer"],
       url: `${SITE_URL}/`,
       logo: OG_IMAGE,
+      image: OG_IMAGE,
+      email: CONTACT_EMAIL,
+      telephone: BUSINESS_PHONE,
+      address: BUSINESS_ADDRESS,
+      areaServed: "IN",
+      hasMap: BUSINESS_PROFILE_URL,
       founder: { "@id": `${SITE_URL}/#person` },
-      sameAs: [LINKEDIN_URL, YOUTUBE_URL],
+      sameAs: [BUSINESS_PROFILE_URL, LINKEDIN_URL, YOUTUBE_URL],
     },
     {
       "@type": "WebSite",
@@ -59,47 +68,17 @@ const SITE_JSON_LD = {
       inLanguage: "en-IN",
       publisher: { "@id": `${SITE_URL}/#org` },
     },
-        {
+    {
       "@type": "Person",
       "@id": `${SITE_URL}/#person`,
       name: FOUNDER_NAME,
-      alternateName: ["Bere Venu Gopal", "Venu Gopal Bere", "Venugopal Bere"],
+      alternateName: ["Bere Venu Gopal", "Venu Gopal Bere"],
       jobTitle: "Director, MNR Indo-English High Schools",
       description:
         "Founder & Editor of The Venugopal Bere Educational Review; educational consultant and teacher trainer in Hyderabad.",
       url: `${SITE_URL}/about`,
       image: `${SITE_URL}/author.jpg`,
-      homeLocation: {
-        "@type": "Place",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Hyderabad",
-          addressRegion: "Telangana",
-          addressCountry: "IN",
-        },
-      },
-      knowsAbout: [
-        "Teacher professional development",
-        "Instructional leadership",
-        "School improvement",
-        "NEP 2020",
-        "NCF-SE 2023",
-      ],
       sameAs: [LINKEDIN_URL, YOUTUBE_URL],
-    },,
-        {
-      "@type": "ProfessionalService",
-      "@id": `${SITE_URL}/#business`,
-      name: BUSINESS_NAME,
-      url: `${SITE_URL}/`,
-      logo: OG_IMAGE,
-      image: OG_IMAGE,
-      email: CONTACT_EMAIL,
-      address: BUSINESS_ADDRESS,
-      areaServed: "IN",
-      hasMap: BUSINESS_PROFILE_URL,
-      sameAs: [BUSINESS_PROFILE_URL, LINKEDIN_URL, YOUTUBE_URL],
-      founder: { "@id": `${SITE_URL}/#person` },
     },
   ],
 };
