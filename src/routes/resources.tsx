@@ -177,6 +177,7 @@ const VISUAL_TOOLS = [
 // Hand-picked videos from the channel.
 // Add/remove video IDs as needed.
 const FEATURED_VIDEOS = [
+  "6wptpTtGENA",
   "nSaGKpQcAr4",
   "ydjjqApXAqo",
   "pi4PzE2HIQA",

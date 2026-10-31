@@ -131,7 +131,76 @@ insert into public.articles (week_number, slug, title, publish_at, status) value
       'Why One-Day Teacher Training Rarely Transforms Classrooms', '2026-10-19 06:00+05:30', 'draft'),
   (2, 'from-school-administrator-to-instructional-leader',
       'From School Administrator to Instructional Leader',        '2026-10-26 06:00+05:30', 'draft'),
-  -- … weeks 3–12 …
+  (
+        3,
+        'classroom-observation-inspection-or-professional-growth',
+        'Classroom Observation: Inspection or Professional Growth?',
+        '2026-11-02 06:00:00+05:30',
+        'draft'
+    ),
+    (
+        4,
+        'experience-does-not-automatically-become-expertise',
+        'Experience Does Not Automatically Become Expertise',
+        '2026-11-09 06:00:00+05:30',
+        'draft'
+    ),
+    (
+        5,
+        'from-completing-the-syllabus-to-building-competencies',
+        'From Completing the Syllabus to Building Competencies',
+        '2026-11-16 06:00:00+05:30',
+        'draft'
+    ),
+    (
+        6,
+        'beyond-marks-what-student-assessments-should-reveal',
+        'Beyond Marks: What Student Assessments Should Reveal',
+        '2026-11-23 06:00:00+05:30',
+        'draft'
+    ),
+    (
+        7,
+        'why-teachers-need-to-learn-together',
+        'Why Teachers Need to Learn Together',
+        '2026-11-30 06:00:00+05:30',
+        'draft'
+    ),
+    (
+        8,
+        'nep-2020-and-ncf-se-2023-closing-the-implementation-gap',
+        'NEP 2020 and NCF-SE 2023: Closing the Implementation Gap',
+        '2026-12-07 06:00:00+05:30',
+        'draft'
+    ),
+    (
+        9,
+        'the-power-of-feedback-in-teacher-development',
+        'The Power of Feedback in Teacher Development',
+        '2026-12-14 06:00:00+05:30',
+        'draft'
+    ),
+    (
+        10,
+        'ai-cannot-replace-the-reflective-teacher',
+        'AI Cannot Replace the Reflective Teacher',
+        '2026-12-21 06:00:00+05:30',
+        'draft'
+    ),
+    (
+        11,
+        'what-makes-a-school-a-learning-organisation',
+        'What Makes a School a Learning Organisation?',
+        '2026-12-28 06:00:00+05:30',
+        'draft'
+    ),
+    (
+        12,
+        'twelve-lessons-in-educational-leadership-and-professional-learning',
+        'Twelve Lessons in Educational Leadership and Professional Learning',
+        '2027-01-04 06:00:00+05:30',
+        'draft'
+    );
 ```
 
 **Process**
